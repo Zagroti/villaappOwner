@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -40,6 +39,17 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
+		B6A01E02EB1B4C0F9AA25D84 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 573F9179B2BE4163B002C09B /* libBVLinearGradient.a */; };
+		DF9046F0F1F64C4499250112 /* IS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E29F51D765741C09B876EC2 /* IS.ttf */; };
+		AF199D69EC66467CBB496E5D /* ISBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28667978B6E24A17AEA31636 /* ISBold.ttf */; };
+		F9A544BDE1EF41059436EE0A /* ISF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67E0CC75CA184EDA9F85F411 /* ISF.ttf */; };
+		285A8C2F45464273A4769512 /* ISFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB510520F75E4CEAB5FBCA89 /* ISFBold.ttf */; };
+		99D1E5E7718B4539BB3D8379 /* ISFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB90093D8DC845EDA74425D2 /* ISFLight.ttf */; };
+		CC53BBB5AF6B4F7CA9397B93 /* ISFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFA42CBC18064262B151FC7D /* ISFMedium.ttf */; };
+		C8F340CC19394EDB8C15CAC6 /* ISFUltraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F25A9F043E54806B2E028A0 /* ISFUltraLight.ttf */; };
+		6AD03530B87844519450C55A /* ISLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D23746879D84DE2B1D49E5B /* ISLight.ttf */; };
+		9879E40630C14AFFB0E8876A /* ISMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AA334E72CC64EFA8F239AF6 /* ISMedium.ttf */; };
+		F18D1335B93A4ED783297C1C /* ISUltraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF9B0C072022451E81CE87AB /* ISUltraLight.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -347,6 +357,18 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		CAEFAED7CA8645DAAE33A07E /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; name = "BVLinearGradient.xcodeproj"; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		573F9179B2BE4163B002C09B /* libBVLinearGradient.a */ = {isa = PBXFileReference; name = "libBVLinearGradient.a"; path = "libBVLinearGradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		5E29F51D765741C09B876EC2 /* IS.ttf */ = {isa = PBXFileReference; name = "IS.ttf"; path = "../Assets/fonts/IS.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		28667978B6E24A17AEA31636 /* ISBold.ttf */ = {isa = PBXFileReference; name = "ISBold.ttf"; path = "../Assets/fonts/ISBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		67E0CC75CA184EDA9F85F411 /* ISF.ttf */ = {isa = PBXFileReference; name = "ISF.ttf"; path = "../Assets/fonts/ISF.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DB510520F75E4CEAB5FBCA89 /* ISFBold.ttf */ = {isa = PBXFileReference; name = "ISFBold.ttf"; path = "../Assets/fonts/ISFBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EB90093D8DC845EDA74425D2 /* ISFLight.ttf */ = {isa = PBXFileReference; name = "ISFLight.ttf"; path = "../Assets/fonts/ISFLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DFA42CBC18064262B151FC7D /* ISFMedium.ttf */ = {isa = PBXFileReference; name = "ISFMedium.ttf"; path = "../Assets/fonts/ISFMedium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9F25A9F043E54806B2E028A0 /* ISFUltraLight.ttf */ = {isa = PBXFileReference; name = "ISFUltraLight.ttf"; path = "../Assets/fonts/ISFUltraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8D23746879D84DE2B1D49E5B /* ISLight.ttf */ = {isa = PBXFileReference; name = "ISLight.ttf"; path = "../Assets/fonts/ISLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2AA334E72CC64EFA8F239AF6 /* ISMedium.ttf */ = {isa = PBXFileReference; name = "ISMedium.ttf"; path = "../Assets/fonts/ISMedium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CF9B0C072022451E81CE87AB /* ISUltraLight.ttf */ = {isa = PBXFileReference; name = "ISUltraLight.ttf"; path = "../Assets/fonts/ISUltraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +397,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				B6A01E02EB1B4C0F9AA25D84 /* libBVLinearGradient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +587,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				CAEFAED7CA8645DAAE33A07E /* BVLinearGradient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -585,6 +609,7 @@
 				00E356EF1AD99517003FC87E /* vilaappOwnerTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				52065071A935455BBD87C48E /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -610,6 +635,24 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		52065071A935455BBD87C48E /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				5E29F51D765741C09B876EC2 /* IS.ttf */,
+				28667978B6E24A17AEA31636 /* ISBold.ttf */,
+				67E0CC75CA184EDA9F85F411 /* ISF.ttf */,
+				DB510520F75E4CEAB5FBCA89 /* ISFBold.ttf */,
+				EB90093D8DC845EDA74425D2 /* ISFLight.ttf */,
+				DFA42CBC18064262B151FC7D /* ISFMedium.ttf */,
+				9F25A9F043E54806B2E028A0 /* ISFUltraLight.ttf */,
+				8D23746879D84DE2B1D49E5B /* ISLight.ttf */,
+				2AA334E72CC64EFA8F239AF6 /* ISMedium.ttf */,
+				CF9B0C072022451E81CE87AB /* ISUltraLight.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -692,7 +735,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -1057,6 +1100,16 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				DF9046F0F1F64C4499250112 /* IS.ttf in Resources */,
+				AF199D69EC66467CBB496E5D /* ISBold.ttf in Resources */,
+				F9A544BDE1EF41059436EE0A /* ISF.ttf in Resources */,
+				285A8C2F45464273A4769512 /* ISFBold.ttf in Resources */,
+				99D1E5E7718B4539BB3D8379 /* ISFLight.ttf in Resources */,
+				CC53BBB5AF6B4F7CA9397B93 /* ISFMedium.ttf in Resources */,
+				C8F340CC19394EDB8C15CAC6 /* ISFUltraLight.ttf in Resources */,
+				6AD03530B87844519450C55A /* ISLight.ttf in Resources */,
+				9879E40630C14AFFB0E8876A /* ISMedium.ttf in Resources */,
+				F18D1335B93A4ED783297C1C /* ISUltraLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1189,6 +1242,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vilaappOwner.app/vilaappOwner";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+				);
 			};
 			name = Debug;
 		};
@@ -1207,6 +1268,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vilaappOwner.app/vilaappOwner";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+				);
 			};
 			name = Release;
 		};
@@ -1226,6 +1295,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = vilaappOwner;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+				);
 			};
 			name = Debug;
 		};
@@ -1244,6 +1317,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = vilaappOwner;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+				);
 			};
 			name = Release;
 		};
@@ -1270,6 +1347,14 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+				);
 			};
 			name = Debug;
 		};
@@ -1296,6 +1381,14 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+				);
 			};
 			name = Release;
 		};
@@ -1321,6 +1414,14 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vilaappOwner-tvOS.app/vilaappOwner-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+				);
 			};
 			name = Debug;
 		};
@@ -1346,6 +1447,14 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vilaappOwner-tvOS.app/vilaappOwner-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+				);
 			};
 			name = Release;
 		};
