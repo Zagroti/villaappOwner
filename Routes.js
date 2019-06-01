@@ -8,8 +8,10 @@ import SendNumber from './src/container/SendNumber';
 import EnterCode from './src/container/EnterCode';
 import Home from './src/container/Home';
 import Profile from './src/container/Profile';
-import ResultItemsPage from './src/container/ResultItemsPage'
-import Details from './src/container/Details'
+import ResultItemsPage from './src/container/ResultItemsPage';
+import Details from './src/container/Details';
+import RentPage from './src/container/RentPage';
+import MyFlatsPage from './src/container/MyFlatsPage'
 
 
 
@@ -22,7 +24,7 @@ const backButton = () => (
     >
         <View style={{ alignItems: 'center' }}>
             <Image
-                source={require('./Assets/Images/left-arrow.png')}
+                source={require('./Assets/Images/left-arrow-black.png')}
                 style={{ width: 30, height: 20 }}
             />
             {/*
@@ -57,80 +59,95 @@ const backButtonDetail = () => (
 
 
 const Routes = () => (
-  
-
-
-
-        <Router >
-            <Scene key="root" >
-
-                <Scene key="SendNumber"
-                    component={SendNumber}
-                    title="Send Number"
-                    hideNavBar={true}
-                    initial={true}
-
-
-                />
-                <Scene key="EnterCode" component={EnterCode}
-                    title=""
-                    titleStyle={{ color: 'transparent' }}
-                    renderBackButton={() => backButton()}
-                    navigationBarStyle={styles.login_style_bar}
-                    sceneStyle={styles.login_scene_style}
-
-                />
-
-                <Scene key="Home"
-                    component={Home}
-                    title="home"
-                    hideNavBar={true}
-
-                />
-
-                <Scene key="Profile" component={Profile}
-                    title=""
-                    titleStyle={{ color: 'transparent' }}
-                    renderBackButton={() => backButton()}
-                    navigationBarStyle={styles.login_style_bar}
-                    sceneStyle={styles.login_scene_style}
-                />
-
-                <Scene key="ResultItemsPage" component={ResultItemsPage}
-                    title=""
-                    titleStyle={{ color: 'transparent' }}
-                    renderBackButton={() => backButton()}
-                    navigationBarStyle={styles.login_style_bar}
-                    sceneStyle={styles.login_scene_style}
-                    onRight={() => alert('right')}
-                    // rightButtonImage={require('./Assets/Images/bell.png')}
-                    renderRightButton={() => (
-                        <TouchableOpacity style={styles.notification_box}
-                            onPress={() => alert('توجهات')}>
-                            <ImageBackground
-                                style={styles.bell}
-                                source={require('./Assets/Images/bell.png')}
-                            >
-                                <View style={styles.notification} >
-                                    <Text style={styles.notification_text} >3</Text>
-                                </View>
-                            </ImageBackground>
-                        </TouchableOpacity>
-                    )}
-                />
-
-                <Scene key="Details" component={Details}
-                    title=""
-                    titleStyle={{ color: 'red' }}
-                    renderBackButton={() => backButtonDetail()}
-                    navigationBarStyle={styles.login_style_bar_detail}
-                    sceneStyle={styles.login_scene_style}
-
-                />
 
 
 
 
+    <Router >
+        <Scene key="root" >
+
+            <Scene key="SendNumber"
+                component={SendNumber}
+                title="Send Number"
+                hideNavBar={true}
+
+
+
+            />
+            <Scene key="EnterCode" component={EnterCode}
+                title=""
+                titleStyle={{ color: 'transparent' }}
+                renderBackButton={() => backButton()}
+                navigationBarStyle={styles.login_style_bar}
+                sceneStyle={styles.login_scene_style}
+
+            />
+
+            <Scene key="Home"
+                component={Home}
+                title="home"
+                hideNavBar={true}
+                initial={true}
+            />
+
+            <Scene key="Profile" component={Profile}
+                title=""
+                titleStyle={{ color: 'transparent' }}
+                renderBackButton={() => backButton()}
+                navigationBarStyle={styles.login_style_bar}
+                sceneStyle={styles.login_scene_style}
+            />
+
+            <Scene key="ResultItemsPage" component={ResultItemsPage}
+                title=""
+                titleStyle={{ color: 'transparent' }}
+                renderBackButton={() => backButton()}
+                navigationBarStyle={styles.login_style_bar}
+                sceneStyle={styles.login_scene_style}
+                onRight={() => alert('right')}
+                // rightButtonImage={require('./Assets/Images/bell.png')}
+                renderRightButton={() => (
+                    <TouchableOpacity style={styles.notification_box}
+                        onPress={() => alert('توجهات')}>
+                        <ImageBackground
+                            style={styles.bell}
+                            source={require('./Assets/Images/bell.png')}
+                        >
+                            <View style={styles.notification} >
+                                <Text style={styles.notification_text} >3</Text>
+                            </View>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                )}
+            />
+
+            <Scene key="Details" component={Details}
+                title=""
+                titleStyle={{ color: 'red' }}
+                renderBackButton={() => backButtonDetail()}
+                navigationBarStyle={styles.login_style_bar_detail}
+                sceneStyle={styles.login_scene_style}
+
+            />
+
+            <Scene key="RentPage" component={RentPage}
+                title=""
+                titleStyle={{ color: 'transparent' }}
+                renderBackButton={() => backButton()}
+                navigationBarStyle={styles.login_style_bar}
+                sceneStyle={styles.login_scene_style}
+
+
+            />
+
+            <Scene key="MyFlatsPage" component={MyFlatsPage}
+                title=""
+                titleStyle={{ color: 'transparent' }}
+                hideNavBar={true}
+                sceneStyle={styles.login_scene_style}
+
+
+            />
 
 
 
@@ -138,9 +155,13 @@ const Routes = () => (
 
 
 
-            </Scene>
-        </Router>
-    
+
+
+
+
+        </Scene>
+    </Router>
+
 )
 
 export default Routes;

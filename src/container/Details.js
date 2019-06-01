@@ -15,10 +15,12 @@ import {
 import { Actions } from 'react-native-router-flux';
 import InputScrollView from 'react-native-input-scroll-view';
 
+import LinearGradient from 'react-native-linear-gradient';
+
+
 
 //components 
-import NoRequest from '../components/NoRequest';
-import Requestitems from '../components/RequestItems';
+
 
 export default class Details extends Component {
 
@@ -184,20 +186,20 @@ export default class Details extends Component {
                                 this.setModalVisible(true);
                             }}
                         >
-                            <ImageBackground style={styles.save_button_image}
-                                imageStyle={{
-                                    borderRadius: 50,
-                                }}
-                                source={require('./../../Assets/Images/save.png')}
-                            >
+
+
+                            <LinearGradient
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}
+                                colors={['#36a35b', '#6fcf97']}
+                                style={styles.save_button_image}>
                                 <Text style={styles.save_text} >
                                     ذخیره
-                            </Text>
+                                </Text>
                                 <View style={styles.right}>
                                     <Image style={{ width: 8, resizeMode: "contain" }} source={require('../../Assets/Images/right.png')} />
                                 </View>
-
-                            </ImageBackground>
+                            </LinearGradient>
                         </TouchableOpacity>
                     </View>
 
@@ -297,7 +299,7 @@ export default class Details extends Component {
                                 <Image style={{ width: 25, resizeMode: 'contain', margin: 20 }}
                                     source={require('../../Assets/Images/checkblue.png')}
                                 />
-                                <Text style={{ fontSize: 12, fontFamily: 'ISBold',marginRight:10 }} >پذیرفته شده توسط صاحب ویلا</Text>
+                                <Text style={{ fontSize: 12, fontFamily: 'ISBold', marginRight: 10 }} >پذیرفته شده توسط صاحب ویلا</Text>
                                 <View style={{
                                     width: 70,
                                     height: 70,
@@ -326,17 +328,22 @@ export default class Details extends Component {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                             }}>
-                                
-                                <TouchableOpacity style={{ width: Dimensions.get('window').width - 100, backgroundColor: 'transparent'}}
+
+                                <TouchableOpacity style={{ width: Dimensions.get('window').width - 100, backgroundColor: 'transparent' }}
                                     onPress={this._enterCode} activeOpacity={.6}>
-                                    <ImageBackground style={{
-                                        width: '100%',
-                                        height: 50,
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                        imageStyle={{ borderRadius: 50 }}
-                                        source={require('./../../Assets/Images/save.png')}>
+                                    
+
+                                    <LinearGradient
+                                        start={{ x: 0, y: 0 }}
+                                        end={{ x: 1, y: 0 }}
+                                        colors={['#36a35b', '#6fcf97']}
+                                        style={{
+                                            width: '100%',
+                                            height: 50,
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            borderRadius:50
+                                        }}>
                                         <Text style={{
                                             fontFamily: 'ISBold',
                                             color: '#fff',
@@ -344,7 +351,7 @@ export default class Details extends Component {
                                         }} >
                                             پرداخت
                                         </Text>
-                                    </ImageBackground>
+                                    </LinearGradient>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -370,7 +377,7 @@ const styles = ({
         backgroundColor: "#fff",
         width: Dimensions.get('window').width,
         flex: 1,
-        marginTop:-50
+        marginTop: -50
     },
 
     header: {
@@ -568,6 +575,8 @@ const styles = ({
         fontSize: 40,
         flexDirection: 'row',
         justifyContent: 'center',
+        borderRadius:50
+
 
     },
     save_text: {

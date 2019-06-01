@@ -5,18 +5,13 @@ import {
     Dimensions,
     DrawerLayoutAndroid,
     Image,
-    ImageBackground,
     TouchableOpacity,
     BackHandler,
-    ToastAndroid,
-    ScrollView,
-    Modal,
-    TextInput,
-    Platform
+    ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import InputScrollView from 'react-native-input-scroll-view';
-// import PersianCalendarPicker from 'react-native-jalali-date-picker-rtl';
+
+
 
 
 //components 
@@ -31,6 +26,11 @@ export default class Home extends Component {
         super(props)
         this.state = {
             modalVisible: false,
+            color_1: '#C72652',
+            color_2: '#000',
+            color_3: '#000',
+            red: '#C72652',
+            black: '#333'
 
         };
     }
@@ -64,33 +64,58 @@ export default class Home extends Component {
         if (path === 'profile') {
             Actions.Profile()
         }
+        if (path === 'myFlatPage') {
+            Actions.MyFlatsPage()
+        }
         if (path === 'history') {
             return false;
         }
+
 
         this.refs['DRAWER_REF'].closeDrawer();
 
     }
 
     _showRequestsNavigate = () => {
-        Actions.ResultItemsPage()
+        Actions.RentPage()
     }
 
-    //close modal
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
+
+    // change tabs for request type
+    _changeTab = (tab) => {
+        if (tab === 'tab1') {
+            this.setState({
+                color_1: this.state.red,
+                color_2: this.state.black,
+                color_3: this.state.black
+
+            })
+        } else if (tab === 'tab2') {
+            this.setState({
+                color_1: this.state.black,
+                color_2: this.state.red,
+                color_3: this.state.black,
+            })
+        } else if (tab === 'tab3') {
+            this.setState({
+                color_1: this.state.black,
+                color_2: this.state.black,
+                color_3: this.state.red
+            })
+        }
+
     }
 
     render() {
 
         const navigationView = (
-            <View style={{ flex: 1, backgroundColor: '#A52D53' , alignItems:'center' }}>
+            <View style={{ flex: 1, backgroundColor: '#fff', alignItems: 'center' }}>
                 {/* <Text style={{ margin: 10, fontSize: 15, textAlign: 'left' }}>I'm in the Drawer!</Text> */}
                 <View style={{
                     alignItems: 'center',
                     paddingVertical: 20,
                     backgroundColor: '#b04267',
-                    width:'100%'
+                    width: '100%'
                 }} >
                     <View style={styles.icon_parent} >
                         <View style={styles.icon_child} >
@@ -100,10 +125,15 @@ export default class Home extends Component {
                     <View style={styles.person_desc} >
                         <Text style={styles.person_name} >جمیله باغی تبار</Text>
                     </View>
-                    
+
                 </View>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('myFlatPage')}>
+                    <Text style={styles.drawer_text}>ویلاهای من</Text>
+                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/home.png')} />
+                </TouchableOpacity>
+
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
-                    <Text style={styles.drawer_text}>پروفایل</Text>
+                    <Text style={styles.drawer_text}>درخواست ها</Text>
                     <Image style={styles.bottomIcon} source={require('../../Assets/Images/user.png')} />
                 </TouchableOpacity>
 
@@ -111,6 +141,11 @@ export default class Home extends Component {
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('history')}>
                     <Text style={styles.drawer_text}>تاریخچه</Text>
                     <Image style={styles.bottomIcon} source={require('../../Assets/Images/history.png')} />
+                </TouchableOpacity>
+
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
+                    <Text style={styles.drawer_text}>پروفایل</Text>
+                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
                 </TouchableOpacity>
             </View>
         );
@@ -132,19 +167,7 @@ export default class Home extends Component {
 
                     {/* MENU */}
                     <View style={styles.menu} >
-                        <TouchableOpacity
-                            style={styles.humberger}
-                            onPress={() => alert('توجهات')}
-                        >
-                            <ImageBackground
-                                style={styles.bell}
-                                source={require('./../../Assets/Images/bell.png')}
-                            >
-                                <View style={styles.notification} >
-                                    <Text style={styles.notification_text} >3</Text>
-                                </View>
-                            </ImageBackground>
-                        </TouchableOpacity>
+                        
                         <TouchableOpacity style={styles.humberger} onPress={this._openDrawer}>
                             <Image style={styles.humberger_icon} source={require('../../Assets/Images/menu.png')} />
                         </TouchableOpacity>
@@ -153,7 +176,19 @@ export default class Home extends Component {
 
                     {/* request box  */}
                     <View style={styles.up} >
-                        <Text style={styles.title} >درخواست های من</Text>
+                        <Text style={styles.title} >درخواست های  امروز</Text>
+                        <View style={styles.tab}  >
+                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab1')}>
+                                <Text style={[styles.tab_text, { color: this.state.color_1 }]}>فعال</Text>
+                            </TouchableOpacity>
+                            <Text style={styles.line} ></Text>
+                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab2')}>
+                                <Text style={[styles.tab_text, { color: this.state.color_2 }]}>در صف </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab3')}>
+                                <Text style={[styles.tab_text, { color: this.state.color_3 }]}>بسته شده</Text>
+                            </TouchableOpacity>
+                        </View>
                         <ScrollView contentContainerStyle={styles.requestBox} >
                             {/* <NoRequest /> */}
                             <Requestitems navigate={this._showRequestsNavigate} />
@@ -165,156 +200,13 @@ export default class Home extends Component {
                             <Requestitems navigate={this._showRequestsNavigate} />
                         </ScrollView>
                     </View>
-                    <TouchableOpacity activeOpacity={.9} style={{
-                        position: 'absolute', bottom: 140, zIndex: 10, right: 20, width: 90,
-                        height: 90,
-                        borderRadius: 50,
-                        backgroundColor: '#C92652',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                        onPress={() => {
-                            this.setModalVisible(true);
-                        }}
-                    >
-                        <View style={styles.middleInside}>
-                            <Image style={styles.middleIcon} source={require('../../Assets/Images/bluemarker.png')} />
-                        </View>
-                    </TouchableOpacity>
-
-                   
+                    
 
                 </View>
 
 
 
-                {/* MODAL */}
-
-
-                <Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {
-                        this.setModalVisible(false);
-                    }}
-
-                >
-                    <InputScrollView >
-                        {/* Close modal  */}
-                        <View
-                            style={{
-                                backgroundColor: '#f6f6f6',
-                                width: '100%',
-                                height: 50,
-                                flexDirection: 'row',
-                                justifyContent: 'flex-end'
-                            }}>
-                            {/* Close modal  */}
-                            <TouchableOpacity
-                                onPress={() => {
-                                    this.setModalVisible(false);
-                                }}>
-                                <Image style={styles.modal_close}
-                                    source={require('../../Assets/Images/close.png')}
-                                />
-                            </TouchableOpacity>
-                        </View>
-
-                        {/* Modal Body */}
-                        <View style={styles.Modal}>
-                            <View style={styles.modal_description} >
-                                <View style={styles.modal_description_left}>
-                                    <Text style={styles.modal_description_text}>
-                                        برای پیدا کردن بهترین مکان دلخواه هرچه سریعتر اقدام کنید !
-                                        </Text>
-                                    <Text style={styles.modal_description_title}>
-                                        ما اینجاییم تا بهترین مکان را برای شما پیدا کنیم
-                                        </Text>
-                                </View>
-                                <Image style={styles.home_icon_marker} source={require('../../Assets/Images/homemarker.png')} />
-                            </View>
-
-                            {/* price */}
-                            <View style={styles.modal_price} >
-                                <View style={styles.modal_details} >
-                                    <View style={styles.modal_titles}>
-                                        <Text style={styles.toman} > ( تومان ) </Text>
-                                        <Text style={styles.gheymat} >قیمت</Text>
-                                    </View>
-                                    <Image style={styles.modal_icons} source={require('../../Assets/Images/percent.png')} />
-                                </View>
-
-
-                                <TextInput
-                                    placeholderStyle={{
-                                        fontFamily: 'ISFBold',
-                                        color: '#636363'
-                                    }}
-                                    placeholder="100,000"
-                                    style={styles.price_input}
-                                    onChangeText={(price) => this.setState({ price })}
-                                    keyboardType='numeric'
-
-                                />
-
-                            </View>
-
-                            {/* date */}
-                            <View style={styles.start_date} >
-                                <View style={styles.modal_details} >
-                                    <Text style={styles.modal_titles}>تاریخ شروع</Text>
-                                    <Image style={styles.modal_icons} source={require('../../Assets/Images/calendergrey.png')} />
-                                </View>
-                                <Text style={styles.select_time} >1398 / 11 / 15</Text>
-                                {/* <View style={styles.container}>
-                                    <PersianCalendarPicker
-                                        selectedDate={date}
-                                        onDateChange={this.onDateChange}
-                                        screenWidth={Dimensions.get('window').width}
-                                    />
-                                    <Text style={styles.selectedDate}> Date: {this.state.date.toString()} </Text>
-                                </View> */}
-                            </View>
-
-                            {/* nights */}
-                            <View style={styles.nights} >
-                                <View style={styles.modal_details} >
-                                    <Text style={styles.modal_titles}>تعداد شبها</Text>
-                                    <Image style={styles.modal_icons} source={require('../../Assets/Images/moon.png')} />
-                                </View>
-                                <TextInput
-                                    placeholderStyle={{
-                                        fontFamily: 'ISFBold',
-                                        color: '#636363'
-                                    }}
-                                    placeholder="2"
-                                    style={styles.price_input}
-                                    onChangeText={(price) => this.setState({ price })}
-                                    keyboardType='numeric'
-
-                                />
-                            </View>
-
-                            {/* request btn */}
-                            <View style={styles.new_request_box}>
-
-                                <TouchableOpacity style={styles.new_request_btn} onPress={this._enterCode} activeOpacity={.6}>
-                                    <ImageBackground style={styles.new_request_btn_img} imageStyle={{ borderRadius: 50 }} source={require('./../../Assets/Images/sendButton.png')}>
-                                        <Text style={styles.new_request_btn_text} >
-                                            درخواست جدید
-                                        </Text>
-                                    </ImageBackground>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </InputScrollView>
-
-
-
-                </Modal>
-
+                
 
 
 
@@ -339,7 +231,7 @@ const styles = ({
     menu: {
         backgroundColor: '#f6f6f6',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         height: 50,
         padding: 20
     },
@@ -403,7 +295,6 @@ const styles = ({
     requestBox: {
         width: Dimensions.get('window').width,
         alignItems: 'center',
-        paddingTop: 20,
         paddingBottom: 200,
     },
 
@@ -416,18 +307,7 @@ const styles = ({
         alignItems: 'center',
         zIndex: 20
     },
-    middleBtn: {
-        bottom: 50,
-        width: 90,
-        height: 90,
-        borderRadius: 50,
-        backgroundColor: '#C92652',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 2,
-
-    },
+    
     middleInside: {
         width: 80,
         height: 80,
@@ -494,199 +374,57 @@ const styles = ({
         fontSize: 18,
         fontFamily: 'ISBold',
         marginTop: 10,
-        color:'#fff'
+        color: '#fff'
     },
     bottomIcons: {
         padding: 20,
         alignItems: 'center',
         justifyContent: 'flex-end',
         flexDirection: 'row',
-        borderBottomColor:'#ffffff82',
-        borderBottomWidth:1,
-        width:'95%'
+        borderBottomColor: '#666',
+        borderBottomWidth: 1,
+        width: '100%'
     },
     drawer_text: {
         fontSize: 16,
-        color: '#333',
+        color: '#666',
         fontFamily: 'ISBold',
         marginRight: 10,
-        color: '#fff'
     },
     bottomIcon: {
         width: 30,
         height: 30
     },
-    Modal: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f7f7f7',
-        // height: Dimensions.get('window').height ,
-        width: Dimensions.get('window').width,
-    },
-    modal_description: {
-        backgroundColor: '#eee',
-        borderBottomRightRadius: 20,
-        borderBottomLeftRadius: 10,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 20,
-        width: '90%',
-        flexDirection: 'row',
-        alignItems: 'center',
+    tab: {
+        width: Dimensions.get('window').width - 50,
+        height: 50,
+        backgroundColor: '#fff',
+        borderRadius: 5,
         shadowColor: "#f7f7f7",
         shadowOpacity: 1,
         elevation: 1,
-        height: 120,
-        padding: 10,
-        marginTop: 50,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginVertical: 10,
+
+
+
+    },
+    tab_box: {
+        width: '33.3333%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: "100%"
+
     },
 
-    home_icon_marker: {
-        width: 100,
-        resizeMode: "contain",
-        top: -40,
-    },
-
-    modal_description_left: {
-        flex: 1
-    },
-    modal_description_text: {
-        fontSize: 14,
-        color: '#333',
-        fontFamily: 'ISBold',
-    },
-    modal_description_title: {
+    tab_text: {
         fontSize: 10,
-        color: '#aaa',
-        fontFamily: 'IS',
-    },
-    modal_price: {
-        width: '90%',
-        flexDirection: 'column',
-        marginVertical: 20,
-        paddingVertical: 20,
-        borderRadius: 5
-    },
-    modal_details: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-end'
-    },
-    modal_titles: {
-        flexDirection: 'row',
-        fontSize: 12,
         fontFamily: 'ISBold',
-        alignItems: 'center',
-        color: '#636363'
+        marginLeft: 5,
     },
-    gheymat: {
-        fontSize: 12,
-        fontFamily: 'ISBold',
-        color: '#636363'
-    },
-    toman: {
-        fontSize: 8,
-        fontFamily: 'ISBold',
-        color: '#636363'
-    },
-    modal_icons: {
-        width: 20,
-        resizeMode: "contain",
-        marginLeft: 10,
-    },
-
-    price_input: {
-        textAlign: 'center',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
-        width: '100%',
-        height: 50,
-        backgroundColor: '#fff',
-        color: '#636363',
-        marginTop: 5,
-        ...Platform.select({
-            android: {
-                fontFamily: 'ISFBold',
-                fontSize: 15
-            }
-        })
-
-    },
-    start_date: {
-        width: '90%',
-        height: 100
-    },
-    select_time: {
-        textAlign: 'center',
-        fontSize: 15,
-        fontFamily: 'ISFBold',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
-        width: '100%',
-        height: 50,
-        backgroundColor: '#fff',
-        color: '#636363',
-        marginTop: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    nights: {
-        width: '90%',
-        height: 100
-    },
-    select_nights: {
-        textAlign: 'center',
-        fontSize: 15,
-        fontFamily: 'ISFBold',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
-        width: '100%',
-        height: 50,
-        backgroundColor: '#fff',
-        color: '#636363',
-        marginTop: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    new_request_box: {
-        width: '100%',
-        height: 140,
-        backgroundColor: 'red',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ebebeb',
-        marginTop: 40,
-        // paddingTop: 50,
-        // paddingBottom: 300,
-    },
-
-    new_request_btn: {
-        width: '90%',
-    },
-    new_request_btn_img: {
-        width: '100%',
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    new_request_btn_text: {
-        fontFamily: 'ISBold',
-        color: '#fff',
-        fontSize: 16,
-    },
-    modal_close: {
-        width: 25,
-        height: 25,
-        margin: 20
-    }
 
 
 

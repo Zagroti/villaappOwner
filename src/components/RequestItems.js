@@ -4,7 +4,7 @@ import { Text, View, Dimensions, Image, TouchableOpacity } from 'react-native';
 export default class RequestItems extends Component {
 
 
-    constructor (props){
+    constructor(props) {
         super(props)
         this.state = {
 
@@ -22,7 +22,7 @@ export default class RequestItems extends Component {
                 </View>
                 <View style={styles.right}>
                     <View style={styles.vila_info}>
-                        <Text style={styles.vila_name}>ویلای دریاکنار</Text>
+                        <Text style={styles.vila_name}>ویلای کیش</Text>
                         <View style={styles.vila_detail}>
                             <View style={styles.times}>
                                 <View style={styles.start_time}>
@@ -42,8 +42,14 @@ export default class RequestItems extends Component {
                         </View>
                     </View>
                     <View style={styles.number_box}>
-                        <Text style={styles.number}>3</Text>
-                        <Text style={styles.case}>مورد</Text>
+                        <Image style={{
+                                    width:60,
+                                    height: 60,
+                                    resizeMode: 'cover',
+                                    borderWidth: 1,
+                                    borderRadius: 30,
+                                    borderColor: '#686868',
+                        }}  source={require('../../Assets/Images/userx.jpeg')} />
                     </View>
                 </View>
             </TouchableOpacity>
@@ -61,9 +67,9 @@ const styles = ({
         padding: 10,
         borderRadius: 10,
         height: 100,
-        marginBottom: 20,
+        marginBottom: 10,
         zIndex: 2,
-        
+
     },
 
     right: {
@@ -73,12 +79,14 @@ const styles = ({
     },
 
     number_box: {
-        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingLeft: 10,
-        borderLeftColor: '#f6f6f6',
-        borderLeftWidth: 2,
+        width:60,
+        height:60,
+        shadowColor: "#eee",
+        shadowOpacity: 1,
+        elevation: 5,
+        borderRadius:30
     },
     number: {
         fontSize: 50,
