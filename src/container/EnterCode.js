@@ -230,10 +230,12 @@ export default class EnterCode extends Component {
                                 color_1="#36a35b"
                                 color_2="#6fcf97"
                                 height={40}
-                                borderRadius={10}
+                                borderRadius={30}
                                 textColor="#fff"
                                 size={16}
                                 title="ورود"
+                                top={0}
+                                bottom={200}
                             />
 
                     </View>

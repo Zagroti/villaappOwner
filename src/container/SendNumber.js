@@ -200,11 +200,13 @@ export default class SendNumber extends Component {
                                 color_1="#18749a"
                                 color_2="#46add8"
                                 height={40}
-                                borderRadius={10}
+                                borderRadius={30}
                                 textColor="#fff"
                                 size={16}
                                 title="ارسال"
-                            />
+                                top={30}
+                                bottom={100}
+/>
 
                     </KeyboardAvoidingView>
 
@@ -299,12 +301,7 @@ const styles = ({
         fontFamily: 'ISBold',
 
     },
-    send_btn: {
-        width: Dimensions.get('window').width - 100,
-        marginTop: 30,
-        marginBottom: 100,
 
-    },
     linear: {
         width: '100%',
         height: 50,
