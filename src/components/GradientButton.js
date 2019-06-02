@@ -6,7 +6,9 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const GradientButton = (props) => (
     <TouchableOpacity style={{
-        width: props.width
+        width: props.width,
+        marginTop:props.top,
+        marginBottom:props.bottom
     }}
         onPress={props.press}
         activeOpacity={.6}>
@@ -46,5 +48,6 @@ export default GradientButton
     textColor="#333"
     size={16}
     title="عنوان"
+    paddingVertical={50}
 /> */}
 

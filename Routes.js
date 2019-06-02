@@ -10,6 +10,7 @@ import Home from './src/container/Home';
 import Profile from './src/container/Profile';
 import ResultItemsPage from './src/container/ResultItemsPage';
 import Details from './src/container/Details';
+import EditDetails from './src/container/EditDetails';
 import RentPage from './src/container/RentPage';
 import MyFlatsPage from './src/container/MyFlatsPage'
 
@@ -88,6 +89,7 @@ const Routes = () => (
                 title="home"
                 hideNavBar={true}
                 initial={true}
+               
             />
 
             <Scene key="Profile" component={Profile}
@@ -130,6 +132,15 @@ const Routes = () => (
 
             />
 
+            <Scene key="EditDetails" component={EditDetails}
+                title=""
+                titleStyle={{ color: 'transparent' }}
+                renderBackButton={() => backButton()}
+                navigationBarStyle={styles.login_style_bar}
+                sceneStyle={styles.login_scene_style}
+
+            />
+
             <Scene key="RentPage" component={RentPage}
                 title=""
                 titleStyle={{ color: 'transparent' }}
@@ -145,8 +156,6 @@ const Routes = () => (
                 titleStyle={{ color: 'transparent' }}
                 hideNavBar={true}
                 sceneStyle={styles.login_scene_style}
-
-
             />
 
 

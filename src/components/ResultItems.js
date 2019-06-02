@@ -26,7 +26,8 @@ export default class ResultItems extends Component {
                         padding: 10,
                         borderTopLeftRadius: 10,
                         borderBottomLeftRadius: 30,
-                        flex: 3
+                        flex: 3,
+                        height:90
                     }} >
 
                     <View style={styles.up}>

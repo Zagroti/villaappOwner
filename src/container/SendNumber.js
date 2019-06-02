@@ -17,7 +17,8 @@ import {
 import { Actions } from 'react-native-router-flux';
 
 
-import LinearGradient from 'react-native-linear-gradient';
+//components 
+import GradientButton from './../components/GradientButton'
 
 
 
@@ -192,17 +193,18 @@ export default class SendNumber extends Component {
 
                         </View>
 
-                        <TouchableOpacity style={styles.send_btn} onPress={this._enterCode} activeOpacity={.6}>
-                            <LinearGradient
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 0 }}
-                                colors={['#18749a', '#46add8']}
-                                style={styles.linear}>
-                                <Text style={styles.send_btn_text} >
-                                    ارسال
-                                </Text>
-                            </LinearGradient>
-                        </TouchableOpacity>
+
+                        <GradientButton
+                                width={Dimensions.get('window').width - 100}
+                                press={this._enterCode}
+                                color_1="#18749a"
+                                color_2="#46add8"
+                                height={40}
+                                borderRadius={10}
+                                textColor="#fff"
+                                size={16}
+                                title="ارسال"
+                            />
 
                     </KeyboardAvoidingView>
 

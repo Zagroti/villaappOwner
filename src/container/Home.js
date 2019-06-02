@@ -64,8 +64,11 @@ export default class Home extends Component {
         if (path === 'profile') {
             Actions.Profile()
         }
-        if (path === 'myFlatPage') {
+        if (path === 'myFlat') {
             Actions.MyFlatsPage()
+        }
+        if (path === 'home') {
+            Actions.Home()
         }
         if (path === 'history') {
             return false;
@@ -129,18 +132,18 @@ export default class Home extends Component {
                 </View>
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('myFlatPage')}>
                     <Text style={styles.drawer_text}>ویلاهای من</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/home.png')} />
+                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
                 </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('home')}>
                     <Text style={styles.drawer_text}>درخواست ها</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/user.png')} />
+                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
                 </TouchableOpacity>
 
                 {/* got to history */}
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('history')}>
                     <Text style={styles.drawer_text}>تاریخچه</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/history.png')} />
+                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>

@@ -20,7 +20,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 
 //components 
-
+import GradientButton from './../components/GradientButton'
 
 export default class Details extends Component {
 
@@ -152,7 +152,6 @@ export default class Details extends Component {
 
                     <View style={styles.conditions}>
                         <Text style={styles.about_vila_title}>شرایط</Text>
-
                         <Text style={styles.conditions_text}>1. آرام باشید و مراقب خودتان باشید.</Text>
                         <Text style={{ color: '#DC3053', fontSize: 12, fontFamily: 'ISMedium' }}>2. عاشق خودتان باشید .</Text>
                         <Text style={styles.conditions_text}>3. اتاق را کثیف نکنید </Text>
@@ -177,189 +176,22 @@ export default class Details extends Component {
                             this.setModalVisible(true);
                         }}
                     >
-                        <TouchableOpacity activeOpacity={.6}
-                            style={{
-                                width: '80%',
-                                justifyContent: "center"
-                            }}
-                            onPress={() => {
-                                this.setModalVisible(true);
-                            }}
-                        >
 
-
-                            <LinearGradient
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 0 }}
-                                colors={['#36a35b', '#6fcf97']}
-                                style={styles.save_button_image}>
-                                <Text style={styles.save_text} >
-                                    ذخیره
-                                </Text>
-                                <View style={styles.right}>
-                                    <Image style={{ width: 8, resizeMode: "contain" }} source={require('../../Assets/Images/right.png')} />
-                                </View>
-                            </LinearGradient>
-                        </TouchableOpacity>
+                        <GradientButton
+                            width="80%"
+                            press={() => Actions.EditDetails()}
+                            color_1="#dfdfdf"
+                            color_2="#dfdfdf"
+                            height={50}
+                            borderRadius={30}
+                            textColor="#fff"
+                            size={16}
+                            title="ویرایش"
+                        />
                     </View>
 
 
                 </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                {/* M O D A L  modal MODAL  */}
-
-                <Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {
-                        this.setModalVisible(false);
-                    }}
-
-                >
-                    <InputScrollView>
-                        {/* Close modal  */}
-                        <View
-                            style={{
-                                backgroundColor: '#f7f7f7',
-                                width: '100%',
-                                height: 50,
-                                flexDirection: 'row',
-                                justifyContent: 'flex-end'
-                            }}>
-                            {/* Close modal  */}
-                            <TouchableOpacity
-                                onPress={() => {
-                                    this.setModalVisible(false);
-                                }}>
-                                <Image style={{
-                                    width: 25,
-                                    height: 25,
-                                    margin: 20
-                                }}
-                                    source={require('../../Assets/Images/close.png')}
-                                />
-                            </TouchableOpacity>
-                        </View>
-
-
-
-                        {/* Modal modal modal modal  */}
-                        <View style={styles.Modal}>
-                            <View style={styles.modal_title} >
-
-                                <View style={styles.icon_parent} >
-                                    <View style={styles.icon_child} >
-                                        <Image style={styles.icon} source={require('../../Assets/Images/natalie.jpeg')} />
-                                    </View>
-                                </View>
-                                <View style={styles.person_desc} >
-                                    <Text style={styles.person_name} >جمیله باغی تبار</Text>
-                                    <Text style={styles.person_number} >0912 100 8900</Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.rent_detail} >
-                                <View style={styles.rent_items} >
-                                    <Text style={styles.rent_text} >شروع تاریخ</Text>
-                                    <Text style={styles.rent_number} >1398 / 11 / 10</Text>
-                                </View>
-                                <View style={styles.rent_items} >
-                                    <Text style={styles.rent_text} >تعداد شبها</Text>
-                                    <Text style={styles.rent_number} >5</Text>
-                                </View>
-                                <View style={styles.rent_items} >
-                                    <Text style={styles.rent_text} >نفرات</Text>
-                                    <Text style={styles.rent_number} >2</Text>
-                                </View>
-                                <View style={styles.rent_items} >
-                                    <Text style={styles.rent_text} >هزینه هرشب</Text>
-                                    <Text style={styles.rent_number} >100,000</Text>
-                                </View>
-                                <View style={styles.totalـprice} >
-                                    <Text style={styles.total_text} >هزینه کل</Text>
-                                    <Text style={styles.total_number} >500,000 ت</Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.accept_from_owner} >
-                                <Image style={{ width: 25, resizeMode: 'contain', margin: 20 }}
-                                    source={require('../../Assets/Images/checkblue.png')}
-                                />
-                                <Text style={{ fontSize: 12, fontFamily: 'ISBold', marginRight: 10 }} >پذیرفته شده توسط صاحب ویلا</Text>
-                                <View style={{
-                                    width: 70,
-                                    height: 70,
-                                    borderRadius: 35,
-                                    backgroundColor: '#f5f5f5',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    shadowColor: "#f7f7f7",
-                                    shadowOpacity: 1,
-                                    elevation: 1,
-                                }} >
-                                    <Image style={{ width: 25, resizeMode: 'contain', margin: 20 }}
-                                        source={require('../../Assets/Images/usergrey.png')}
-                                    />
-                                </View>
-                            </View>
-
-
-
-
-
-                            {/* request btn */}
-                            <View style={{
-                                width: '100%',
-                                height: 100,
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                            }}>
-
-                                <TouchableOpacity style={{ width: Dimensions.get('window').width - 100, backgroundColor: 'transparent' }}
-                                    onPress={this._enterCode} activeOpacity={.6}>
-                                    
-
-                                    <LinearGradient
-                                        start={{ x: 0, y: 0 }}
-                                        end={{ x: 1, y: 0 }}
-                                        colors={['#36a35b', '#6fcf97']}
-                                        style={{
-                                            width: '100%',
-                                            height: 50,
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            borderRadius:50
-                                        }}>
-                                        <Text style={{
-                                            fontFamily: 'ISBold',
-                                            color: '#fff',
-                                            fontSize: 16,
-                                        }} >
-                                            پرداخت
-                                        </Text>
-                                    </LinearGradient>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </InputScrollView>
-
-
-
-                </Modal >
 
 
 
@@ -575,7 +407,7 @@ const styles = ({
         fontSize: 40,
         flexDirection: 'row',
         justifyContent: 'center',
-        borderRadius:50
+        borderRadius: 50
 
 
     },

@@ -21,8 +21,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 
 //components 
-import NoRequest from '../components/NoRequest';
-import Requestitems from '../components/RequestItems';
+import ResultItems from '../components/ResultItems';
 import NoFlat from '../components/NoFlat';
 
 
@@ -66,6 +65,12 @@ export default class MyFlatsPage extends Component {
         if (path === 'profile') {
             Actions.Profile()
         }
+        if (path === 'myFlat') {
+            Actions.MyFlatsPage()
+        }
+        if (path === 'home') {
+            Actions.Home()
+        }
         if (path === 'history') {
             return false;
         }
@@ -82,6 +87,12 @@ export default class MyFlatsPage extends Component {
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });
     }
+
+
+    _showDetail = () => {
+        Actions.Details()
+    }
+
 
 
 
@@ -106,20 +117,20 @@ export default class MyFlatsPage extends Component {
                     </View>
 
                 </View>
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('myFlat')}>
                     <Text style={styles.drawer_text}>ویلاهای من</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/home.png')} />
+                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
                 </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('home')}>
                     <Text style={styles.drawer_text}>درخواست ها</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/user.png')} />
+                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
                 </TouchableOpacity>
 
                 {/* got to history */}
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('history')}>
                     <Text style={styles.drawer_text}>تاریخچه</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/history.png')} />
+                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
@@ -146,7 +157,7 @@ export default class MyFlatsPage extends Component {
 
                     {/* MENU */}
                     <View style={styles.menu} >
-                        
+
                         <TouchableOpacity style={styles.humberger} onPress={this._openDrawer}>
                             <Image style={styles.humberger_icon} source={require('../../Assets/Images/menu.png')} />
                         </TouchableOpacity>
@@ -156,32 +167,34 @@ export default class MyFlatsPage extends Component {
                     {/* request box  */}
                     <View style={styles.up} >
                         <Text style={styles.title} >ویلاهای من </Text>
-                        
+
                         <ScrollView contentContainerStyle={styles.requestBox} >
-                            <NoFlat press={()=> alert('yyy')} />
-                            {/* <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} /> */}
+                            {/* <NoFlat press={()=> alert('yyy')} /> */}
+                            <ResultItems navigate={this._showDetail} />
+                            <ResultItems navigate={this._showDetail} />
+                            <ResultItems navigate={this._showDetail} />
+                            <ResultItems navigate={this._showDetail} />
+                            <ResultItems navigate={this._showDetail} />
+                            <ResultItems navigate={this._showDetail} />
                         </ScrollView>
                     </View>
                     <TouchableOpacity activeOpacity={.9} style={{
-                        position: 'absolute', bottom: 140, zIndex: 10, right: 20, width: 90,
-                        height: 90,
-                        borderRadius: 45,
+                        position: 'absolute', bottom: 140, zIndex: 10, right: 20, width: 80,
+                        height: 80,
+                        borderRadius: 40,
                         backgroundColor: '#B62750',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
+                        shadowColor: "#000",
+                        shadowOpacity: 1,
+                        elevation: 5,
                     }}
                         onPress={() => {
-                            this.setModalVisible(true);
+                            Actions.EditDetails()
                         }}
                     >
-                       <Text style={{fontSize:70,color:'#fff',lineHeight:85,fontWeight:'900'}} >+</Text>
+                        <Text style={{ fontSize: 60, color: '#fff', lineHeight: 70, fontWeight: '900' }} >+</Text>
                     </TouchableOpacity>
 
 
@@ -190,136 +203,7 @@ export default class MyFlatsPage extends Component {
 
 
 
-                {/* MODAL */}
 
-
-                <Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {
-                        this.setModalVisible(false);
-                    }}
-
-                >
-                    <InputScrollView >
-                        {/* Close modal  */}
-                        <View
-                            style={{
-                                backgroundColor: '#f6f6f6',
-                                width: '100%',
-                                height: 50,
-                                flexDirection: 'row',
-                                justifyContent: 'flex-end'
-                            }}>
-                            {/* Close modal  */}
-                            <TouchableOpacity
-                                onPress={() => {
-                                    this.setModalVisible(false);
-                                }}>
-                                <Image style={styles.modal_close}
-                                    source={require('../../Assets/Images/close.png')}
-                                />
-                            </TouchableOpacity>
-                        </View>
-
-                        {/* Modal Body */}
-                        <View style={styles.Modal}>
-                            <View style={styles.modal_description} >
-                                <View style={styles.modal_description_left}>
-                                    <Text style={styles.modal_description_text}>
-                                        برای پیدا کردن بهترین مکان دلخواه هرچه سریعتر اقدام کنید !
-                                        </Text>
-                                    <Text style={styles.modal_description_title}>
-                                        ما اینجاییم تا بهترین مکان را برای شما پیدا کنیم
-                                        </Text>
-                                </View>
-                                <Image style={styles.home_icon_marker} source={require('../../Assets/Images/homemarker.png')} />
-                            </View>
-
-                            {/* price */}
-                            <View style={styles.modal_price} >
-                                <View style={styles.modal_details} >
-                                    <View style={styles.modal_titles}>
-                                        <Text style={styles.toman} > ( تومان ) </Text>
-                                        <Text style={styles.gheymat} >قیمت</Text>
-                                    </View>
-                                    <Image style={styles.modal_icons} source={require('../../Assets/Images/percent.png')} />
-                                </View>
-
-
-                                <TextInput
-                                    placeholderStyle={{
-                                        fontFamily: 'ISFBold',
-                                        color: '#636363'
-                                    }}
-                                    placeholder="100,000"
-                                    style={styles.price_input}
-                                    onChangeText={(price) => this.setState({ price })}
-                                    keyboardType='numeric'
-
-                                />
-
-                            </View>
-
-                            {/* date */}
-                            <View style={styles.start_date} >
-                                <View style={styles.modal_details} >
-                                    <Text style={styles.modal_titles}>تاریخ شروع</Text>
-                                    <Image style={styles.modal_icons} source={require('../../Assets/Images/calendergrey.png')} />
-                                </View>
-                                <Text style={styles.select_time} >1398 / 11 / 15</Text>
-                                {/* <View style={styles.container}>
-                                    <PersianCalendarPicker
-                                        selectedDate={date}
-                                        onDateChange={this.onDateChange}
-                                        screenWidth={Dimensions.get('window').width}
-                                    />
-                                    <Text style={styles.selectedDate}> Date: {this.state.date.toString()} </Text>
-                                </View> */}
-                            </View>
-
-                            {/* nights */}
-                            <View style={styles.nights} >
-                                <View style={styles.modal_details} >
-                                    <Text style={styles.modal_titles}>تعداد شبها</Text>
-                                    <Image style={styles.modal_icons} source={require('../../Assets/Images/moon.png')} />
-                                </View>
-                                <TextInput
-                                    placeholderStyle={{
-                                        fontFamily: 'ISFBold',
-                                        color: '#636363'
-                                    }}
-                                    placeholder="2"
-                                    style={styles.price_input}
-                                    onChangeText={(price) => this.setState({ price })}
-                                    keyboardType='numeric'
-
-                                />
-                            </View>
-
-                            {/* request btn */}
-                            <View style={styles.new_request_box}>
-
-                                <TouchableOpacity style={styles.new_request_btn} onPress={this._enterCode} activeOpacity={.6}>
-                                    
-                                    <LinearGradient
-                                        start={{ x: 0, y: 0 }}
-                                        end={{ x: 1, y: 0 }}
-                                        colors={['#18749a', '#46add8']}
-                                        style={styles.new_request_btn_img}>
-                                        <Text style={styles.new_request_btn_text} >
-                                        درخواست جدید
-                                        </Text>
-                                    </LinearGradient>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </InputScrollView>
-
-
-
-                </Modal>
 
 
 
@@ -410,6 +294,7 @@ const styles = ({
         width: Dimensions.get('window').width,
         alignItems: 'center',
         paddingBottom: 200,
+        marginTop: 20
     },
 
     footer: {
@@ -421,7 +306,7 @@ const styles = ({
         alignItems: 'center',
         zIndex: 20
     },
-    
+
     middleInside: {
         width: 80,
         height: 80,
@@ -668,7 +553,7 @@ const styles = ({
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius:50
+        borderRadius: 50
 
     },
 

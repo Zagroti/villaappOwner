@@ -5,8 +5,11 @@ import {
     TextInput,
     KeyboardAvoidingView
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
+
+
+//components 
+import GradientButton from './../components/GradientButton'
 
 
 
@@ -221,18 +224,18 @@ export default class EnterCode extends Component {
                             </View>
                         </View>
 
+                        <GradientButton
+                                width={Dimensions.get('window').width - 100}
+                                press={this._enterCode}
+                                color_1="#36a35b"
+                                color_2="#6fcf97"
+                                height={40}
+                                borderRadius={10}
+                                textColor="#fff"
+                                size={16}
+                                title="ورود"
+                            />
 
-                        <TouchableOpacity style={styles.save_button} onPress={this._goHome} activeOpacity={.6}>
-                            <LinearGradient
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 0 }}
-                                colors={['#36a35b', '#6fcf97']}
-                                style={styles.linear}>
-                                <Text style={styles.save_text} >
-                                    ورود
-                                </Text>
-                            </LinearGradient>
-                        </TouchableOpacity>
                     </View>
 
                 </KeyboardAvoidingView>

@@ -176,7 +176,7 @@ export default class RentPage extends Component {
                             <Image style={{
                                 width: '100%',
                                 height: 180,
-                                backgroundColor: 'red',
+                                backgroundColor: '#f6f6f6',
                                 resizeMode: 'cover',
                                 borderRadius: 10
                             }} source={require('../../Assets/Images/vilajungle.jpg')} />
