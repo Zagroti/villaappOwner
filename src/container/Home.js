@@ -64,7 +64,7 @@ export default class Home extends Component {
         if (path === 'profile') {
             Actions.Profile()
         }
-        if (path === 'myFlat') {
+        if (path === 'myFlatPage') {
             Actions.MyFlatsPage()
         }
         if (path === 'home') {

@@ -71,6 +71,7 @@ const Routes = () => (
                 component={SendNumber}
                 title="Send Number"
                 hideNavBar={true}
+                initial={true}
 
 
 
@@ -88,7 +89,6 @@ const Routes = () => (
                 component={Home}
                 title="home"
                 hideNavBar={true}
-                initial={true}
                
             />
 
