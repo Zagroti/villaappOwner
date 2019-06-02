@@ -77,31 +77,43 @@ export default class Profile extends Component {
                     </Text>
                     </View>
                     <View style={styles.account_form}>
-                        <TextInput
-                            style={styles.form_inputs}
-                            onChangeText={(countryCode) => this.setState({ countryCode })}
-                            placeholder="نام و نام خانوادگی"
-                        />
-                        <TextInput
-                            style={styles.form_inputs}
-                            onChangeText={(countryCode) => this.setState({ countryCode })}
-                            placeholder="ایمیل"
-                        />
-                        <TextInput
-                            style={styles.form_inputs}
-                            onChangeText={(countryCode) => this.setState({ countryCode })}
-                            placeholder="شهر"
-                        />
-                        <TextInput
-                            style={styles.form_inputs}
-                            onChangeText={(countryCode) => this.setState({ countryCode })}
-                            placeholder="آدرس"
-                        />
+                        <View style={styles.input_box}>
+                            <TextInput
+                                style={styles.form_inputs}
+                                onChangeText={(countryCode) => this.setState({ countryCode })}
+                                placeholder="نام و نام خانوادگی"
+                            />
+                            <Image style={styles.input_icon} source={require('../../Assets/Images/userq.png')} />
+                        </View>
+                        <View style={styles.input_box}>
+                            <TextInput
+                                style={styles.form_inputs}
+                                onChangeText={(countryCode) => this.setState({ countryCode })}
+                                placeholder="ایمیل"
+                            />
+                            <Image style={styles.input_icon} source={require('../../Assets/Images/pocket.png')} />
+                        </View>
+                        <View style={styles.input_box}>
+                            <TextInput
+                                style={styles.form_inputs}
+                                onChangeText={(countryCode) => this.setState({ countryCode })}
+                                placeholder="شهر"
+                            />
+                            <Image style={styles.input_icon} source={require('../../Assets/Images/phone.png')} />
+                        </View>
+                        <View style={styles.input_box}>
+                            <TextInput
+                                style={styles.form_inputs}
+                                onChangeText={(countryCode) => this.setState({ countryCode })}
+                                placeholder="آدرس"
+                            />
+                            <Image style={styles.input_icon} source={require('../../Assets/Images/telephone.png')} />
+                        </View>
 
                     </View>
 
                     <TouchableOpacity style={styles.save_button} onPress={this._saveInfo} activeOpacity={.6}>
-                    
+
                         <LinearGradient
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 0 }}
@@ -198,18 +210,34 @@ const styles = ({
     account_form: {
 
     },
-    form_inputs: {
-        backgroundColor: '#fff',
-        width: Dimensions.get('window').width - 100,
-        borderRadius: 5,
-        marginBottom: 10,
-        height: 40,
-        fontSize: 10,
-        fontFamily: 'ISBold',
-        paddingHorizontal: 10,
+    input_box:{
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor:'#fff',
         shadowColor: "#f7f7f7",
         shadowOpacity: 1,
         elevation: 1,
+        marginBottom: 10,
+        paddingHorizontal: 10,
+        borderRadius: 5,
+        height:50,
+        width: Dimensions.get('window').width - 100,
+
+    },
+    form_inputs: {
+        backgroundColor: '#fff',
+        height: 40,
+        fontSize: 10,
+        fontFamily: 'ISBold',
+        textAlign: 'right',
+        paddingRight: 10,
+        width:'90%'
+
+    },
+    input_icon:{
+        width:20,
+        resizeMode:'contain'
 
     },
     save_button: {
@@ -229,7 +257,7 @@ const styles = ({
         fontSize: 40,
         flexDirection: 'row',
         justifyContent: 'center',
-        borderRadius:50
+        borderRadius: 50
 
     },
     save_text: {
