@@ -226,7 +226,7 @@ export default class EnterCode extends Component {
 
                         <GradientButton
                                 width={Dimensions.get('window').width - 100}
-                                press={this._enterCode}
+                                press={this._goHome}
                                 color_1="#36a35b"
                                 color_2="#6fcf97"
                                 height={40}
