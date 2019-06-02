@@ -8,7 +8,11 @@
   },
   "dependencies": {
     "react": "16.8.3",
-    "react-native": "0.59.8"
+    "react-native": "0.59.8",
+    "react-native-input-scroll-view": "^1.9.2",
+    "react-native-linear-gradient": "^2.5.4",
+    "react-native-router-flux": "^4.0.6",
+    "react-native-textarea": "^1.0.3"
   },
   "devDependencies": {
     "@babel/core": "7.4.5",
@@ -20,5 +24,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./Assets/fonts"
+    ]
   }
 }
