@@ -48,6 +48,7 @@ export default GradientButton
     textColor="#333"
     size={16}
     title="عنوان"
-    paddingVertical={50}
+    marginTop={20}
+    marginBottom={20}
 /> */}
 

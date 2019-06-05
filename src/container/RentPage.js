@@ -120,7 +120,7 @@ export default class RentPage extends Component {
                         <View style={styles.box_1}  >
                             <View style={styles.circle}>
                                 <View style={styles.user_box}>
-                                    <Image style={styles.image} source={require('../../Assets/Images/userx.jpeg')} />
+                                    <Image style={styles.image} source={require('../../Assets/Images/userx.png')} />
                                 </View>
                                 <Text style={{
                                     fontSize: 18,
@@ -373,10 +373,10 @@ const styles = ({
         textAlign: 'center'
     },
     image: {
-        width: 60,
-        height: 60,
+        width: 80,
+        height: 80,
         resizeMode: 'cover',
-        borderRadius:30
+        borderRadius:40
     },
     Modal: {
         flexDirection: 'column',

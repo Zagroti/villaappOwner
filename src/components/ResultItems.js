@@ -79,29 +79,29 @@ const styles = ({
         justifyContent: 'center',
         alignItems: 'center',
         width: Dimensions.get('window').width - 50,
-        padding: 10,
+        padding: 5,
         borderRadius: 10,
         height: 100,
         marginTop: 10,
-        marginBottom: 20,
         zIndex: 10,
+        backgroundColor:'#fff'
     },
     detailes: {
 
     },
     image_box: {
-        width: 120,
-        height: 120,
+        width: 90,
+        height: 90,
         justifyContent: 'center',
         alignItems: 'center',
         
     },
     image: {
-        width:120,
-        height: 120,
+        width:90,
+        height: 90,
         resizeMode: 'cover',
         borderWidth: 2,
-        borderRadius: 5,
+        borderRadius: 10,
         borderColor: '#fff',
     },
     up: {

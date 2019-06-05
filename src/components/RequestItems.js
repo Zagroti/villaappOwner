@@ -49,7 +49,7 @@ export default class RequestItems extends Component {
                                     borderWidth: 1,
                                     borderRadius: 30,
                                     borderColor: '#686868',
-                        }}  source={require('../../Assets/Images/userx.jpeg')} />
+                        }}  source={require('../../Assets/Images/userx.png')} />
                     </View>
                 </View>
             </TouchableOpacity>

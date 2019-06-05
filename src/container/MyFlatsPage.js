@@ -186,6 +186,7 @@ export default class MyFlatsPage extends Component {
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
+
                         shadowColor: "#000",
                         shadowOpacity: 1,
                         elevation: 5,
