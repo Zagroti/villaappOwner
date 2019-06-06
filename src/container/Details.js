@@ -3,20 +3,12 @@ import {
     Text,
     View,
     Dimensions,
-    DrawerLayoutAndroid,
     Image,
     ImageBackground,
     TouchableOpacity,
-    BackHandler,
-    ToastAndroid,
     ScrollView,
-    Modal
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import InputScrollView from 'react-native-input-scroll-view';
-
-import LinearGradient from 'react-native-linear-gradient';
-
 
 
 //components 
@@ -57,10 +49,6 @@ export default class Details extends Component {
 
                     {/* MENU */}
                     <View style={styles.menu} >
-                        {/* <TouchableOpacity style={styles.back_box} onPress={()=>this._backToResultImage()} >
-                            <Image style={styles.back}
-                                source={require('./../../Assets/Images/left-arrow-white.png')} />
-                        </TouchableOpacity> */}
                         <Text style={styles.owner_answer}>پذیرفته شده</Text>
                     </View>
 
@@ -342,9 +330,6 @@ const styles = ({
         fontFamily: 'ISMedium',
         color: '#c7c7c7',
     },
-    see_more_icon: {
-
-    },
 
 
     avilibiy: {
@@ -398,157 +383,7 @@ const styles = ({
         height: 160,
         top: -50,
         alignItems: 'center',
-    },
-    save_button_image: {
-        width: '100%',
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        borderRadius: 50
-
-
-    },
-    save_text: {
-        fontFamily: "ISBold",
-        color: '#fff',
-        fontSize: 16,
-        width: '50%'
-    },
-    right: {
-        width: '40%',
-        alignItems: 'flex-end'
-    },
-
-
-
-    Modal: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f6f6f6'
-    },
-    modal_title: {
-        alignItems: 'center',
-    },
-
-    icon_parent: {
-        width: 110,
-        height: 110,
-        backgroundColor: '#aaa',
-        borderWidth: 10,
-        borderColor: '#f5f5f5',
-        borderRadius: 55,
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
-    },
-    icon_child: {
-        width: 90,
-        height: 90,
-        backgroundColor: '#fff',
-        borderWidth: 10,
-        borderColor: '#f8f8f8',
-        borderRadius: 45,
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
-    },
-
-    icon_cover: {
-        width: 70,
-        height: 70,
-        backgroundColor: '#C92652',
-        borderRadius: 35,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    icon: {
-        width: '100%',
-        height: '100%',
-        borderRadius: 35,
-
-    },
-    person_desc: {
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    person_name: {
-        fontSize: 18,
-        fontFamily: 'ISBold',
-        marginTop: 10
-    },
-    person_number: {
-        fontSize: 15,
-        fontFamily: 'ISF',
-        color: '#949494'
-    },
-
-    rent_detail: {
-        width: '80%',
-        marginTop: 20
-    },
-    rent_items: {
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
-        backgroundColor: '#fff',
-        flexDirection: 'row-reverse',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 10,
-        marginVertical: 5,
-    },
-    rent_text: {
-        fontSize: 13,
-        fontFamily: 'ISF',
-        color: '#333'
-    },
-    rent_number: {
-        fontSize: 13,
-        fontFamily: 'ISFBold',
-        color: '#333'
-    },
-    totalـprice: {
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
-        backgroundColor: '#fff',
-        flexDirection: 'row-reverse',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 10,
-        marginVertical: 5,
-        backgroundColor: '#FFF7CD'
-    },
-    total_number: {
-        fontSize: 18,
-        fontFamily: 'ISFBold',
-        color: '#333'
-    },
-    total_text: {
-        fontFamily: 'ISFBold',
-        fontSize: 18,
-        color: '#333',
-    },
-
-    accept_from_owner: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        height: 60,
-        borderRadius: 30,
-        marginVertical: 30
     }
-
-
 
 
 

@@ -5,18 +5,10 @@ import {
     Dimensions,
     DrawerLayoutAndroid,
     Image,
-    ImageBackground,
     TouchableOpacity,
-    BackHandler,
-    ToastAndroid,
     ScrollView,
-    Modal,
-    TextInput,
-    Platform
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import InputScrollView from 'react-native-input-scroll-view';
-import LinearGradient from 'react-native-linear-gradient';
 
 
 
@@ -31,7 +23,6 @@ export default class MyFlatsPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            modalVisible: false,
 
         };
     }
@@ -42,25 +33,10 @@ export default class MyFlatsPage extends Component {
     }
 
 
-    componentDidMount() {
-        // for disable back btn
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    }
-
-    componentWillUnmount() {
-        // for disable back btn
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-    }
 
 
-    //for disable back button haedware
-    handleBackButton() {
-        // ToastAndroid.show('Back button is pressed', ToastAndroid.SHORT);
-        return true;
-    }
 
-
-    //footer actions
+    //menu actions
     _navigate = (path) => {
         if (path === 'profile') {
             Actions.Profile()
@@ -79,14 +55,7 @@ export default class MyFlatsPage extends Component {
 
     }
 
-    _showRequestsNavigate = () => {
-        Actions.RentPage()
-    }
 
-    //close modal
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
-    }
 
 
     _showDetail = () => {
@@ -202,14 +171,6 @@ export default class MyFlatsPage extends Component {
 
                 </View>
 
-
-
-
-
-
-
-
-
             </DrawerLayoutAndroid >
 
 
@@ -234,27 +195,7 @@ const styles = ({
         height: 50,
         padding: 20
     },
-    bell: {
-        width: 30,
-        height: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    notification: {
-        width: 14,
-        height: 14,
-        borderRadius: 7,
-        backgroundColor: '#B22850',
-        start: 10,
-        top: -10,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    notification_text: {
-        color: '#fff',
-        fontSize: 9,
-        fontFamily: 'ISFMedium',
-    },
+   
     humberger: {
         width: 50,
         height: 50,
@@ -298,33 +239,7 @@ const styles = ({
         marginTop: 20
     },
 
-    footer: {
-        width: Dimensions.get('window').width,
-        height: 100,
-        backgroundColor: "#C92652",
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        zIndex: 20
-    },
-
-    middleInside: {
-        width: 80,
-        height: 80,
-        backgroundColor: '#fff',
-        borderWidth: 2,
-        borderColor: '#eee',
-        borderRadius: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 20
-    },
-    middleIcon: {
-        width: 40,
-        height: 50,
-        zIndex: 20
-    },
-
+    
     icon_parent: {
         width: 120,
         height: 120,
@@ -394,214 +309,7 @@ const styles = ({
     bottomIcon: {
         width: 30,
         height: 30
-    },
-    Modal: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f7f7f7',
-        // height: Dimensions.get('window').height ,
-        width: Dimensions.get('window').width,
-    },
-    modal_description: {
-        backgroundColor: '#eee',
-        borderBottomRightRadius: 20,
-        borderBottomLeftRadius: 10,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 20,
-        width: '90%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
-        height: 120,
-        padding: 10,
-        marginTop: 50,
-    },
-
-    home_icon_marker: {
-        width: 100,
-        resizeMode: "contain",
-        top: -40,
-    },
-
-    modal_description_left: {
-        flex: 1
-    },
-    modal_description_text: {
-        fontSize: 14,
-        color: '#333',
-        fontFamily: 'ISBold',
-    },
-    modal_description_title: {
-        fontSize: 10,
-        color: '#aaa',
-        fontFamily: 'IS',
-    },
-    modal_price: {
-        width: '90%',
-        flexDirection: 'column',
-        marginVertical: 20,
-        paddingVertical: 20,
-        borderRadius: 5
-    },
-    modal_details: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-end'
-    },
-    modal_titles: {
-        flexDirection: 'row',
-        fontSize: 12,
-        fontFamily: 'ISBold',
-        alignItems: 'center',
-        color: '#636363'
-    },
-    gheymat: {
-        fontSize: 12,
-        fontFamily: 'ISBold',
-        color: '#636363'
-    },
-    toman: {
-        fontSize: 8,
-        fontFamily: 'ISBold',
-        color: '#636363'
-    },
-    modal_icons: {
-        width: 20,
-        resizeMode: "contain",
-        marginLeft: 10,
-    },
-
-    price_input: {
-        textAlign: 'center',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
-        width: '100%',
-        height: 50,
-        backgroundColor: '#fff',
-        color: '#636363',
-        marginTop: 5,
-        ...Platform.select({
-            android: {
-                fontFamily: 'ISFBold',
-                fontSize: 15
-            }
-        })
-
-    },
-    start_date: {
-        width: '90%',
-        height: 100
-    },
-    select_time: {
-        textAlign: 'center',
-        fontSize: 15,
-        fontFamily: 'ISFBold',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
-        width: '100%',
-        height: 50,
-        backgroundColor: '#fff',
-        color: '#636363',
-        marginTop: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    nights: {
-        width: '90%',
-        height: 100
-    },
-    select_nights: {
-        textAlign: 'center',
-        fontSize: 15,
-        fontFamily: 'ISFBold',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
-        width: '100%',
-        height: 50,
-        backgroundColor: '#fff',
-        color: '#636363',
-        marginTop: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    new_request_box: {
-        width: '100%',
-        height: 140,
-        backgroundColor: 'red',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ebebeb',
-        marginTop: 40,
-        // paddingTop: 50,
-        // paddingBottom: 300,
-    },
-
-    new_request_btn: {
-        width: '90%',
-    },
-    new_request_btn_img: {
-        width: '100%',
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 50
-
-    },
-
-    new_request_btn_text: {
-        fontFamily: 'ISBold',
-        color: '#fff',
-        fontSize: 16,
-    },
-    modal_close: {
-        width: 25,
-        height: 25,
-        margin: 20
-    },
-    tab: {
-        width: Dimensions.get('window').width - 50,
-        height: 50,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        marginVertical: 10,
-
-
-
-    },
-    tab_box: {
-        width: '33.3333%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: "100%"
-
-    },
-
-    tab_text: {
-        fontSize: 10,
-        fontFamily: 'ISBold',
-        marginLeft: 5,
-    },
-
-
-
-
+    }
 
 
 

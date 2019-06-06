@@ -3,18 +3,12 @@ import {
     Text,
     View,
     Dimensions,
-    DrawerLayoutAndroid,
     Image,
     TextInput,
-    ImageBackground,
-    TouchableOpacity,
-    BackHandler,
-    ToastAndroid,
     ScrollView,
     KeyboardAvoidingView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import InputScrollView from 'react-native-input-scroll-view';
 import Textarea from 'react-native-textarea';
 
 
@@ -274,20 +268,6 @@ const styles = ({
         resizeMode: "contain",
         top: -40,
     },
-
-    edit_details_description_left: {
-        flex: 1
-    },
-    edit_details_description_text: {
-        fontSize: 14,
-        color: '#333',
-        fontFamily: 'ISBold',
-    },
-    edit_details_description_title: {
-        fontSize: 10,
-        color: '#aaa',
-        fontFamily: 'IS',
-    },
     edit_details_1: {
         width: Dimensions.get('window').width - 50,
         flexDirection: 'column',
@@ -299,14 +279,6 @@ const styles = ({
         flexDirection: 'column',
         width: '100%',
 
-    },
-    edit_details_titles: {
-        width: '100%',
-        flexDirection: 'row',
-        fontSize: 12,
-        fontFamily: 'ISBold',
-        alignItems: 'center',
-        color: '#636363',
     },
     titles: {
         width: '100%',
@@ -423,82 +395,6 @@ const styles = ({
         borderRadius: 5,
         fontFamily: 'ISBold',
 
-    },
-
-
-
-    start_date: {
-        width: '90%',
-        height: 100
-    },
-    select_time: {
-        textAlign: 'center',
-        fontSize: 15,
-        fontFamily: 'ISFBold',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
-        width: '100%',
-        height: 50,
-        backgroundColor: '#fff',
-        color: '#636363',
-        marginTop: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    nights: {
-        width: '90%',
-        height: 100
-    },
-    select_nights: {
-        textAlign: 'center',
-        fontSize: 15,
-        fontFamily: 'ISFBold',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
-        width: '100%',
-        height: 50,
-        backgroundColor: '#fff',
-        color: '#636363',
-        marginTop: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    new_request_box: {
-        width: '100%',
-        height: 140,
-        backgroundColor: 'red',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ebebeb',
-        marginTop: 40,
-        // paddingTop: 50,
-        // paddingBottom: 300,
-    },
-
-    new_request_btn: {
-        width: '90%',
-    },
-    new_request_btn_img: {
-        width: '100%',
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    new_request_btn_text: {
-        fontFamily: 'ISBold',
-        color: '#fff',
-        fontSize: 16,
-    },
-    edit_details_close: {
-        width: 25,
-        height: 25,
-        margin: 20
     }
 
 

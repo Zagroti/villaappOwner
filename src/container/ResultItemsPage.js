@@ -3,12 +3,8 @@ import {
     Text,
     View,
     Dimensions,
-    TextInput,
     Image,
-    ImageBackground,
     TouchableOpacity,
-    BackHandler,
-    ToastAndroid,
     ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -146,9 +142,6 @@ const styles = ({
         fontSize:10,
         fontFamily: 'ISBold',
         marginLeft: 5,
-    },
-    tab_image:{
-
     },
     line:{
         width:1,

@@ -3,21 +3,13 @@ import {
     Text,
     View,
     Dimensions,
-    DrawerLayoutAndroid,
     Image,
-    ImageBackground,
-    TouchableOpacity,
     BackHandler,
-    ToastAndroid,
     ScrollView,
     Modal,
-    TextInput,
-    Platform
 } from 'react-native';
-import { Actions, Reducer } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import InputScrollView from 'react-native-input-scroll-view';
-import LinearGradient from 'react-native-linear-gradient';
-
 
 
 //components 
@@ -368,10 +360,6 @@ const styles = ({
         alignItems: 'center',
         padding: 5
     },
-    buttons: {
-        width: '50%',
-        textAlign: 'center'
-    },
     image: {
         width: 80,
         height: 80,
@@ -398,56 +386,7 @@ const styles = ({
         borderWidth: 1,
         borderRadius: 40,
         borderColor: '#EEAF4B',
-    },
-    modal_close: {
-        width: 25,
-        height: 25,
-        margin: 20
-    },
-
-    number_box: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width:60,
-        height:60,
-        shadowColor: "#eee",
-        shadowOpacity: 1,
-        elevation: 5,
-        borderRadius:30
-    },
-
-
-    tab: {
-        width: Dimensions.get('window').width - 50,
-        height: 50,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        marginVertical: 10,
-
-
-
-    },
-    tab_box: {
-        width: '33.3333%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: "100%"
-
-    },
-
-    tab_text: {
-        fontSize: 10,
-        fontFamily: 'ISBold',
-        marginLeft: 5,
-    },
-
+    }
 
 
 

@@ -14,12 +14,24 @@ export default class ResultItems extends Component {
     render() {
 
         return (
-            <TouchableOpacity style={styles.ResultItems} 
-                              activeOpacity={.9} 
-                              onPress={this.props.navigate}
-                              onPressIn={()=>this.setState({touchColor:'#FFF7DE'})}
-                              onPressOut={()=>this.setState({touchColor:'#fff'})}
-                              >
+            <TouchableOpacity
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: Dimensions.get('window').width - 50,
+                    padding: 5,
+                    borderRadius: 10,
+                    height: 100,
+                    marginTop: 10,
+                    zIndex: 10,
+                    backgroundColor: this.state.touchColor
+                }}
+                activeOpacity={.9}
+                onPress={this.props.navigate}
+                onPressIn={() => this.setState({ touchColor: '#FFF7DE' })}
+                onPressOut={() => this.setState({ touchColor: '#fff' })}
+            >
                 <View
                     style={{
                         backgroundColor: this.state.touchColor,
@@ -27,7 +39,7 @@ export default class ResultItems extends Component {
                         borderTopLeftRadius: 10,
                         borderBottomLeftRadius: 30,
                         flex: 3,
-                        height:90
+                        height: 90
                     }} >
 
                     <View style={styles.up}>
@@ -75,16 +87,7 @@ export default class ResultItems extends Component {
 
 const styles = ({
     ResultItems: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: Dimensions.get('window').width - 50,
-        padding: 5,
-        borderRadius: 10,
-        height: 100,
-        marginTop: 10,
-        zIndex: 10,
-        backgroundColor:'#fff'
+
     },
     detailes: {
 
@@ -94,10 +97,10 @@ const styles = ({
         height: 90,
         justifyContent: 'center',
         alignItems: 'center',
-        
+
     },
     image: {
-        width:90,
+        width: 90,
         height: 90,
         resizeMode: 'cover',
         borderWidth: 2,

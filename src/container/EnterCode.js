@@ -9,7 +9,6 @@ import {
     Animated
 } from 'react-native';
 
-import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import GradientButton from '../components/GradientButton';
 
@@ -117,7 +116,7 @@ class EnterCode extends Component {
                                 کد فعال سازی خود را وارد کنید
                             </Text>
 
-                            <View style={styles.codeShowBox}>
+                            <View style={styles.code_show_box}>
                                 <TextInput
                                     onFocus={() => {
                                         this.setState({ bg: '#C72A54' })
@@ -227,9 +226,6 @@ const styles = ({
         fontWeight: '900',
         color: '#b7b7b7'
     },
-    Resend: {
-
-    },
 
     ResendText: {
         fontSize: 14,
@@ -267,34 +263,9 @@ const styles = ({
         marginTop: 20
 
     },
-    codeShowBox: {
+    code_show_box: {
         flexDirection: 'row',
-    },
-    MyCodeNumber: {
-
-    },
-
-    save_button: {
-        width: Dimensions.get('window').width - 100,
-        marginTop: 0,
-        flexGrow: 2,
-        justifyContent: "flex-start",
-
-    },
-    linear: {
-        width: '100%',
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        borderRadius: 50
-
-    },
-    save_text: {
-        fontFamily: "ISBold",
-        color: '#fff',
-        fontSize: 16,
-    },
+    }
 
 
 

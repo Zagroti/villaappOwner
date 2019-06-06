@@ -6,7 +6,6 @@ import {
     Text,
     View,
     Dimensions,
-    TouchableOpacity,
     TextInput,
     Platform,
     KeyboardAvoidingView,
@@ -313,12 +312,7 @@ const styles = ({
         height: 45,
         paddingLeft: 10,
         fontSize: 12,
-        fontWeight: '900',
-        ...Platform.select({
-            android: {
-                fontFamily: 'ISFBold',
-            }
-        })
+        fontWeight: '900'
     },
     input_box_2: {
         height: 45,
