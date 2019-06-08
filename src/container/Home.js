@@ -30,7 +30,10 @@ export default class Home extends Component {
             color_2: '#000',
             color_3: '#000',
             red: '#C72652',
-            black: '#333'
+            black: '#333',
+            tab1: true,
+            tab2: false,
+            tab3: false
 
         };
     }
@@ -90,20 +93,28 @@ export default class Home extends Component {
             this.setState({
                 color_1: this.state.red,
                 color_2: this.state.black,
-                color_3: this.state.black
-
+                color_3: this.state.black,
+                tab1: true,
+                tab2: false,
+                tab3: false
             })
         } else if (tab === 'tab2') {
             this.setState({
                 color_1: this.state.black,
                 color_2: this.state.red,
                 color_3: this.state.black,
+                tab1: false,
+                tab2: true,
+                tab3: false
             })
         } else if (tab === 'tab3') {
             this.setState({
                 color_1: this.state.black,
                 color_2: this.state.black,
-                color_3: this.state.red
+                color_3: this.state.red,
+                tab1: false,
+                tab2: false,
+                tab3: true
             })
         }
 
@@ -170,7 +181,7 @@ export default class Home extends Component {
 
                     {/* MENU */}
                     <View style={styles.menu} >
-                        
+
                         <TouchableOpacity style={styles.humberger} onPress={this._openDrawer}>
                             <Image style={styles.humberger_icon} source={require('../../Assets/Images/menu.png')} />
                         </TouchableOpacity>
@@ -192,24 +203,48 @@ export default class Home extends Component {
                                 <Text style={[styles.tab_text, { color: this.state.color_3 }]}>بسته شده</Text>
                             </TouchableOpacity>
                         </View>
-                        <ScrollView contentContainerStyle={styles.requestBox} >
-                            {/* <NoRequest /> */}
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                            <Requestitems navigate={this._showRequestsNavigate} />
-                        </ScrollView>
+                        {
+                            this.state.tab1 ?
+                                <ScrollView contentContainerStyle={styles.requestBox} >
+                                    {/* <NoRequest /> */}
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                                </ScrollView> : <Text style={{height:0}}></Text>
+                        }
+
+                        {
+                            this.state.tab2 ?
+                                <ScrollView contentContainerStyle={styles.requestBox} >
+                                    {/* <NoRequest /> */}
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                           
+                                </ScrollView> : <Text style={{height:0}}></Text>
+                        }
+
+
+                        {
+                            this.state.tab3 ?
+                                <ScrollView contentContainerStyle={styles.requestBox} >
+                                    {/* <NoRequest /> */}
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                            
+                                </ScrollView> : <Text style={{height:0}}></Text>
+                        }
+
                     </View>
-                    
+
 
                 </View>
 
 
 
-                
+
 
 
 
@@ -310,7 +345,7 @@ const styles = ({
         alignItems: 'center',
         zIndex: 20
     },
-    
+
     middleInside: {
         width: 80,
         height: 80,
