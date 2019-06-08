@@ -48,7 +48,7 @@ export default class MyFlatsPage extends Component {
             Actions.Home()
         }
         if (path === 'history') {
-            return false;
+            Actions.History()
         }
 
         this.refs['DRAWER_REF'].closeDrawer();

@@ -13,6 +13,7 @@ import Details from './src/container/Details';
 import EditDetails from './src/container/EditDetails';
 import RentPage from './src/container/RentPage';
 import MyFlatsPage from './src/container/MyFlatsPage'
+import History from './src/container/History'
 
 
 
@@ -86,10 +87,18 @@ const Routes = () => (
                 component={Home}
                 title="home"
                 hideNavBar={true}
-e               
+                e
             />
 
             <Scene key="Profile" component={Profile}
+                title=""
+                titleStyle={{ color: 'transparent' }}
+                renderBackButton={() => backButton()}
+                navigationBarStyle={styles.login_style_bar}
+                sceneStyle={styles.login_scene_style}
+            />
+
+            <Scene key="History" component={History}
                 title=""
                 titleStyle={{ color: 'transparent' }}
                 renderBackButton={() => backButton()}
@@ -152,6 +161,14 @@ e
                 title=""
                 titleStyle={{ color: 'transparent' }}
                 hideNavBar={true}
+                sceneStyle={styles.login_scene_style}
+            />
+
+            <Scene key="History" component={History}
+                title=""
+                titleStyle={{ color: 'transparent' }}
+                renderBackButton={() => backButton()}
+                navigationBarStyle={styles.login_style_bar}
                 sceneStyle={styles.login_scene_style}
             />
 

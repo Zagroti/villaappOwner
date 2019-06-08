@@ -71,7 +71,7 @@ export default class Home extends Component {
             Actions.Home()
         }
         if (path === 'history') {
-            return false;
+            Actions.History()
         }
 
 
@@ -410,9 +410,6 @@ const styles = ({
         justifyContent: 'space-around',
         alignItems: 'center',
         marginVertical: 10,
-
-
-
     },
     tab_box: {
         width: '33.3333%',

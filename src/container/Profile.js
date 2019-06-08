@@ -124,7 +124,7 @@ export default class Profile extends Component {
                             textColor="#fff"
                             size={16}
                             title="ذخیره"
-                            top={40}
+                            top={20}
                             bottom={50}
                         />
 
