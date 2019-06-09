@@ -6,16 +6,27 @@ import {
     Image,
     TextInput,
     ScrollView,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    TouchableOpacity,
+    Alert,
+    NativeModules
+
 } from 'react-native';
+
+
 import { Actions } from 'react-native-router-flux';
 import Textarea from 'react-native-textarea';
 
 
-
-
 //components 
 import GradientButton from '../components/GradientButton'
+
+
+
+// import ImagePicker from 'react-native-image-picker';
+
+var ImagePicker = NativeModules.ImageCropPicker;
+
 
 export default class EditDetails extends Component {
 
@@ -23,6 +34,8 @@ export default class EditDetails extends Component {
         super(props)
         this.state = {
             modalVisible: false,
+            image: null,
+            images: null
         }
     }
 
@@ -36,6 +49,56 @@ export default class EditDetails extends Component {
     _backToResultImage = () => {
         Actions.ResultItemsPage()
     }
+
+
+
+    pickSingle(cropit, circular = false, mediaType) {
+        ImagePicker.openPicker({
+            width: 500,
+            height: 500,
+            cropping: cropit,
+            cropperCircleOverlay: circular,
+            compressImageMaxWidth: 1000,
+            compressImageMaxHeight: 1000,
+            compressImageQuality: 1,
+            compressVideoPreset: 'MediumQuality',
+            includeExif: true,
+            mediaType: 'photo'
+        }).then(image => {
+            console.log('received image', image);
+            this.setState({
+                image: { uri: image.path, width: image.width, height: image.height, mime: image.mime },
+                images: null
+            });
+        }).catch(e => {
+            console.log(e);
+            Alert.alert(e.message ? e.message : e);
+        });
+    }
+
+    pickMultiple() {
+        ImagePicker.openPicker({
+            multiple: true,
+            waitAnimationEnd: false,
+            includeExif: true,
+            forceJpg: true,
+            mediaType: 'photo'
+        }).then(images => {
+            this.setState({
+                image: null,
+                images: images.map(i => {
+                    console.log('received image', i);
+                    return { uri: i.path, width: i.width, height: i.height, mime: i.mime };
+                })
+            });
+        }).catch(e => false);
+    }
+
+
+    renderAsset(image) {
+        return <Image style={styles.images_box} source={image} />
+    }
+
 
 
     render() {
@@ -56,36 +119,32 @@ export default class EditDetails extends Component {
                         <View style={styles.edit_details_details} >
                             <Text style={styles.titles} >عکس ها</Text>
                             <View style={styles.add_images_boxes} >
-                                <View style={styles.images_box} >
-                                    <Image style={styles.images} source={require('../../Assets/Images/vilajungle.jpg')} />
+
+                                <View style={styles.container}>
+                                    <ScrollView contentContainerStyle={{
+                                        justifyContent: 'flex-end',
+                                        flexDirection: 'row',
+                                        flexWrap: 'wrap',
+                                        paddingVertical: 10,
+                                        minWidth: '100%'
+                                    }}>
+                                        {this.state.images ? this.state.images.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
+                                        <TouchableOpacity style={styles.images_box} onPress={this.pickMultiple.bind(this)}>
+                                            <Image style={styles.select_image} source={require('../../Assets/Images/picture.png')} />
+                                            <Text style={{
+                                                fontSize: 10,
+                                                fontFamily: 'ISBold',
+                                                color: '#636363'
+                                            }} >افزودن عکس</Text>
+                                        </TouchableOpacity>
+                                    </ScrollView>
+
                                 </View>
-                                <View style={styles.images_box} >
-                                    <Image style={styles.images} source={require('../../Assets/Images/vilajungle.jpg')} />
-                                </View>
-                                <View style={styles.images_box} >
-                                    <Image style={styles.images} source={require('../../Assets/Images/vilajungle.jpg')} />
-                                </View>
-                                <View style={styles.images_box} >
-                                    <Image style={styles.select_image} source={require('../../Assets/Images/picture.png')} />
-                                    <Text style={{
-                                        fontSize: 10,
-                                        fontFamily: 'ISBold',
-                                        color: '#636363'
-                                    }} >افزودن عکس</Text>
-                                </View>
+
                             </View>
                         </View>
 
-                        {/* <TextInput
-                            placeholderStyle={{
-                                fontFamily: 'ISFBold',
-                                color: '#636363'
-                            }}
-                            placeholder="100,000"
-                            style={styles.price_input}
-                            onChangeText={() => alert('2')}
-                            keyboardType='numeric'
-                        /> */}
+
                     </View>
 
                     {/* date */}
@@ -334,14 +393,15 @@ const styles = ({
         width: '100%'
     },
     images_box: {
-        width: (Dimensions.get('window').width - 100) / 3,
-        height: (Dimensions.get('window').width - 100) / 3,
+        width: 80,
+        height: 80,
         marginLeft: 10,
         backgroundColor: '#ececec',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 10,
+        resizeMode: 'cover'
     },
 
     images: {
@@ -396,7 +456,21 @@ const styles = ({
         fontFamily: 'ISBold',
 
     }
-
+    ,
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    button: {
+        backgroundColor: 'blue',
+        marginBottom: 10
+    },
+    text: {
+        color: 'white',
+        fontSize: 20,
+        textAlign: 'center'
+    }
 
 
 

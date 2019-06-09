@@ -72,7 +72,7 @@ const Routes = () => (
                 component={SendNumber}
                 title="Send Number"
                 hideNavBar={true}
-                initial={true}
+                
             />
             <Scene key="EnterCode" component={EnterCode}
                 title=""
@@ -144,7 +144,7 @@ const Routes = () => (
                 renderBackButton={() => backButton()}
                 navigationBarStyle={styles.login_style_bar}
                 sceneStyle={styles.login_scene_style}
-
+                initial={true}
             />
 
             <Scene key="RentPage" component={RentPage}
