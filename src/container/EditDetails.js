@@ -6,16 +6,24 @@ import {
     Image,
     TextInput,
     ScrollView,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    PermissionsAndroid,
+    TouchableOpacity
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Textarea from 'react-native-textarea';
 
 
-
+import Mapir from 'mapir-react-native-sdk'
 
 //components 
 import GradientButton from '../components/GradientButton'
+
+
+
+
+const arrowDown = require('./../../Assets/Images/arrow-down.png')
+const arrowUp = require('./../../Assets/Images/arrow-up.png')
 
 export default class EditDetails extends Component {
 
@@ -23,7 +31,17 @@ export default class EditDetails extends Component {
         super(props)
         this.state = {
             modalVisible: false,
+            markers: [
+                { latitude: 51.422548, longitude: 35.732573 },
+            ],
+            mapHeight: 200,
+            mapWidth: Dimensions.get('window').width - 50,
+            moreText: 'بیشتر',
+            arrowDown: true
+
         }
+
+
     }
 
 
@@ -38,14 +56,68 @@ export default class EditDetails extends Component {
     }
 
 
+    componentDidMount() {
+        {
+            PermissionsAndroid.requestMultiple(
+                [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
+                {
+                    title: 'Give Location Permission',
+                    message: 'App needs location permission to find your position.'
+                }
+            ).then(granted => {
+                console.log(granted);
+                resolve();
+            }).catch(err => {
+                console.warn(err);
+                reject(err);
+            });
+        }
+
+    }
+
+    // select location 
+    addMarker = async (coordinates) => {
+        await this.setState({
+            markers: [{ latitude: coordinates[0], longitude: coordinates[1] }]
+        });
+
+    }
+
+
+    // change map size and arrow 
+    _mapHeightChanger = () => {
+        if (this.state.arrowDown) {
+            this.setState({
+                mapHeight: 300,
+                mapWidth: Dimensions.get('window').width - 10,
+                moreText: 'کوچکتر',
+                arrowDown: false
+            })
+        } else {
+            this.setState({
+                mapHeight: 200,
+                mapWidth: Dimensions.get('window').width - 50,
+                moreText: 'بزرگتر',
+                arrowDown: true
+            })
+        }
+
+    }
+
+
+
     render() {
 
-
-
+        // map marker
+        const mark = this.state.markers.map(markers =>
+            (<Mapir.Marker
+                id={'2'}
+                key={markers.latitude}
+                coordinate={[markers.latitude, markers.longitude]}
+            />))
 
         return (
-
-
 
             <ScrollView >
                 <KeyboardAvoidingView style={styles.EditDetails} behavior="padding" enabled>
@@ -166,20 +238,15 @@ export default class EditDetails extends Component {
                             </View>
                         </View>
                     </View>
+
+
+
                     <View style={styles.edit_details_1} >
                         <Text style={styles.titles}>آدرس و موقعیت </Text>
-                        <TextInput
-                            placeholderStyle={{
-                                fontFamily: 'ISBold',
-                                // color: '#636363'
-                            }}
-                            placeholder="آدرس کامل"
-                            style={styles.input}
-                        // onChangeText={() => alert('2')}
-                        />
                     </View>
+
                     <View style={{
-                        height: 200,
+                        height: this.state.mapHeight,
                         overflow: 'hidden',
                         borderWidth: 2,
                         borderColor: '#fff',
@@ -188,19 +255,35 @@ export default class EditDetails extends Component {
                         shadowOpacity: .3,
                         backgroundColor: '#fff',
                         elevation: 1,
+                        width: this.state.mapWidth
                     }}>
-
-
-                        <Image style={{
-                            width: Dimensions.get('window').width - 50,
-                            height: 200, resizeMode: 'cover',
-                            borderRadius: 10,
-                            marginBottom: 50,
-
-
-                        }} source={require('./../../Assets/Images/map.png')}></Image>
-
+                        <Mapir
+                            accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
+                            zoomLevel={6}
+                            centerCoordinate={[51.422548, 35.732573]}
+                            showUserLocation={true}
+                            onLongPress={e => this.addMarker(e.geometry.coordinates)}
+                            style={{ flex: 1 }}
+                        >
+                            {mark}
+                        </Mapir>
                     </View>
+
+
+                    <TouchableOpacity
+                        style={{ marginVertical: 10, alignItems: 'center' }}
+                        onPress={this._mapHeightChanger}
+                    >
+                        <Text style={{
+                            fontSize: 13,
+                            fontFamily: 'ISBold',
+                            color: '#ccc',
+                            marginVertical: 2
+                        }} >{this.state.moreText}</Text>
+                        <Image source={this.state.arrowDown ? arrowDown : arrowUp} />
+                    </TouchableOpacity>
+
+
 
                     <GradientButton
                         width="90%"

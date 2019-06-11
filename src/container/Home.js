@@ -170,7 +170,6 @@ export default class Home extends Component {
 
                     {/* MENU */}
                     <View style={styles.menu} >
-                        
                         <TouchableOpacity style={styles.humberger} onPress={this._openDrawer}>
                             <Image style={styles.humberger_icon} source={require('../../Assets/Images/menu.png')} />
                         </TouchableOpacity>

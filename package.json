@@ -7,10 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.8.3",
-    "react-native": "0.59.8",
+    "mapir-react-native-sdk": "^1.6.1",
+    "react": "16.6.3",
+    "react-native": "0.57.8",
     "react-native-input-scroll-view": "^1.9.2",
     "react-native-linear-gradient": "^2.5.4",
+    "react-native-permissions": "^1.1.1",
     "react-native-router-flux": "^4.0.6",
     "react-native-textarea": "^1.0.3"
   },
