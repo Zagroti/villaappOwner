@@ -122,8 +122,7 @@ export default class EditDetails extends Component {
 
                                 <View style={styles.container}>
                                     <ScrollView contentContainerStyle={{
-                                        justifyContent: 'flex-end',
-                                        flexDirection: 'row',
+                                        flexDirection: 'row-reverse',
                                         flexWrap: 'wrap',
                                         paddingVertical: 10,
                                         minWidth: '100%'
