@@ -9,7 +9,8 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
     Alert,
-    NativeModules
+    NativeModules,
+    ImageBackground
 
 } from 'react-native';
 
@@ -26,6 +27,12 @@ import GradientButton from '../components/GradientButton'
 // import ImagePicker from 'react-native-image-picker';
 
 var ImagePicker = NativeModules.ImageCropPicker;
+
+
+
+// images for upload
+var imgs = []
+var dImgs = []
 
 
 export default class EditDetails extends Component {
@@ -46,57 +53,82 @@ export default class EditDetails extends Component {
         this.setState({ modalVisible: visible });
     }
 
-    _backToResultImage = () => {
-        Actions.ResultItemsPage()
-    }
 
 
 
-    pickSingle(cropit, circular = false, mediaType) {
-        ImagePicker.openPicker({
-            width: 500,
-            height: 500,
-            cropping: cropit,
-            cropperCircleOverlay: circular,
-            compressImageMaxWidth: 1000,
-            compressImageMaxHeight: 1000,
-            compressImageQuality: 1,
-            compressVideoPreset: 'MediumQuality',
-            includeExif: true,
-            mediaType: 'photo'
-        }).then(image => {
-            console.log('received image', image);
-            this.setState({
-                image: { uri: image.path, width: image.width, height: image.height, mime: image.mime },
-                images: null
-            });
-        }).catch(e => {
-            console.log(e);
-            Alert.alert(e.message ? e.message : e);
-        });
-    }
+    // pickMultiple() {
+
+    //     ImagePicker.openPicker({
+    //         multiple: true,
+    //         waitAnimationEnd: false,
+    //         includeExif: true,
+    //         forceJpg: true,
+    //         mediaType: 'photo'
+    //     }).then(images => {
+    //         this.setState({
+    //             image: null,
+    //             images: images.map(i => {
+    //                 console.log('received image', i);
+    //                 return { uri: i.path, width: i.width, height: i.height, mime: i.mime };
+    //             })
+    //         });
+    //     }).catch(e => false);
+    // }
 
     pickMultiple() {
+
         ImagePicker.openPicker({
             multiple: true,
-            waitAnimationEnd: false,
+            waitAnimationEnd: true,
             includeExif: true,
             forceJpg: true,
             mediaType: 'photo'
         }).then(images => {
+            images.map(i => {
+                imgs.push({ uri: i.path, width: i.width, height: i.height, mime: i.mime });
+            })
             this.setState({
                 image: null,
-                images: images.map(i => {
-                    console.log('received image', i);
-                    return { uri: i.path, width: i.width, height: i.height, mime: i.mime };
-                })
+                images: [...imgs]
             });
+            console.log('received image', imgs);
+
         }).catch(e => false);
     }
 
 
+
+
+    // show selected images
     renderAsset(image) {
-        return <Image style={styles.images_box} source={image} />
+
+        // return <Image  style={styles.images_box} source={image} />
+
+        return <ImageBackground style={styles.images_box} imageStyle={{ borderRadius: 10 }} source={image}>
+            <Image style={{
+                width: 30,
+                height: 30,
+                resizeMode: 'cover',
+                position:'absolute',
+                top:10,
+                right: 10,
+            }} source={require('./../../Assets/Images/delete.png')} />
+        </ImageBackground>
+    }
+
+
+    // delete selected images
+    _deleteImage = (key) => {
+        for (let i = 0; i < imgs.length; i++) {
+            if (imgs[i].uri === key) {
+                imgs.splice(imgs[i], 1)
+            }
+        }
+        this.setState({
+            image: null,
+            images: imgs
+        });
+
     }
 
 
@@ -125,10 +157,10 @@ export default class EditDetails extends Component {
                                         flexDirection: 'row-reverse',
                                         flexWrap: 'wrap',
                                         minWidth: '100%',
-                                        justifyContent:'flex-start'
+                                        justifyContent: 'flex-start'
                                     }}>
-                                        {this.state.images ? this.state.images.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
-                                        <TouchableOpacity style={styles.images_box} onPress={this.pickMultiple.bind(this)}>
+                                        {this.state.images ? this.state.images.map(i => <TouchableOpacity onPress={() => this._deleteImage(i.uri)} key={i.uri}>{this.renderAsset(i)}</TouchableOpacity>) : null}
+                                        <TouchableOpacity style={styles.images_box} onPress={this.pickMultiple.bind(this)} activeOpacity={.8} >
                                             <Image style={styles.select_image} source={require('../../Assets/Images/picture.png')} />
                                             <Text style={{
                                                 fontSize: 10,
@@ -387,8 +419,8 @@ const styles = ({
         width: '100%'
     },
     images_box: {
-        width: (Dimensions.get('window').width - 100)/3,
-        height: (Dimensions.get('window').width - 100)/3,
+        width: (Dimensions.get('window').width - 100) / 3,
+        height: (Dimensions.get('window').width - 100) / 3,
         marginLeft: 10,
         backgroundColor: '#ececec',
         borderRadius: 10,
@@ -455,7 +487,7 @@ const styles = ({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        width:'100%',
+        width: '100%',
         padding: 10,
 
     },
