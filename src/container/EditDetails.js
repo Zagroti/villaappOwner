@@ -120,12 +120,12 @@ export default class EditDetails extends Component {
                             <Text style={styles.titles} >عکس ها</Text>
                             <View style={styles.add_images_boxes} >
 
-                                <View style={styles.container}>
+                                <View style={styles.image_container}>
                                     <ScrollView contentContainerStyle={{
                                         flexDirection: 'row-reverse',
                                         flexWrap: 'wrap',
-                                        paddingVertical: 10,
-                                        minWidth: '100%'
+                                        minWidth: '100%',
+                                        justifyContent:'flex-start'
                                     }}>
                                         {this.state.images ? this.state.images.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
                                         <TouchableOpacity style={styles.images_box} onPress={this.pickMultiple.bind(this)}>
@@ -247,17 +247,12 @@ export default class EditDetails extends Component {
                         backgroundColor: '#fff',
                         elevation: 1,
                     }}>
-
-
                         <Image style={{
                             width: Dimensions.get('window').width - 50,
                             height: 200, resizeMode: 'cover',
                             borderRadius: 10,
                             marginBottom: 50,
-
-
                         }} source={require('./../../Assets/Images/map.png')}></Image>
-
                     </View>
 
                     <GradientButton
@@ -392,15 +387,15 @@ const styles = ({
         width: '100%'
     },
     images_box: {
-        width: 80,
-        height: 80,
+        width: (Dimensions.get('window').width - 100)/3,
+        height: (Dimensions.get('window').width - 100)/3,
         marginLeft: 10,
         backgroundColor: '#ececec',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
-        resizeMode: 'cover'
+        resizeMode: 'cover',
     },
 
     images: {
@@ -456,10 +451,13 @@ const styles = ({
 
     }
     ,
-    container: {
+    image_container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        width:'100%',
+        padding: 10,
+
     },
     button: {
         backgroundColor: 'blue',
