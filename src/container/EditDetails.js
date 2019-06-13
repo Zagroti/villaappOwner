@@ -105,15 +105,21 @@ export default class EditDetails extends Component {
         // return <Image  style={styles.images_box} source={image} />
 
         return <ImageBackground style={styles.images_box} imageStyle={{ borderRadius: 10 }} source={image}>
-                    <Image style={{
-                        width: 20,
-                        height: 20,
-                        resizeMode: 'cover',
-                        position: 'absolute',
-                        top: 10,
-                        right: 10,
-                    }} source={require('./../../Assets/Images/delete.png')} />
-                </ImageBackground>
+            <View style={{
+                backgroundColor: '#fffe',
+                padding: 5,
+                position: 'absolute',
+                top: 5,
+                right: 5,
+                borderRadius: 50
+            }}>
+                <Image style={{
+                    width: 15,
+                    height: 15,
+                    resizeMode: 'cover',
+                }} source={require('./../../Assets/Images/delete.png')} />
+            </View>
+        </ImageBackground>
     }
 
 
