@@ -8,7 +8,8 @@ import {
     ScrollView,
     KeyboardAvoidingView,
     PermissionsAndroid,
-    TouchableOpacity
+    TouchableOpacity,
+    Picker
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Textarea from 'react-native-textarea';
@@ -116,6 +117,7 @@ export default class EditDetails extends Component {
                 key={markers.latitude}
                 coordinate={[markers.latitude, markers.longitude]}
             />))
+
 
         return (
 
@@ -244,6 +246,18 @@ export default class EditDetails extends Component {
                     <View style={styles.edit_details_1} >
                         <Text style={styles.titles}>آدرس و موقعیت </Text>
                     </View>
+                    <Picker
+                        selectedValue={this.state.markers}
+                        style={{ height: 50, width: '90%' ,fontFamily:'IS', borderWidth:1, borderColor:'#eee' }}
+                        onValueChange={(itemValue) =>{
+                            this.setState({ markers: itemValue })
+                        }
+                        }>
+                        <Picker.Item label="آمل" style={{ fontFamily:'IS' }} value={[{ latitude: 52, longitude: 35 }]} />
+                        <Picker.Item label="بابل" value={[{ latitude: 52.1, longitude: 35 }]} />
+                        <Picker.Item label="بابلسر" value={[{ latitude: 52.2, longitude: 35 }]} />
+                        <Picker.Item label="کیش" value={[{ latitude: 52.4, longitude: 35 }]}/>
+                    </Picker>
 
                     <View style={{
                         height: this.state.mapHeight,
