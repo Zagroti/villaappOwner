@@ -11,7 +11,7 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 import GradientButton from '../components/GradientButton';
-
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 
@@ -46,6 +46,7 @@ class EnterCode extends Component {
         if (this.state.code == '12345') {
             // go HOME
             Actions.Home();
+            this._storeData();
 
 
         } else {
@@ -77,6 +78,17 @@ class EnterCode extends Component {
 
     }
 
+    //
+    _storeData = async () => {
+        try {
+            await AsyncStorage.setItem('login', 'true')
+            
+        } catch (e) {
+            // saving error
+        }
+        console.log('set')
+
+    }
 
     render() {
         let { fadeText } = this.state
