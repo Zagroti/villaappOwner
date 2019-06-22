@@ -8,7 +8,6 @@ import SendNumber from './src/container/SendNumber';
 import EnterCode from './src/container/EnterCode';
 import Home from './src/container/Home';
 import Profile from './src/container/Profile';
-import ResultItemsPage from './src/container/ResultItemsPage';
 import Details from './src/container/Details';
 import EditDetails from './src/container/EditDetails';
 import RentPage from './src/container/RentPage';
@@ -18,15 +17,22 @@ import History from './src/container/History'
 
 
 
+
+const nothing = () => (
+    null
+);
+
+
 //back button
 const backButton = () => (
     <TouchableOpacity
         onPress={() => Actions.pop()}
-        style={{ width: 30, height: 20, marginLeft: 20 }}
+        style={{ width: 60, height: 60, marginRight: 20 , alignItems: 'center',
+        justifyContent:'center', }}
     >
-        <View style={{ alignItems: 'center' }}>
+        <View >
             <Image
-                source={require('./Assets/Images/left-arrow-black.png')}
+                source={require('./Assets/Images/right-arrow-black.png')}
                 style={{ width: 30, height: 20 }}
             />
             {/*
@@ -47,14 +53,14 @@ const backButtonDetail = () => (
             justifyContent: 'center',
             alignItems: 'center',
             top: 10,
-            start: 10,
+            end: 10,
 
         }} onPress={() => Actions.pop()} >
         <Image style={{
             width: 30,
             resizeMode: 'contain'
         }}
-            source={require('./Assets/Images/left-arrow-white.png')} />
+            source={require('./Assets/Images/right-arrow-white.png')} />
     </TouchableOpacity>
 )
 
@@ -72,67 +78,40 @@ const Routes = () => (
                 component={SendNumber}
                 title="Send Number"
                 hideNavBar={true}
-                
+                initial={true}
             />
             <Scene key="EnterCode" component={EnterCode}
                 title=""
                 titleStyle={{ color: 'transparent' }}
-                renderBackButton={() => backButton()}
                 navigationBarStyle={styles.login_style_bar}
                 sceneStyle={styles.login_scene_style}
-
+                renderBackButton={() => nothing}
+                renderRightButton={() => backButton()}
             />
 
             <Scene key="Home"
                 component={Home}
                 title="home"
                 hideNavBar={true}
-
+                
             />
 
             <Scene key="Profile" component={Profile}
                 title=""
                 titleStyle={{ color: 'transparent' }}
-                renderBackButton={() => backButton()}
+                renderBackButton={() => nothing}
+                renderRightButton={() => backButton()}
                 navigationBarStyle={styles.login_style_bar}
                 sceneStyle={styles.login_scene_style}
             />
 
-            <Scene key="History" component={History}
-                title=""
-                titleStyle={{ color: 'transparent' }}
-                renderBackButton={() => backButton()}
-                navigationBarStyle={styles.login_style_bar}
-                sceneStyle={styles.login_scene_style}
-            />
-
-            <Scene key="ResultItemsPage" component={ResultItemsPage}
-                title=""
-                titleStyle={{ color: 'transparent' }}
-                renderBackButton={() => backButton()}
-                navigationBarStyle={styles.login_style_bar}
-                sceneStyle={styles.login_scene_style}
-                onRight={() => alert('right')}
-                // rightButtonImage={require('./Assets/Images/bell.png')}
-                renderRightButton={() => (
-                    <TouchableOpacity style={styles.notification_box}
-                        onPress={() => alert('توجهات')}>
-                        <ImageBackground
-                            style={styles.bell}
-                            source={require('./Assets/Images/bell.png')}
-                        >
-                            <View style={styles.notification} >
-                                <Text style={styles.notification_text} >3</Text>
-                            </View>
-                        </ImageBackground>
-                    </TouchableOpacity>
-                )}
-            />
+            
 
             <Scene key="Details" component={Details}
                 title=""
                 titleStyle={{ color: 'red' }}
-                renderBackButton={() => backButtonDetail()}
+                renderBackButton={() => nothing}
+                renderRightButton={() => backButtonDetail()}
                 navigationBarStyle={styles.login_style_bar_detail}
                 sceneStyle={styles.login_scene_style}
 
@@ -141,7 +120,8 @@ const Routes = () => (
             <Scene key="EditDetails" component={EditDetails}
                 title=""
                 titleStyle={{ color: 'transparent' }}
-                renderBackButton={() => backButton()}
+                renderBackButton={() => nothing}
+                renderRightButton={() => backButton()}
                 navigationBarStyle={styles.login_style_bar}
                 sceneStyle={styles.login_scene_style}
 
@@ -150,7 +130,8 @@ const Routes = () => (
             <Scene key="RentPage" component={RentPage}
                 title=""
                 titleStyle={{ color: 'transparent' }}
-                renderBackButton={() => backButton()}
+                renderBackButton={() => nothing}
+                renderRightButton={() => backButton()}
                 navigationBarStyle={styles.login_style_bar}
                 sceneStyle={styles.login_scene_style}
 
@@ -167,18 +148,11 @@ const Routes = () => (
             <Scene key="History" component={History}
                 title=""
                 titleStyle={{ color: 'transparent' }}
-                renderBackButton={() => backButton()}
+                renderBackButton={() => nothing}
+                renderRightButton={() => backButton()}
                 navigationBarStyle={styles.login_style_bar}
                 sceneStyle={styles.login_scene_style}
             />
-
-
-
-
-
-
-
-
 
 
 

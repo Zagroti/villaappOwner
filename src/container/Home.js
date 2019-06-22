@@ -295,8 +295,8 @@ const styles = ({
         fontFamily: 'ISFMedium',
     },
     humberger: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
         alignItems: 'center',
     },
     humberger_icon: {

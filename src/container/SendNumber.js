@@ -62,6 +62,7 @@ class SendNumber extends Component {
 
     // mobile number onchange
     _changeNumber = (e) => {
+
         // just number has permission
         this.setState({
             number: e.replace(/[^0-9]/g, '').trim()
@@ -70,20 +71,40 @@ class SendNumber extends Component {
 
 
     // send code function
-    _enterCode = async () => {
+    _sendNumber = async () => {
 
+        let self = this
         if (this.state.number.length === 10) {
-            // go to enter code page 
-            Actions.EnterCode();
 
             // merge code and user number 
             let sentNumber = this.state.code + this.state.number
             await this.setState({
                 sentNumber: sentNumber.trim()
             })
-            this.props.onSendNumber(sentNumber)
 
-        }else {
+
+
+            // go to enter code page 
+            Actions.EnterCode();
+
+
+        } else if (this.state.number.length === 11) {
+
+             let enternumber = this.state.number.split('')
+            await enternumber.splice(0,1)
+
+            let sentNumber = this.state.code + enternumber.join('')
+            await this.setState({
+                sentNumber: sentNumber.trim()
+            })
+
+            console.log(this.state.sentNumber)
+            // go to enter code page 
+            Actions.EnterCode();
+
+
+
+        } else {
 
             // animation show permission 
             await this.setState({
@@ -206,7 +227,7 @@ class SendNumber extends Component {
                                     value={this.state.number}
                                     keyboardType='numeric'
                                     textContentType="telephoneNumber"
-                                    maxLength={10} multiline
+                                    maxLength={11} multiline
 
                                 />
 
@@ -239,7 +260,7 @@ class SendNumber extends Component {
 
                         <GradientButton
                             width={Dimensions.get('window').width - 100}
-                            press={this._enterCode}
+                            press={this._sendNumber}
                             activeOpacity={.6}
                             color_1="#18749a"
                             color_2="#46add8"

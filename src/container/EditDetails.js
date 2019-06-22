@@ -8,7 +8,6 @@ import {
     ScrollView,
     KeyboardAvoidingView,
     PermissionsAndroid,
-    TouchableOpacity,
     Picker,
     TouchableOpacity,
     Alert,
@@ -38,7 +37,6 @@ var ImagePicker = NativeModules.ImageCropPicker;
 
 // images for upload
 var imgs = []
-var dImgs = []
 
 
 
@@ -93,24 +91,6 @@ export default class EditDetails extends Component {
 
 
 
-    // pickMultiple() {
-
-    //     ImagePicker.openPicker({
-    //         multiple: true,
-    //         waitAnimationEnd: false,
-    //         includeExif: true,
-    //         forceJpg: true,
-    //         mediaType: 'photo'
-    //     }).then(images => {
-    //         this.setState({
-    //             image: null,
-    //             images: images.map(i => {
-    //                 console.log('received image', i);
-    //                 return { uri: i.path, width: i.width, height: i.height, mime: i.mime };
-    //             })
-    //         });
-    //     }).catch(e => false);
-    // }
 
     pickMultiple() {
 
@@ -202,11 +182,8 @@ export default class EditDetails extends Component {
             });
         }
 
-
-    render() {
-
-
     }
+
 
     // select location 
     addMarker = async (coordinates) => {
@@ -370,16 +347,16 @@ export default class EditDetails extends Component {
                         <Text style={styles.titles}>آدرس و موقعیت </Text>
                     </View>
                     <Picker
-                        selectedValue={this.state.markers}
-                        style={{ height: 50, width: '90%' ,fontFamily:'IS', borderWidth:1, borderColor:'#eee' }}
-                        onValueChange={(itemValue) =>{
+                        selectedValue={this.state.location}
+                        style={{ height: 50, width: '90%', fontFamily: 'IS', borderWidth: 1, borderColor: '#eee' }}
+                        onValueChange={(itemValue) => {
                             this.setState({ markers: itemValue })
                         }
                         }>
-                        <Picker.Item label="آمل" style={{ fontFamily:'IS' }} value={[{ latitude: 52, longitude: 35 }]} />
-                        <Picker.Item label="بابل" value={[{ latitude: 52.1, longitude: 35 }]} />
+                        <Picker.Item label="آمل" style={{ fontFamily: 'IS' }} value={[{ latitude: 52, longitude: 35 }]} />
+                        <Picker.Item label="بابل" value={[{ latitude: 52.1, longitude: 35 }] } />
                         <Picker.Item label="بابلسر" value={[{ latitude: 52.2, longitude: 35 }]} />
-                        <Picker.Item label="کیش" value={[{ latitude: 52.4, longitude: 35 }]}/>
+                        <Picker.Item label="کیش" value={[{ latitude: 52.4, longitude: 35 }]} />
                     </Picker>
 
                     <View style={{
@@ -423,8 +400,8 @@ export default class EditDetails extends Component {
 
 
 
-                        
-                    </View>
+
+
 
 
                     <GradientButton
@@ -559,8 +536,8 @@ const styles = ({
         width: '100%',
     },
     images_box: {
-        width: (Dimensions.get('window').width  - 82) / 3 ,
-        height: (Dimensions.get('window').width - 82) / 3  ,
+        width: (Dimensions.get('window').width - 82) / 3,
+        height: (Dimensions.get('window').width - 82) / 3,
         marginLeft: 5,
         marginRight: 5,
         backgroundColor: '#ececec',

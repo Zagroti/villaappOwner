@@ -38,7 +38,7 @@ export default class History extends Component {
 
                     <View style={styles.history_box}>
                         <Text style={styles.title} >
-                            اطلاعات حساب
+                            تاریخچه 
                         </Text>
                        
 
