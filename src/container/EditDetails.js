@@ -446,7 +446,6 @@ const styles = ({
         justifyContent: 'space-between',
         flexDirection: 'row-reverse',
         width: '100%',
-        backgroundColor:'red'
     },
     images_box: {
         width: (Dimensions.get('window').width  - 82) / 3 ,
