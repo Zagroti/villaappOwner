@@ -144,7 +144,7 @@ const Routes = () => (
                 renderBackButton={() => backButton()}
                 navigationBarStyle={styles.login_style_bar}
                 sceneStyle={styles.login_scene_style}
-                initial={true}
+
             />
 
             <Scene key="RentPage" component={RentPage}

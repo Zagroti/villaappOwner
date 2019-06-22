@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "16.8.3",
     "react-native": "0.59.8",
+    "react-native-image-crop-picker": "^0.24.1",
     "react-native-input-scroll-view": "^1.9.2",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-router-flux": "^4.0.6",

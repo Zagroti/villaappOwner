@@ -6,12 +6,17 @@ import {
     Image,
     TextInput,
     ScrollView,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    TouchableOpacity,
+    Alert,
+    NativeModules,
+    ImageBackground
+
 } from 'react-native';
+
+
 import { Actions } from 'react-native-router-flux';
 import Textarea from 'react-native-textarea';
-
-
 
 
 //components 
@@ -19,12 +24,29 @@ import GradientButton from '../components/GradientButton'
 import CheckboxIcon from '../components/CheckboxIcon';
 import CheckboxText from '../components/CheckboxText';
 
+
+
+// import ImagePicker from 'react-native-image-picker';
+
+var ImagePicker = NativeModules.ImageCropPicker;
+
+
+
+// images for upload
+var imgs = []
+var dImgs = []
+
+
 export default class EditDetails extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             modalVisible: false,
+
+            image: null,
+            images: null,
+
             parking: false,
             wifi: false,
             heater: false,
@@ -38,6 +60,7 @@ export default class EditDetails extends Component {
             condition_5: false,
             condition_6: false,
             condition_7: false,
+
         }
     }
 
@@ -48,9 +71,90 @@ export default class EditDetails extends Component {
         this.setState({ modalVisible: visible });
     }
 
-    _backToResultImage = () => {
-        Actions.ResultItemsPage()
+
+
+
+    // pickMultiple() {
+
+    //     ImagePicker.openPicker({
+    //         multiple: true,
+    //         waitAnimationEnd: false,
+    //         includeExif: true,
+    //         forceJpg: true,
+    //         mediaType: 'photo'
+    //     }).then(images => {
+    //         this.setState({
+    //             image: null,
+    //             images: images.map(i => {
+    //                 console.log('received image', i);
+    //                 return { uri: i.path, width: i.width, height: i.height, mime: i.mime };
+    //             })
+    //         });
+    //     }).catch(e => false);
+    // }
+
+    pickMultiple() {
+
+        ImagePicker.openPicker({
+            multiple: true,
+            waitAnimationEnd: true,
+            includeExif: true,
+            forceJpg: true,
+            mediaType: 'photo'
+        }).then(images => {
+            images.map(i => {
+                imgs.push({ uri: i.path, width: i.width, height: i.height, mime: i.mime });
+            })
+            this.setState({
+                image: null,
+                images: [...imgs]
+            });
+            console.log('received image', imgs);
+
+        }).catch(e => false);
     }
+
+
+
+
+    // show selected images
+    renderAsset(image) {
+
+        // return <Image  style={styles.images_box} source={image} />
+
+        return <ImageBackground style={styles.images_box} imageStyle={{ borderRadius: 10 }} source={image}>
+            <View style={{
+                backgroundColor: '#fffe',
+                padding: 5,
+                position: 'absolute',
+                top: 5,
+                right: 5,
+                borderRadius: 50
+            }}>
+                <Image style={{
+                    width: 15,
+                    height: 15,
+                    resizeMode: 'cover',
+                }} source={require('./../../Assets/Images/delete.png')} />
+            </View>
+        </ImageBackground>
+    }
+
+
+    // delete selected images
+    _deleteImage = (key) => {
+        for (let i = 0; i < imgs.length; i++) {
+            if (imgs[i].uri === key) {
+                imgs.splice(imgs[i], 1)
+            }
+        }
+        this.setState({
+            image: null,
+            images: imgs
+        });
+
+    }
+
 
 
     // checkbox state
@@ -58,6 +162,7 @@ export default class EditDetails extends Component {
         await this.setState({ [name]: e })
         // console.log(this.state)
     }
+
 
 
     render() {
@@ -78,36 +183,31 @@ export default class EditDetails extends Component {
                         <View style={styles.edit_details_details} >
                             <Text style={styles.titles} >عکس ها</Text>
                             <View style={styles.add_images_boxes} >
-                                <View style={styles.images_box} >
-                                    <Image style={styles.images} source={require('../../Assets/Images/vilajungle.jpg')} />
+
+                                <View style={styles.image_container}>
+                                    <ScrollView contentContainerStyle={{
+                                        flexDirection: 'row-reverse',
+                                        flexWrap: 'wrap',
+                                        minWidth: '100%',
+                                        justifyContent: 'flex-start'
+                                    }}>
+                                        {this.state.images ? this.state.images.map(i => <TouchableOpacity onPress={() => this._deleteImage(i.uri)} key={i.uri}>{this.renderAsset(i)}</TouchableOpacity>) : null}
+                                        <TouchableOpacity style={styles.images_box} onPress={this.pickMultiple.bind(this)} activeOpacity={.8} >
+                                            <Image style={styles.select_image} source={require('../../Assets/Images/picture.png')} />
+                                            <Text style={{
+                                                fontSize: 10,
+                                                fontFamily: 'ISBold',
+                                                color: '#636363'
+                                            }} >افزودن عکس</Text>
+                                        </TouchableOpacity>
+                                    </ScrollView>
+
                                 </View>
-                                <View style={styles.images_box} >
-                                    <Image style={styles.images} source={require('../../Assets/Images/vilajungle.jpg')} />
-                                </View>
-                                <View style={styles.images_box} >
-                                    <Image style={styles.images} source={require('../../Assets/Images/vilajungle.jpg')} />
-                                </View>
-                                <View style={styles.images_box} >
-                                    <Image style={styles.select_image} source={require('../../Assets/Images/picture.png')} />
-                                    <Text style={{
-                                        fontSize: 10,
-                                        fontFamily: 'ISBold',
-                                        color: '#636363'
-                                    }} >افزودن عکس</Text>
-                                </View>
+
                             </View>
                         </View>
 
-                        {/* <TextInput
-                            placeholderStyle={{
-                                fontFamily: 'ISFBold',
-                                color: '#636363'
-                            }}
-                            placeholder="100,000"
-                            style={styles.price_input}
-                            onChangeText={() => alert('2')}
-                            keyboardType='numeric'
-                        /> */}
+
                     </View>
 
                     {/* date */}
@@ -208,17 +308,12 @@ export default class EditDetails extends Component {
                         backgroundColor: '#fff',
                         elevation: 1,
                     }}>
-
-
                         <Image style={{
                             width: Dimensions.get('window').width - 50,
                             height: 200, resizeMode: 'cover',
                             borderRadius: 10,
                             marginBottom: 50,
-
-
                         }} source={require('./../../Assets/Images/map.png')}></Image>
-
                     </View>
 
                     <GradientButton
@@ -350,17 +445,20 @@ const styles = ({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         flexDirection: 'row-reverse',
-        width: '100%'
+        width: '100%',
+        backgroundColor:'red'
     },
     images_box: {
-        width: (Dimensions.get('window').width - 100) / 3,
-        height: (Dimensions.get('window').width - 100) / 3,
-        marginLeft: 10,
+        width: (Dimensions.get('window').width  - 82) / 3 ,
+        height: (Dimensions.get('window').width - 82) / 3  ,
+        marginLeft: 5,
+        marginRight: 5,
         backgroundColor: '#ececec',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 10,
+        resizeMode: 'cover',
     },
 
     images: {
@@ -415,7 +513,24 @@ const styles = ({
         fontFamily: 'ISBold',
 
     }
+    ,
+    image_container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        // padding: 10,
 
+    },
+    button: {
+        backgroundColor: 'blue',
+        marginBottom: 10
+    },
+    text: {
+        color: 'white',
+        fontSize: 20,
+        textAlign: 'center'
+    }
 
 
 
