@@ -16,6 +16,8 @@ import Textarea from 'react-native-textarea';
 
 //components 
 import GradientButton from '../components/GradientButton'
+import CheckboxIcon from '../components/CheckboxIcon';
+import CheckboxText from '../components/CheckboxText';
 
 export default class EditDetails extends Component {
 
@@ -23,6 +25,19 @@ export default class EditDetails extends Component {
         super(props)
         this.state = {
             modalVisible: false,
+            parking: false,
+            wifi: false,
+            heater: false,
+            laundry: false,
+            pool: false,
+            electric: false,
+            condition_1: false,
+            condition_2: false,
+            condition_3: false,
+            condition_4: false,
+            condition_5: false,
+            condition_6: false,
+            condition_7: false,
         }
     }
 
@@ -35,6 +50,13 @@ export default class EditDetails extends Component {
 
     _backToResultImage = () => {
         Actions.ResultItemsPage()
+    }
+
+
+    // checkbox state
+    _changeCheckState = async (e, name) => {
+        await this.setState({ [name]: e })
+        // console.log(this.state)
     }
 
 
@@ -115,7 +137,7 @@ export default class EditDetails extends Component {
 
                     {/* nights */}
                     <View style={styles.edit_details_1} >
-                        <Text style={styles.titles}>تعداد شبها</Text>
+                        <Text style={styles.titles}>شرایط </Text>
                         <View style={{
                             backgroundColor: '#fff',
                             borderRadius: 5,
@@ -125,45 +147,42 @@ export default class EditDetails extends Component {
                             shadowOpacity: 1,
                             elevation: 1,
                         }} >
-                            <Text style={styles.conditions_text}>1. آرام باشید و مراقب خودتان باشید.</Text>
-                            <Text style={{ color: '#DC3053', fontSize: 12, fontFamily: 'ISMedium' }}>2. عاشق خودتان باشید .</Text>
-                            <Text style={styles.conditions_text}>3. اتاق را کثیف نکنید </Text>
-                            <Text style={styles.conditions_text}>4. اتاق را تمیز نکنید . </Text>
-                            <Text style={styles.conditions_text}>5. خانوم بازی نکنید </Text>
-                            <Text style={styles.conditions_text}>6. داخل اتاق سیگار نکشید . </Text>
-                            <Text style={styles.conditions_text}>7. دقت کنید </Text>
-                            <Text style={styles.conditions_text}>8. نماز اول وقت را فراموش نکنید </Text>
-                            <Text style={styles.conditions_text} >9. خدا را ناظر بر اعمال خود بدانید </Text>
+                            <CheckboxText title="1. آرام باشید و مراقب خودتان باشید."
+                                name="condition_1"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="2. عاشق خودتان باشید"
+                                name="condition_2"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="3. اتاق را کثیف نکنید"
+                                name="condition_3"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="4.خانوم بازی نکنید"
+                                name="condition_4"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="5. نماز اول وقت را فراموش نکنید "
+                                name="condition_5"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="6. دقت کنید"
+                                name="condition_6"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
                         </View>
                     </View>
 
                     <View style={styles.edit_details_1} >
                         <Text style={styles.titles}>دسترسی ها</Text>
                         <View style={styles.avilibiy_first}>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >پارکینگ</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >WiFi</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >لباسشویی</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/checkgrey.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >سیستم گرمایشی</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >الکتریکی</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >استخر</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
+                            <CheckboxIcon title="پارکینگ" name="parking" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="WiFi" name="wifi" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="لباسشویی" name="laundry" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="سیستم گرمایشی" name="heater" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="الکتریکی" name="electric" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="استخر" name="pool" changeState={(e, name) => { this._changeCheckState(e, name) }} />
                         </View>
                     </View>
                     <View style={styles.edit_details_1} >
