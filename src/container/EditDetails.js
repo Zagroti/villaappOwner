@@ -9,16 +9,37 @@ import {
     KeyboardAvoidingView,
     PermissionsAndroid,
     TouchableOpacity,
-    Picker
+    Picker,
+    TouchableOpacity,
+    Alert,
+    NativeModules,
+    ImageBackground
 } from 'react-native';
+
+
+import Mapir from 'mapir-react-native-sdk'
 import { Actions } from 'react-native-router-flux';
 import Textarea from 'react-native-textarea';
 
 
-import Mapir from 'mapir-react-native-sdk'
 
 //components 
 import GradientButton from '../components/GradientButton'
+import CheckboxIcon from '../components/CheckboxIcon';
+import CheckboxText from '../components/CheckboxText';
+
+
+
+// import ImagePicker from 'react-native-image-picker';
+
+var ImagePicker = NativeModules.ImageCropPicker;
+
+
+
+// images for upload
+var imgs = []
+var dImgs = []
+
 
 
 
@@ -38,7 +59,24 @@ export default class EditDetails extends Component {
             mapHeight: 200,
             mapWidth: Dimensions.get('window').width - 50,
             moreText: 'بیشتر',
-            arrowDown: true
+            arrowDown: true,
+
+            image: null,
+            images: null,
+
+            parking: false,
+            wifi: false,
+            heater: false,
+            laundry: false,
+            pool: false,
+            electric: false,
+            condition_1: false,
+            condition_2: false,
+            condition_3: false,
+            condition_4: false,
+            condition_5: false,
+            condition_6: false,
+            condition_7: false,
 
         }
 
@@ -52,9 +90,98 @@ export default class EditDetails extends Component {
         this.setState({ modalVisible: visible });
     }
 
-    _backToResultImage = () => {
-        Actions.ResultItemsPage()
+
+
+
+    // pickMultiple() {
+
+    //     ImagePicker.openPicker({
+    //         multiple: true,
+    //         waitAnimationEnd: false,
+    //         includeExif: true,
+    //         forceJpg: true,
+    //         mediaType: 'photo'
+    //     }).then(images => {
+    //         this.setState({
+    //             image: null,
+    //             images: images.map(i => {
+    //                 console.log('received image', i);
+    //                 return { uri: i.path, width: i.width, height: i.height, mime: i.mime };
+    //             })
+    //         });
+    //     }).catch(e => false);
+    // }
+
+    pickMultiple() {
+
+        ImagePicker.openPicker({
+            multiple: true,
+            waitAnimationEnd: true,
+            includeExif: true,
+            forceJpg: true,
+            mediaType: 'photo'
+        }).then(images => {
+            images.map(i => {
+                imgs.push({ uri: i.path, width: i.width, height: i.height, mime: i.mime });
+            })
+            this.setState({
+                image: null,
+                images: [...imgs]
+            });
+            console.log('received image', imgs);
+
+        }).catch(e => false);
     }
+
+
+
+
+    // show selected images
+    renderAsset(image) {
+
+        // return <Image  style={styles.images_box} source={image} />
+
+        return <ImageBackground style={styles.images_box} imageStyle={{ borderRadius: 10 }} source={image}>
+            <View style={{
+                backgroundColor: '#fffe',
+                padding: 5,
+                position: 'absolute',
+                top: 5,
+                right: 5,
+                borderRadius: 50
+            }}>
+                <Image style={{
+                    width: 15,
+                    height: 15,
+                    resizeMode: 'cover',
+                }} source={require('./../../Assets/Images/delete.png')} />
+            </View>
+        </ImageBackground>
+    }
+
+
+    // delete selected images
+    _deleteImage = (key) => {
+        for (let i = 0; i < imgs.length; i++) {
+            if (imgs[i].uri === key) {
+                imgs.splice(imgs[i], 1)
+            }
+        }
+        this.setState({
+            image: null,
+            images: imgs
+        });
+
+    }
+
+
+
+    // checkbox state
+    _changeCheckState = async (e, name) => {
+        await this.setState({ [name]: e })
+        // console.log(this.state)
+    }
+
 
 
     componentDidMount() {
@@ -74,6 +201,10 @@ export default class EditDetails extends Component {
                 reject(err);
             });
         }
+
+
+    render() {
+
 
     }
 
@@ -130,36 +261,31 @@ export default class EditDetails extends Component {
                         <View style={styles.edit_details_details} >
                             <Text style={styles.titles} >عکس ها</Text>
                             <View style={styles.add_images_boxes} >
-                                <View style={styles.images_box} >
-                                    <Image style={styles.images} source={require('../../Assets/Images/vilajungle.jpg')} />
+
+                                <View style={styles.image_container}>
+                                    <ScrollView contentContainerStyle={{
+                                        flexDirection: 'row-reverse',
+                                        flexWrap: 'wrap',
+                                        minWidth: '100%',
+                                        justifyContent: 'flex-start'
+                                    }}>
+                                        {this.state.images ? this.state.images.map(i => <TouchableOpacity onPress={() => this._deleteImage(i.uri)} key={i.uri}>{this.renderAsset(i)}</TouchableOpacity>) : null}
+                                        <TouchableOpacity style={styles.images_box} onPress={this.pickMultiple.bind(this)} activeOpacity={.8} >
+                                            <Image style={styles.select_image} source={require('../../Assets/Images/picture.png')} />
+                                            <Text style={{
+                                                fontSize: 10,
+                                                fontFamily: 'ISBold',
+                                                color: '#636363'
+                                            }} >افزودن عکس</Text>
+                                        </TouchableOpacity>
+                                    </ScrollView>
+
                                 </View>
-                                <View style={styles.images_box} >
-                                    <Image style={styles.images} source={require('../../Assets/Images/vilajungle.jpg')} />
-                                </View>
-                                <View style={styles.images_box} >
-                                    <Image style={styles.images} source={require('../../Assets/Images/vilajungle.jpg')} />
-                                </View>
-                                <View style={styles.images_box} >
-                                    <Image style={styles.select_image} source={require('../../Assets/Images/picture.png')} />
-                                    <Text style={{
-                                        fontSize: 10,
-                                        fontFamily: 'ISBold',
-                                        color: '#636363'
-                                    }} >افزودن عکس</Text>
-                                </View>
+
                             </View>
                         </View>
 
-                        {/* <TextInput
-                            placeholderStyle={{
-                                fontFamily: 'ISFBold',
-                                color: '#636363'
-                            }}
-                            placeholder="100,000"
-                            style={styles.price_input}
-                            onChangeText={() => alert('2')}
-                            keyboardType='numeric'
-                        /> */}
+
                     </View>
 
                     {/* date */}
@@ -189,7 +315,7 @@ export default class EditDetails extends Component {
 
                     {/* nights */}
                     <View style={styles.edit_details_1} >
-                        <Text style={styles.titles}>تعداد شبها</Text>
+                        <Text style={styles.titles}>شرایط </Text>
                         <View style={{
                             backgroundColor: '#fff',
                             borderRadius: 5,
@@ -199,45 +325,42 @@ export default class EditDetails extends Component {
                             shadowOpacity: 1,
                             elevation: 1,
                         }} >
-                            <Text style={styles.conditions_text}>1. آرام باشید و مراقب خودتان باشید.</Text>
-                            <Text style={{ color: '#DC3053', fontSize: 12, fontFamily: 'ISMedium' }}>2. عاشق خودتان باشید .</Text>
-                            <Text style={styles.conditions_text}>3. اتاق را کثیف نکنید </Text>
-                            <Text style={styles.conditions_text}>4. اتاق را تمیز نکنید . </Text>
-                            <Text style={styles.conditions_text}>5. خانوم بازی نکنید </Text>
-                            <Text style={styles.conditions_text}>6. داخل اتاق سیگار نکشید . </Text>
-                            <Text style={styles.conditions_text}>7. دقت کنید </Text>
-                            <Text style={styles.conditions_text}>8. نماز اول وقت را فراموش نکنید </Text>
-                            <Text style={styles.conditions_text} >9. خدا را ناظر بر اعمال خود بدانید </Text>
+                            <CheckboxText title="1. آرام باشید و مراقب خودتان باشید."
+                                name="condition_1"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="2. عاشق خودتان باشید"
+                                name="condition_2"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="3. اتاق را کثیف نکنید"
+                                name="condition_3"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="4.خانوم بازی نکنید"
+                                name="condition_4"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="5. نماز اول وقت را فراموش نکنید "
+                                name="condition_5"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
+                            <CheckboxText title="6. دقت کنید"
+                                name="condition_6"
+                                changeState={(e, name) => { this._changeCheckState(e, name) }}
+                            />
                         </View>
                     </View>
 
                     <View style={styles.edit_details_1} >
                         <Text style={styles.titles}>دسترسی ها</Text>
                         <View style={styles.avilibiy_first}>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >پارکینگ</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >WiFi</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >لباسشویی</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/checkgrey.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >سیستم گرمایشی</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >الکتریکی</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
-                            <View style={styles.avilibiy_item} >
-                                <Text style={styles.avilibiy_text} >استخر</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
-                            </View>
+                            <CheckboxIcon title="پارکینگ" name="parking" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="WiFi" name="wifi" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="لباسشویی" name="laundry" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="سیستم گرمایشی" name="heater" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="الکتریکی" name="electric" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                            <CheckboxIcon title="استخر" name="pool" changeState={(e, name) => { this._changeCheckState(e, name) }} />
                         </View>
                     </View>
 
@@ -271,6 +394,7 @@ export default class EditDetails extends Component {
                         elevation: 1,
                         width: this.state.mapWidth
                     }}>
+
                         <Mapir
                             accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
                             zoomLevel={6}
@@ -297,6 +421,10 @@ export default class EditDetails extends Component {
                         <Image source={this.state.arrowDown ? arrowDown : arrowUp} />
                     </TouchableOpacity>
 
+
+
+                        
+                    </View>
 
 
                     <GradientButton
@@ -428,17 +556,19 @@ const styles = ({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         flexDirection: 'row-reverse',
-        width: '100%'
+        width: '100%',
     },
     images_box: {
-        width: (Dimensions.get('window').width - 100) / 3,
-        height: (Dimensions.get('window').width - 100) / 3,
-        marginLeft: 10,
+        width: (Dimensions.get('window').width  - 82) / 3 ,
+        height: (Dimensions.get('window').width - 82) / 3  ,
+        marginLeft: 5,
+        marginRight: 5,
         backgroundColor: '#ececec',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 10,
+        resizeMode: 'cover',
     },
 
     images: {
@@ -493,7 +623,24 @@ const styles = ({
         fontFamily: 'ISBold',
 
     }
+    ,
+    image_container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        // padding: 10,
 
+    },
+    button: {
+        backgroundColor: 'blue',
+        marginBottom: 10
+    },
+    text: {
+        color: 'white',
+        fontSize: 20,
+        textAlign: 'center'
+    }
 
 
 

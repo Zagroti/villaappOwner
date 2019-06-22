@@ -3,6 +3,7 @@ package com.vilaappowner;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -27,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new LinearGradientPackage(),
           new RCTMGLPackage()
+          new PickerPackage(),
+
       );
     }
 

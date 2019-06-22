@@ -72,7 +72,7 @@ const Routes = () => (
                 component={SendNumber}
                 title="Send Number"
                 hideNavBar={true}
-                initial={true}
+                
             />
             <Scene key="EnterCode" component={EnterCode}
                 title=""
@@ -87,6 +87,7 @@ const Routes = () => (
                 component={Home}
                 title="home"
                 hideNavBar={true}
+
             />
 
             <Scene key="Profile" component={Profile}
