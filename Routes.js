@@ -87,7 +87,7 @@ const Routes = () => (
                 component={Home}
                 title="home"
                 hideNavBar={true}
-                
+
             />
 
             <Scene key="Profile" component={Profile}

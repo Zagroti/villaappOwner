@@ -7,20 +7,22 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.8.3",
-    "react-native": "0.59.8",
+    "mapir-react-native-sdk": "^1.6.1",
+    "react": "16.6.3",
+    "react-native": "0.57.8",
     "react-native-image-crop-picker": "^0.24.1",
     "react-native-input-scroll-view": "^1.9.2",
     "react-native-linear-gradient": "^2.5.4",
+    "react-native-permissions": "^1.1.1",
     "react-native-router-flux": "^4.0.6",
     "react-native-textarea": "^1.0.3"
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
-    "@babel/runtime": "7.4.5",
-    "babel-jest": "24.8.0",
-    "jest": "24.8.0",
-    "metro-react-native-babel-preset": "0.54.1",
+    "@babel/core": "7.4.4",
+    "@babel/runtime": "7.4.4",
+    "babel-jest": "24.7.1",
+    "jest": "24.7.1",
+    "metro-react-native-babel-preset": "0.53.1",
     "react-test-renderer": "16.8.3"
   },
   "jest": {
