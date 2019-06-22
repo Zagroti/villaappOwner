@@ -422,12 +422,14 @@ const styles = ({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         flexDirection: 'row-reverse',
-        width: '100%'
+        width: '100%',
+        backgroundColor:'red'
     },
     images_box: {
-        width: (Dimensions.get('window').width - 100) / 3,
-        height: (Dimensions.get('window').width - 100) / 3,
-        marginLeft: 10,
+        width: (Dimensions.get('window').width  - 82) / 3 ,
+        height: (Dimensions.get('window').width - 82) / 3  ,
+        marginLeft: 5,
+        marginRight: 5,
         backgroundColor: '#ececec',
         borderRadius: 10,
         justifyContent: 'center',
@@ -494,7 +496,7 @@ const styles = ({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        padding: 10,
+        // padding: 10,
 
     },
     button: {
