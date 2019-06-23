@@ -55,7 +55,7 @@ export default class EditDetails extends Component {
                 { latitude: 51.422548, longitude: 35.732573 },
             ],
             mapHeight: 200,
-            mapWidth: Dimensions.get('window').width - 50,
+            mapWidth: '90%',
             moreText: 'بیشتر',
             arrowDown: true,
 
@@ -75,6 +75,7 @@ export default class EditDetails extends Component {
             condition_5: false,
             condition_6: false,
             condition_7: false,
+
 
         }
 
@@ -198,7 +199,7 @@ export default class EditDetails extends Component {
     _mapHeightChanger = () => {
         if (this.state.arrowDown) {
             this.setState({
-                mapHeight: 300,
+                mapHeight: 400,
                 mapWidth: Dimensions.get('window').width - 10,
                 moreText: 'کوچکتر',
                 arrowDown: false
@@ -206,13 +207,52 @@ export default class EditDetails extends Component {
         } else {
             this.setState({
                 mapHeight: 200,
-                mapWidth: Dimensions.get('window').width - 50,
+                mapWidth: '90%',
                 moreText: 'بزرگتر',
                 arrowDown: true
             })
         }
 
     }
+
+
+    // picker select city 
+    _changeCity = async (item) => {
+        switch (item) {
+            case 'amol':
+                await this.setState({
+                    markers: [
+                        { latitude: 51.22, longitude: 35.33 },
+                    ],
+                    city: item
+                })
+                break;
+
+            case 'babol':
+                await this.setState({
+                    markers: [
+                        { latitude: 52.422548, longitude: 35.732573 },
+                    ],
+                    city: item
+                })
+                break;
+            case 'babolsar':
+                await this.setState({
+                    markers: [
+                        { latitude: 52.01, longitude: 35.732573 },
+                    ],
+                    city: item
+                })
+                break;
+            default:
+                break;
+        }
+
+
+
+    }
+
+
 
 
 
@@ -224,6 +264,7 @@ export default class EditDetails extends Component {
                 id={'2'}
                 key={markers.latitude}
                 coordinate={[markers.latitude, markers.longitude]}
+
             />))
 
 
@@ -276,6 +317,7 @@ export default class EditDetails extends Component {
                             }}
                             placeholder="عنوان"
                             style={styles.input}
+                            ref={'MAP'}
                         // onChangeText={() => alert('2')}
                         />
 
@@ -346,18 +388,50 @@ export default class EditDetails extends Component {
                     <View style={styles.edit_details_1} >
                         <Text style={styles.titles}>آدرس و موقعیت </Text>
                     </View>
-                    <Picker
-                        selectedValue={this.state.location}
-                        style={{ height: 50, width: '90%', fontFamily: 'IS', borderWidth: 1, borderColor: '#eee' }}
-                        onValueChange={(itemValue) => {
-                            this.setState({ markers: itemValue })
-                        }
-                        }>
-                        <Picker.Item label="آمل" style={{ fontFamily: 'IS' }} value={[{ latitude: 52, longitude: 35 }]} />
-                        <Picker.Item label="بابل" value={[{ latitude: 52.1, longitude: 35 }] } />
-                        <Picker.Item label="بابلسر" value={[{ latitude: 52.2, longitude: 35 }]} />
-                        <Picker.Item label="کیش" value={[{ latitude: 52.4, longitude: 35 }]} />
-                    </Picker>
+                    {/* <View
+                        style={{
+                            height: 50,
+                            width: '90%',
+                            fontFamily: 'IS',
+                            borderWidth: 1,
+                            borderColor: '#eee',
+                            backgroundColor: '#fff',
+                            marginBottom: 20,
+                            borderRadius: 5
+                        }}
+                    >
+
+                        <Picker
+                            selectedValue={this.state.city}
+                            onValueChange={(itemValue) => this.setState({ markers: itemValue })}>
+                            <Picker.Item label="بابل" value={[{ latitude: 52.1, longitude: 35}]} />
+                            <Picker.Item label="آمل" value={[{ latitude: 52, longitude: 35 }]} />
+                            <Picker.Item label="بابلسر" value={[{ latitude: 52.2, longitude: 35 }]} />
+                            <Picker.Item label="کیش" value={[{ latitude: 52.4, longitude: 35}]} />
+                        </Picker>
+                    </View> */}
+                    <View
+                        style={{
+                            height: 50,
+                            width: '90%',
+                            fontFamily: 'IS',
+                            borderWidth: 1,
+                            borderColor: '#eee',
+                            backgroundColor: '#fff',
+                            marginBottom: 20,
+                            borderRadius: 5
+                        }}
+                    >
+
+                        <Picker
+                            selectedValue={this.state.city}
+                            onValueChange={(itemValue) => this._changeCity(itemValue)}>
+                            <Picker.Item label="آمل" value='amol' />
+                            <Picker.Item label="بابل" value='babol' />
+                            <Picker.Item label="بابلسر" value='babolsar' />
+                        </Picker>
+                    </View>
+
 
                     <View style={{
                         height: this.state.mapHeight,
@@ -370,8 +444,7 @@ export default class EditDetails extends Component {
                         backgroundColor: '#fff',
                         elevation: 1,
                         width: this.state.mapWidth
-                    }}>
-
+                    }} >
                         <Mapir
                             accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
                             zoomLevel={6}
@@ -379,6 +452,7 @@ export default class EditDetails extends Component {
                             showUserLocation={true}
                             onLongPress={e => this.addMarker(e.geometry.coordinates)}
                             style={{ flex: 1 }}
+
                         >
                             {mark}
                         </Mapir>
