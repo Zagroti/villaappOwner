@@ -11,6 +11,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.mapbox.rctmgl.RCTMGLPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
           new LinearGradientPackage(),
           new RCTMGLPackage(),
           new PickerPackage(),
-           new AsyncStoragePackage()
+          new AsyncStoragePackage(),
+          new VectorIconsPackage()
 
       );
     }

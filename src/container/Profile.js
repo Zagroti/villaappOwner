@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //components
 import GradientButton from '../components/GradientButton';
@@ -62,7 +63,8 @@ export default class Profile extends Component {
                     <View style={styles.icon_parent} >
                         <View style={styles.icon_child} >
                             <View style={styles.icon_cover} >
-                                <Image style={styles.icon} source={require('../../Assets/Images/user.png')} />
+                            <Icon style={styles.icon} size={25} name="account-outline" color="#636363" /> 
+
                             </View>
                         </View>
                     </View>
@@ -82,7 +84,7 @@ export default class Profile extends Component {
                                 onChangeText={(countryCode) => this.setState({ countryCode })}
                                 placeholder="نام و نام خانوادگی"
                             />
-                            <Image style={styles.input_icon} source={require('../../Assets/Images/userq.png')} />
+                            <Icon style={{marginLeft:5}} size={25} name="account-outline" color="#636363" /> 
                         </View>
                         <View style={styles.input_box}>
                             <TextInput
@@ -90,7 +92,7 @@ export default class Profile extends Component {
                                 onChangeText={(countryCode) => this.setState({ countryCode })}
                                 placeholder="ایمیل"
                             />
-                            <Image style={styles.input_icon} source={require('../../Assets/Images/pocket.png')} />
+                            <Icon style={{marginLeft:5}} size={25} name="email-outline" color="#636363" /> 
                         </View>
                         <View style={styles.input_box}>
                             <TextInput
@@ -98,7 +100,7 @@ export default class Profile extends Component {
                                 onChangeText={(countryCode) => this.setState({ countryCode })}
                                 placeholder="شهر"
                             />
-                            <Image style={styles.input_icon} source={require('../../Assets/Images/phone.png')} />
+                            <Icon style={{marginLeft:5}} size={25} name="phone" color="#636363" /> 
                         </View>
                         <View style={styles.input_box}>
                             <TextInput
@@ -106,7 +108,7 @@ export default class Profile extends Component {
                                 onChangeText={(countryCode) => this.setState({ countryCode })}
                                 placeholder="آدرس"
                             />
-                            <Image style={styles.input_icon} source={require('../../Assets/Images/telephone.png')} />
+                            <Icon style={{marginLeft:5}} size={25} name="phone-classic" color="#636363" />                             
                         </View>
 
                     </View>
@@ -186,9 +188,10 @@ const styles = ({
         alignItems: 'center',
     },
     icon: {
-        width: 25,
-        height: 25,
         backgroundColor: '#C92652',
+        color:'#fff',
+        fontSize:40,
+        borderRadius:20,
     },
     account_box: {
         flexDirection: 'column',

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Mapir from 'mapir-react-native-sdk'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //components 
 import GradientButton from './../components/GradientButton'
@@ -77,25 +78,25 @@ export default class Details extends Component {
                         <View style={styles.posibility}>
                             <Text style={styles.posibility_text}>اتاق 2</Text>
                             <View style={styles.posibility_icon_box} >
-                                <Image style={styles.posibility_icon} source={require('./../../Assets/Images/door.png')} />
+                                <Icon size={15} name="door" color="#333" />
                             </View>
                         </View>
                         <View style={styles.posibility}>
                             <Text style={styles.posibility_text}>2 تختخواب </Text>
                             <View style={styles.posibility_icon_box} >
-                                <Image style={styles.posibility_icon} source={require('./../../Assets/Images/bed.png')} />
+                                <Icon size={15} name="hotel" color="#636363" />
                             </View>
                         </View>
                         <View style={styles.posibility}>
                             <Text style={styles.posibility_text}>1 نفر</Text>
                             <View style={styles.posibility_icon_box} >
-                                <Image style={styles.posibility_icon} source={require('./../../Assets/Images/persons.png')} />
+                                <Icon size={15} name="account-group" color="#636363" />
                             </View>
                         </View>
                         <View style={styles.posibility}>
                             <Text style={styles.posibility_text}>45 متر مربع</Text>
                             <View style={styles.posibility_icon_box} >
-                                <Image style={styles.posibility_icon} source={require('./../../Assets/Images/apartment.png')} />
+                                <Icon size={15} name="home-city-outline" color="#636363" />
                             </View>
                         </View>
                     </View>
@@ -107,7 +108,7 @@ export default class Details extends Component {
                         </View>
                         <TouchableOpacity style={styles.see_more}>
                             <Text style={styles.see_more_text}>بیشتر</Text>
-                            <Image style={styles.see_more_icon} source={require('./../../Assets/Images/arrow-down.png')} />
+                            <Icon size={30} name="chevron-down" color="#c7c7c7" />
                         </TouchableOpacity>
                     </View>
 
@@ -143,7 +144,7 @@ export default class Details extends Component {
 
                         <TouchableOpacity style={styles.see_more}>
                             <Text style={styles.see_more_text}>بیشتر</Text>
-                            <Image style={styles.see_more_icon} source={require('./../../Assets/Images/arrow-down.png')} />
+                            <Icon size={30} name="chevron-down" color="#c7c7c7" />
                         </TouchableOpacity>
                     </View>
 
@@ -169,12 +170,12 @@ export default class Details extends Component {
                             zoomLevel={13}
                             centerCoordinate={[51.422548, 35.732573]}
                             style={{ flex: 1 }}>
-                           <Mapir.Marker
+                            <Mapir.Marker
                                 id={'1'}
                                 coordinate={[51.422548, 35.732573]}
-                            />  
-                           
-                            
+                            />
+
+
                         </Mapir>
                     </View>
 
@@ -306,7 +307,6 @@ const styles = ({
     },
     posibility_icon_box: {
         backgroundColor: '#eee',
-        padding: 15,
         width: 25,
         height: 25,
         borderRadius: 30,

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import InputScrollView from 'react-native-input-scroll-view';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 //components 
@@ -130,7 +131,7 @@ export default class RentPage extends Component {
                                 <View style={styles.twins}>
                                     <Text style={{ fontSize: 10, fontFamily: 'IS', color: '#555' }}>تومان در روز</Text>
                                     <Text style={{ fontSize: 12, fontFamily: 'ISBold', color: '#555', marginHorizontal: 5 }}>400,000 </Text>
-                                    <Image style={{ width: 20, resizeMode: 'contain' }} source={require('../../Assets/Images/24.png')} />
+                                    <Icon size={30} name="store-24-hour" color="#636363" />
                                 </View>
                                 <View style={styles.twins}>
                                     <Text style={{
@@ -143,7 +144,7 @@ export default class RentPage extends Component {
                                         borderRadius: 30
                                     }}>10 شب</Text>
                                     <Text style={{ fontSize: 10, fontFamily: 'ISMedium', color: '#555', marginHorizontal: 5 }}>1398/11/07</Text>
-                                    <Image style={{ width: 20, resizeMode: 'contain' }} source={require('../../Assets/Images/calendergrey.png')} />
+                                    <Icon size={30} name="calendar-range" color="#636363" />
                                 </View>
                             </View>
                             <View style={{
@@ -227,23 +228,19 @@ export default class RentPage extends Component {
                             <View style={{
                                 backgroundColor: '#fff',
                                 width: '90%',
-                                justifyContent:'center',
-                                alignItems:'center',
-                                padding:20,
-                                borderRadius:10
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                padding: 20,
+                                borderRadius: 10
                             }} >
                                 <View style={styles.alarm_box}>
-                                    <Image style={{
-                                        width: 30,
-                                        height: 30,
-                                        resizeMode: 'cover',
-                                    }} source={require('../../Assets/Images/alarm.png')} />
+                                    <Icon size={30} name="bell-ring" color="#EEAF4B" />
                                 </View>
 
-                                <View style={{marginVertical:40}}>
+                                <View style={{ marginVertical: 40 }}>
                                     <Text style={{ fontSize: 20, fontFamily: 'ISBold', color: '#555' }} >توجه:</Text>
-                                    <Text style={{ fontSize: 14, fontFamily: 'ISMedium', color: '#555', marginVertical:10 }} >
-                                        حداکثر بعد از 20 دقیقه از مشتری بازخورد خواهید گرفت 
+                                    <Text style={{ fontSize: 14, fontFamily: 'ISMedium', color: '#555', marginVertical: 10 }} >
+                                        حداکثر بعد از 20 دقیقه از مشتری بازخورد خواهید گرفت
                                     </Text>
                                     <Text style={{ fontSize: 16, fontFamily: 'ISBold', color: '#555' }} >
                                         آیا میخوهید این درخواست را قبول کنید ؟
@@ -252,29 +249,29 @@ export default class RentPage extends Component {
 
                                 <View style={{ width: '90%', justifyContent: 'space-between', flexDirection: 'row' }} >
 
-                            <GradientButton
-                                width="49%"
-                                press={() => {this.setModalVisible(false);}}
-                                color_2="#C50143"
-                                color_1="#C50143"
-                                height={40}
-                                borderRadius={10}
-                                textColor="#fff"
-                                size={16}
-                                title="خیر"
-                            />
-                            <GradientButton
-                                width="49%"
-                                press={this._acceptRequest}
-                                color_1="#63CB8E"
-                                color_2="#63CB8E"
-                                height={40}
-                                borderRadius={10}
-                                textColor="#fff"
-                                size={16}
-                                title="بله"
-                            />
-                        </View>
+                                    <GradientButton
+                                        width="49%"
+                                        press={() => { this.setModalVisible(false); }}
+                                        color_2="#C50143"
+                                        color_1="#C50143"
+                                        height={40}
+                                        borderRadius={10}
+                                        textColor="#fff"
+                                        size={16}
+                                        title="خیر"
+                                    />
+                                    <GradientButton
+                                        width="49%"
+                                        press={this._acceptRequest}
+                                        color_1="#63CB8E"
+                                        color_2="#63CB8E"
+                                        height={40}
+                                        borderRadius={10}
+                                        textColor="#fff"
+                                        size={16}
+                                        title="بله"
+                                    />
+                                </View>
 
                             </View>
 
@@ -340,15 +337,15 @@ const styles = ({
         width: '100%',
         padding: 10
     },
-    user_box:{
+    user_box: {
         justifyContent: 'center',
         alignItems: 'center',
-        width:80,
-        height:80,
+        width: 80,
+        height: 80,
         shadowColor: "#eee",
         shadowOpacity: 1,
         elevation: 5,
-        backgroundColor:'#fff',
+        backgroundColor: '#fff',
         borderWidth: 1,
         borderRadius: 40,
         borderColor: '#686868',
@@ -364,7 +361,7 @@ const styles = ({
         width: 80,
         height: 80,
         resizeMode: 'cover',
-        borderRadius:40
+        borderRadius: 40
     },
     Modal: {
         flexDirection: 'column',
@@ -374,15 +371,15 @@ const styles = ({
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width,
     },
-    alarm_box:{
+    alarm_box: {
         justifyContent: 'center',
         alignItems: 'center',
-        width:80,
-        height:80,
+        width: 80,
+        height: 80,
         shadowColor: "#eee",
         shadowOpacity: 1,
         elevation: 5,
-        backgroundColor:'#fff',
+        backgroundColor: '#fff',
         borderWidth: 1,
         borderRadius: 40,
         borderColor: '#EEAF4B',
