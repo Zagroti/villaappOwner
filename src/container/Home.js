@@ -193,13 +193,16 @@ export default class Home extends Component {
                         <Text style={styles.title} >درخواست های  امروز</Text>
                         <View style={styles.tab}  >
                             <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab1')}>
+                                <Icon name="filter-outline" size={20} color={this.state.color_1} />
                                 <Text style={[styles.tab_text, { color: this.state.color_1 }]}>فعال</Text>
                             </TouchableOpacity>
                             <Text style={styles.line} ></Text>
                             <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab2')}>
+                                <Icon name="filter-outline" size={20} color={this.state.color_2} />
                                 <Text style={[styles.tab_text, { color: this.state.color_2 }]}>در صف </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab3')}>
+                                <Icon name="filter-outline" size={20} color={this.state.color_3} />
                                 <Text style={[styles.tab_text, { color: this.state.color_3 }]}>بسته شده</Text>
                             </TouchableOpacity>
                         </View>
