@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Dimensions, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 export default class ResultItems extends Component {
 
@@ -52,23 +54,23 @@ export default class ResultItems extends Component {
                         <View style={styles.left}>
                             <View style={styles.available}>
                                 <Text style={styles.available_text}>قابل دسترس</Text>
-                                <Image style={styles.icon} source={require('../../Assets/Images/check.png')} />
+                                <Icon style={{marginLeft:5}} size={22} name="check-circle-outline" color="#6FCF97" />  
                             </View>
                             <View style={styles.price}>
                                 <Text style={styles.price_small}>هر شب</Text>
                                 <Text style={styles.price_text}>350,000 ت </Text>
-                                <Image style={styles.icon} source={require('../../Assets/Images/worth.png')} />
+                                <Icon style={{marginLeft:5}} size={22} name="cash-multiple" color="#636363" /> 
                             </View>
                         </View>
 
                         <View style={styles.right}>
                             <View style={styles.person}>
                                 <Text style={styles.person_text}>ظرفیت 10 نفر</Text>
-                                <Image style={styles.icon} source={require('../../Assets/Images/multipleusers.png')} />
+                                <Icon style={{marginLeft:5}} size={22} name="account-group" color="#636363" /> 
                             </View>
                             <View style={styles.location}>
                                 <Text style={styles.location_text}>بابلسر</Text>
-                                <Image style={styles.location_icon} source={require('../../Assets/Images/greymarker.png')} />
+                                <Icon style={{marginLeft:5}} size={22} name="map-marker-outline" color="#636363" /> 
                             </View>
                         </View>
 

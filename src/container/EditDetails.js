@@ -19,6 +19,7 @@ import {
 import Mapir from 'mapir-react-native-sdk'
 import { Actions } from 'react-native-router-flux';
 import Textarea from 'react-native-textarea';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 
@@ -42,8 +43,8 @@ var imgs = []
 
 
 
-const arrowDown = require('./../../Assets/Images/arrow-down.png')
-const arrowUp = require('./../../Assets/Images/arrow-up.png')
+const arrowDown = <Icon  size={22} name="chevron-down" color="#bbb" />
+const arrowUp = <Icon  size={22} name="chevron-up" color="#bbb" />
 
 export default class EditDetails extends Component {
 
@@ -56,7 +57,7 @@ export default class EditDetails extends Component {
             ],
             mapHeight: 200,
             mapWidth: '90%',
-            moreText: 'بیشتر',
+            moreText: 'بزرگتر',
             arrowDown: true,
 
             image: null,
@@ -289,7 +290,7 @@ export default class EditDetails extends Component {
                                     }}>
                                         {this.state.images ? this.state.images.map(i => <TouchableOpacity onPress={() => this._deleteImage(i.uri)} key={i.uri}>{this.renderAsset(i)}</TouchableOpacity>) : null}
                                         <TouchableOpacity style={styles.images_box} onPress={this.pickMultiple.bind(this)} activeOpacity={.8} >
-                                            <Image style={styles.select_image} source={require('../../Assets/Images/picture.png')} />
+                                            <Icon style={styles.select_image}  name="image-outline"  />
                                             <Text style={{
                                                 fontSize: 10,
                                                 fontFamily: 'ISBold',
@@ -388,28 +389,6 @@ export default class EditDetails extends Component {
                     <View style={styles.edit_details_1} >
                         <Text style={styles.titles}>آدرس و موقعیت </Text>
                     </View>
-                    {/* <View
-                        style={{
-                            height: 50,
-                            width: '90%',
-                            fontFamily: 'IS',
-                            borderWidth: 1,
-                            borderColor: '#eee',
-                            backgroundColor: '#fff',
-                            marginBottom: 20,
-                            borderRadius: 5
-                        }}
-                    >
-
-                        <Picker
-                            selectedValue={this.state.city}
-                            onValueChange={(itemValue) => this.setState({ markers: itemValue })}>
-                            <Picker.Item label="بابل" value={[{ latitude: 52.1, longitude: 35}]} />
-                            <Picker.Item label="آمل" value={[{ latitude: 52, longitude: 35 }]} />
-                            <Picker.Item label="بابلسر" value={[{ latitude: 52.2, longitude: 35 }]} />
-                            <Picker.Item label="کیش" value={[{ latitude: 52.4, longitude: 35}]} />
-                        </Picker>
-                    </View> */}
                     <View
                         style={{
                             height: 50,
@@ -452,7 +431,6 @@ export default class EditDetails extends Component {
                             showUserLocation={true}
                             onLongPress={e => this.addMarker(e.geometry.coordinates)}
                             style={{ flex: 1 }}
-
                         >
                             {mark}
                         </Mapir>
@@ -469,7 +447,7 @@ export default class EditDetails extends Component {
                             color: '#ccc',
                             marginVertical: 2
                         }} >{this.state.moreText}</Text>
-                        <Image source={this.state.arrowDown ? arrowDown : arrowUp} />
+                        {this.state.arrowDown ? arrowDown : arrowUp}
                     </TouchableOpacity>
 
 
@@ -629,8 +607,8 @@ const styles = ({
         borderRadius: 10
     },
     select_image: {
-        width: '40%',
-        height: '40%',
+        color:'#636363',
+        fontSize:50,        
         resizeMode: "cover",
         borderRadius: 10
     },

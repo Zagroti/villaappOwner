@@ -9,7 +9,7 @@ import {
     ScrollView,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 //components 
@@ -86,25 +86,25 @@ export default class MyFlatsPage extends Component {
                     </View>
 
                 </View>
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('myFlat')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('myFlatPage')}>
                     <Text style={styles.drawer_text}>ویلاهای من</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
+                    <Icon size={30} name="home-outline" color="#636363" />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('home')}>
                     <Text style={styles.drawer_text}>درخواست ها</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
+                    <Icon size={30} name="home-city-outline" color="#636363" />
                 </TouchableOpacity>
 
                 {/* got to history */}
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('history')}>
                     <Text style={styles.drawer_text}>تاریخچه</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
+                    <Icon size={30} name="calendar-clock" color="#636363" />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
                     <Text style={styles.drawer_text}>پروفایل</Text>
-                    <Image style={styles.bottomIcon} source={require('../../Assets/Images/userq.png')} />
+                    <Icon size={30} name="account-outline" color="#636363" />
                 </TouchableOpacity>
             </View>
         );
@@ -128,7 +128,7 @@ export default class MyFlatsPage extends Component {
                     <View style={styles.menu} >
 
                         <TouchableOpacity style={styles.humberger} onPress={this._openDrawer}>
-                            <Image style={styles.humberger_icon} source={require('../../Assets/Images/menu.png')} />
+                            <Icon size={36} name="menu" color="#636363" />
                         </TouchableOpacity>
                     </View>
 
@@ -164,7 +164,7 @@ export default class MyFlatsPage extends Component {
                             Actions.EditDetails()
                         }}
                     >
-                        <Text style={{ fontSize: 60, color: '#fff', lineHeight: 70, fontWeight: '900' }} >+</Text>
+                        <Icon size={60} name="plus" color="#fff" />
                     </TouchableOpacity>
 
 
@@ -195,7 +195,7 @@ const styles = ({
         height: 50,
         padding: 20
     },
-   
+
     humberger: {
         width: 50,
         height: 50,
@@ -239,7 +239,7 @@ const styles = ({
         marginTop: 20
     },
 
-    
+
     icon_parent: {
         width: 120,
         height: 120,

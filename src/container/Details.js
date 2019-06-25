@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Mapir from 'mapir-react-native-sdk'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //components 
 import GradientButton from './../components/GradientButton'
@@ -29,6 +30,10 @@ export default class Details extends Component {
         super(props)
         this.state = {
             modalVisible: false,
+            avilibiyText: 'بیشتر',
+            avilibiy: false,
+            aboutvilaText: 'بیشتر',
+            aboutvila: false
         }
     }
 
@@ -41,6 +46,37 @@ export default class Details extends Component {
 
     _backToResultImage = () => {
         Actions.ResultItemsPage()
+    }
+
+
+    _moreOptions = (item) => {
+        if (item === 'avilibiy') {
+            if (!this.state.avilibiy) {
+                this.setState({
+                    avilibiyText: 'کمتر',
+                    avilibiy: true,
+                })
+            } else {
+                this.setState({
+                    avilibiyText: 'بیشتر',
+                    avilibiy: false,
+                })
+            }
+        } else if (item === 'aboutvila') {
+            if (!this.state.aboutvila) {
+                this.setState({
+                    aboutvilaText: 'کمتر',
+                    aboutvila: true,
+                })
+            } else {
+                this.setState({
+                    aboutvilaText: 'بیشتر',
+                    aboutvila: false,
+                })
+            }
+
+        }
+
     }
 
 
@@ -77,25 +113,25 @@ export default class Details extends Component {
                         <View style={styles.posibility}>
                             <Text style={styles.posibility_text}>اتاق 2</Text>
                             <View style={styles.posibility_icon_box} >
-                                <Image style={styles.posibility_icon} source={require('./../../Assets/Images/door.png')} />
+                                <Icon size={15} name="door" color="#333" />
                             </View>
                         </View>
                         <View style={styles.posibility}>
                             <Text style={styles.posibility_text}>2 تختخواب </Text>
                             <View style={styles.posibility_icon_box} >
-                                <Image style={styles.posibility_icon} source={require('./../../Assets/Images/bed.png')} />
+                                <Icon size={15} name="hotel" color="#636363" />
                             </View>
                         </View>
                         <View style={styles.posibility}>
                             <Text style={styles.posibility_text}>1 نفر</Text>
                             <View style={styles.posibility_icon_box} >
-                                <Image style={styles.posibility_icon} source={require('./../../Assets/Images/persons.png')} />
+                                <Icon size={15} name="account-group" color="#636363" />
                             </View>
                         </View>
                         <View style={styles.posibility}>
                             <Text style={styles.posibility_text}>45 متر مربع</Text>
                             <View style={styles.posibility_icon_box} >
-                                <Image style={styles.posibility_icon} source={require('./../../Assets/Images/apartment.png')} />
+                                <Icon size={15} name="home-city-outline" color="#636363" />
                             </View>
                         </View>
                     </View>
@@ -104,10 +140,29 @@ export default class Details extends Component {
                         <View style={styles.about_vila_first}>
                             <Text style={styles.about_vila_title} >در مورد ویلا</Text>
                             <Text style={styles.about_vila_text} >لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</Text>
+                            {
+                                this.state.aboutvila ?
+                                    <Text style={styles.about_vila_text} >لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</Text>
+                                    : null
+                            }
                         </View>
-                        <TouchableOpacity style={styles.see_more}>
-                            <Text style={styles.see_more_text}>بیشتر</Text>
-                            <Image style={styles.see_more_icon} source={require('./../../Assets/Images/arrow-down.png')} />
+
+                        {/* more btn */}
+                        <TouchableOpacity
+                            style={{ marginVertical: 10, alignItems: 'center' }}
+                            onPress={() => this._moreOptions('aboutvila')}
+                        >
+                            <Text style={{
+                                fontSize: 13,
+                                fontFamily: 'ISBold',
+                                color: '#ccc',
+                                marginVertical: 2
+                            }} >{this.state.aboutvilaText}</Text>
+                            {
+                                this.state.aboutvila ?
+                                    <Icon size={30} name="chevron-up" color="#c7c7c7" /> :
+                                    <Icon size={30} name="chevron-down" color="#c7c7c7" />
+                            }
                         </TouchableOpacity>
                     </View>
 
@@ -117,34 +172,76 @@ export default class Details extends Component {
                         <View style={styles.avilibiy_first}>
                             <View style={styles.avilibiy_item} >
                                 <Text style={styles.avilibiy_text} >پارکینگ</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
+                                <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
                             </View>
                             <View style={styles.avilibiy_item} >
                                 <Text style={styles.avilibiy_text} >WiFi</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
+                                <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
                             </View>
                             <View style={styles.avilibiy_item} >
                                 <Text style={styles.avilibiy_text} >لباسشویی</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/checkgrey.png')}></Image>
+                                <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#bbb" />
                             </View>
                             <View style={styles.avilibiy_item} >
                                 <Text style={styles.avilibiy_text} >سیستم گرمایشی</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
+                                <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
                             </View>
                             <View style={styles.avilibiy_item} >
                                 <Text style={styles.avilibiy_text} >الکتریکی</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
+                                <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
                             </View>
                             <View style={styles.avilibiy_item} >
                                 <Text style={styles.avilibiy_text} >استخر</Text>
-                                <Image style={styles.avilibiy_icon} source={require('./../../Assets/Images/check.png')}></Image>
+                                <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
                             </View>
+                            {
+                                this.state.avilibiy ?
+                                    <View style={styles.avilibiy_first}>
+                                        <View style={styles.avilibiy_item} >
+                                            <Text style={styles.avilibiy_text} >پارکینگ</Text>
+                                            <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
+                                        </View>
+                                        <View style={styles.avilibiy_item} >
+                                            <Text style={styles.avilibiy_text} >WiFi</Text>
+                                            <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
+                                        </View>
+                                        <View style={styles.avilibiy_item} >
+                                            <Text style={styles.avilibiy_text} >لباسشویی</Text>
+                                            <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#bbb" />
+                                        </View>
+                                        <View style={styles.avilibiy_item} >
+                                            <Text style={styles.avilibiy_text} >سیستم گرمایشی</Text>
+                                            <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
+                                        </View>
+                                        <View style={styles.avilibiy_item} >
+                                            <Text style={styles.avilibiy_text} >الکتریکی</Text>
+                                            <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
+                                        </View>
+
+                                    </View> : null
+
+                            }
                         </View>
 
-                        <TouchableOpacity style={styles.see_more}>
-                            <Text style={styles.see_more_text}>بیشتر</Text>
-                            <Image style={styles.see_more_icon} source={require('./../../Assets/Images/arrow-down.png')} />
+                        {/* more btn */}
+                        <TouchableOpacity
+                            style={{ marginVertical: 10, alignItems: 'center' }}
+                            onPress={() => this._moreOptions('avilibiy')}
+                        >
+                            <Text style={{
+                                fontSize: 13,
+                                fontFamily: 'ISBold',
+                                color: '#ccc',
+                                marginVertical: 2
+                            }} >{this.state.avilibiyText}</Text>
+                            {
+                                this.state.avilibiy ?
+                                    <Icon size={30} name="chevron-up" color="#c7c7c7" /> :
+                                    <Icon size={30} name="chevron-down" color="#c7c7c7" />
+                            }
                         </TouchableOpacity>
+
+
                     </View>
 
                     <View style={styles.conditions}>
@@ -169,12 +266,12 @@ export default class Details extends Component {
                             zoomLevel={13}
                             centerCoordinate={[51.422548, 35.732573]}
                             style={{ flex: 1 }}>
-                           <Mapir.Marker
+                            <Mapir.Marker
                                 id={'1'}
                                 coordinate={[51.422548, 35.732573]}
-                            />  
-                           
-                            
+                            />
+
+
                         </Mapir>
                     </View>
 
@@ -306,7 +403,6 @@ const styles = ({
     },
     posibility_icon_box: {
         backgroundColor: '#eee',
-        padding: 15,
         width: 25,
         height: 25,
         borderRadius: 30,
@@ -361,12 +457,14 @@ const styles = ({
     avilibiy_first: {
         flexWrap: 'wrap',
         flexDirection: 'row',
+        justifyContent: 'flex-end'
     },
 
     avilibiy_item: {
         width: '50%',
         flexDirection: 'row',
         justifyContent: 'flex-end',
+        alignItems: 'center',
         marginBottom: 5
     },
 

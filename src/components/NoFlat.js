@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Dimensions, Image } from 'react-native';
 import GradientButton from './GradientButton';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 
@@ -9,23 +10,23 @@ import GradientButton from './GradientButton';
 
 const NoFlat = (props) => (
 
-            <View style={styles.NoFlat}>
-                <Image style={styles.marker} source={require('../../Assets/Images/noflatmarker.png')} />
-                <Text style={styles.NoFlatTitle}>چیزی برای نمایش وجود ندارد</Text>
-                <Text style={styles.NoFlatText}>برای درخواست دکمه ی نشانه گر را فشار دهید</Text>
-                <GradientButton
-                    width="90%"
-                    press={props.press}
-                    activeOpacity={.6}
-                    color_1="#46add8"
-                    color_2="#18749a"
-                    height={50}
-                    borderRadius={50}
-                    textColor="#fff"
-                    size={16}
-                    title="ویلای خودتو اضافه کن"
-                />
-            </View>
+    <View style={styles.NoFlat}>
+        <Icon size={50} name="map-marker" color="#eee" />
+        <Text style={styles.NoFlatTitle}>چیزی برای نمایش وجود ندارد</Text>
+        <Text style={styles.NoFlatText}>برای درخواست دکمه ی نشانه گر را فشار دهید</Text>
+        <GradientButton
+            width="90%"
+            press={props.press}
+            activeOpacity={.6}
+            color_1="#46add8"
+            color_2="#18749a"
+            height={50}
+            borderRadius={50}
+            textColor="#fff"
+            size={16}
+            title="ویلای خودتو اضافه کن"
+        />
+    </View>
 )
 
 export default NoFlat;
@@ -58,7 +59,7 @@ const styles = ({
         fontSize: 12,
         fontFamily: 'ISBold',
         color: '#555',
-        marginBottom:30
+        marginBottom: 30
     },
 
 })

@@ -3,6 +3,7 @@ import React from 'react';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { Text, View, Image, TouchableOpacity ,  ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import SendNumber from './src/container/SendNumber';
 import EnterCode from './src/container/EnterCode';
@@ -33,13 +34,7 @@ const backButton = () => (
         }}
     >
         <View >
-            <Image
-                source={require('./Assets/Images/right-arrow-black.png')}
-                style={{ width: 30, height: 20 }}
-            />
-            {/*
-                <Icon name='ios-arrow-round-back' style={{ color: '#fff' }} />
-            */}
+            <Icon  size={36} name="arrow-right" color="#636363" />
         </View>
     </TouchableOpacity>
 );
@@ -58,11 +53,7 @@ const backButtonDetail = () => (
             end: 10,
 
         }} onPress={() => Actions.pop()} >
-        <Image style={{
-            width: 30,
-            resizeMode: 'contain'
-        }}
-            source={require('./Assets/Images/right-arrow-white.png')} />
+        <Icon  size={36} name="arrow-right" color="#fff" />
     </TouchableOpacity>
 )
 

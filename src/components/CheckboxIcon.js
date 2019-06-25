@@ -1,9 +1,10 @@
 import React from 'react'
 import { Text, TouchableOpacity, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-const uncheck = require('./../../Assets/Images/checkgrey.png')
-const check = require('./../../Assets/Images/check.png')
+const uncheck = <Icon  size={22} name="check-circle-outline" color="#bbb" />
+const check = <Icon  size={22} name="check-circle-outline" color="#6FCF97" />
 
 export default class CheckboxIcon extends React.Component {
 
@@ -28,11 +29,11 @@ export default class CheckboxIcon extends React.Component {
                     width: '50%',
                     flexDirection: 'row',
                     justifyContent: 'flex-end',
-                    marginBottom: 5
+                    marginBottom: 5,
+                    alignItems:'center'
                 }}
                 onPress={this._check}
                 activeOpacity={.6}>
-
                 <Text
                     style={{
                         fontSize: 12,
@@ -41,9 +42,9 @@ export default class CheckboxIcon extends React.Component {
                     }}
                 >{this.props.title}</Text>
 
-                <Image style={{ marginLeft: 5 }}
-                    source={this.state.check ? check : uncheck}>
-                </Image>
+                <Text style={{marginLeft:5}}>
+                    {this.state.check ? check : uncheck}
+                </Text>
             </TouchableOpacity>
         )
     }
