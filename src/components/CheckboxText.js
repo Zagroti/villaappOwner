@@ -33,7 +33,7 @@ export default class CheckboxText extends React.Component {
         return (
             <TouchableOpacity
                 style={{
-                    marginBottom:4
+                    marginVertical:10
                   
                 }}
                 onPress={this._check}

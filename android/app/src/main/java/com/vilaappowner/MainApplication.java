@@ -12,6 +12,7 @@ import com.facebook.soloader.SoLoader;
 import com.mapbox.rctmgl.RCTMGLPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.reactnativecommunity.slider.ReactSliderPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,9 @@ public class MainApplication extends Application implements ReactApplication {
           new RCTMGLPackage(),
           new PickerPackage(),
           new AsyncStoragePackage(),
-          new VectorIconsPackage()
+          new VectorIconsPackage(),
+          new ReactSliderPackage()
+
 
       );
     }

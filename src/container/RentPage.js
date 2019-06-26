@@ -7,10 +7,13 @@ import {
     BackHandler,
     ScrollView,
     Modal,
+    ImageBackground,
+    TouchableOpacity
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import InputScrollView from 'react-native-input-scroll-view';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Slider from '@react-native-community/slider';
 
 
 //components 
@@ -24,7 +27,8 @@ export default class RentPage extends Component {
         super(props)
         this.state = {
             modalVisible: false,
-
+            minRangeSlider: 100000,
+            maxRangeSlider: 990000,
 
         };
     }
@@ -92,8 +96,12 @@ export default class RentPage extends Component {
 
             <View style={styles.rent_page} >
 
-
-
+                <View style={styles.menu} >
+                    <Text style={styles.title} >اجاره آپارتمان رویال</Text>
+                    <TouchableOpacity style={styles.humberger} onPress={() => Actions.pop()}>
+                        <Icon size={36} name="arrow-right" color="#636363" />
+                    </TouchableOpacity>
+                </View>
 
                 {/* request box  */}
                 <View style={{
@@ -108,74 +116,185 @@ export default class RentPage extends Component {
                     zIndex: 1,
 
                 }} >
-                    <Text style={styles.title} >اجاره آپارتمان رویال</Text>
-                    <ScrollView contentContainerStyle={styles.my_box} >
-                        <View style={styles.box_1}  >
-                            <View style={styles.circle}>
-                                <View style={styles.user_box}>
-                                    <Image style={styles.image} source={require('../../Assets/Images/userx.png')} />
+
+                    <View style={styles.my_box}  >
+                        <ImageBackground style={styles.box_1} imageStyle={{
+                            resizeMode: 'cover',
+                            width: '100%',
+                            borderRadius: 5
+                        }}
+                            source={require('../../Assets/Images/vilajungle.jpg')}  >
+                            <View style={{
+                                width: '100%',
+                                // backgroundColor: '#fff',
+                                backgroundColor: 'rgba(0,0,0,0.4)',
+                                borderRadius: 5,
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    borderBottomWidth: 1,
+                                    borderBottomColor: '#ccc',
+                                    width: '100%',
+                                    padding: 10,
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                    <View style={{
+                                        flexDirection: 'column',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        backgroundColor: '#FFD700',
+                                        padding: 10,
+                                        width: '50%',
+                                        height: 100,
+                                        borderRadius: 10,
+                                        marginVertical: 20
+                                    }} >
+                                        <View style={{
+                                            flexDirection: 'row',
+                                            borderBottomWidth: 1,
+                                            borderBottomColor: '#333',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            width:'100%',
+                                        }} >
+                                            <Text style={{ fontSize: 10, fontFamily: 'IS', color: '#666' }} >(تومان)</Text>
+                                            <Text style={{ fontSize: 13, fontFamily: 'IS', color: '#555' }} >قیمت پیشنهادی  </Text>
+                                        </View>
+                                           
+                                        <View style={{ flexDirection: 'row',alignItems: 'center', width:'100%',
+                                            justifyContent: 'center', }} >
+                                            <Text style={{ fontSize: 13, fontFamily: 'ISMedium', color: '#555' }} >150,000 </Text>
+                                            <Text style={{ fontSize: 13, fontFamily: 'ISMedium', color: '#555' }} > - </Text>
+                                            <Text style={{ fontSize: 13, fontFamily: 'ISMedium', color: '#555' }} >1,350,000 </Text>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.circle}>
+                                        <View style={styles.user_box}>
+                                            <Image style={styles.image} source={require('../../Assets/Images/userx.png')} />
+                                        </View>
+                                        <Text style={{
+                                            fontSize: 18,
+                                            fontFamily: 'ISBold',
+                                            marginTop: 5,
+                                            color: '#fff'
+                                        }}>امید آرمانی</Text>
+                                        <Text style={{
+                                            fontSize: 14,
+                                            fontFamily: 'ISMedium',
+                                            color: '#fff'
+                                        }}>مازندران بابل</Text>
+                                    </View>
                                 </View>
-                                <Text style={{
-                                    fontSize: 18,
-                                    fontFamily: 'ISBold',
-                                    marginTop: 5,
-                                    color: '#333'
-                                }}>امید آرمانی</Text>
-                                <Text style={{
-                                    fontSize: 14,
-                                    fontFamily: 'ISMedium',
-                                    color: '#555'
-                                }}>مازندران بابل</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '100%' }} >
+                                    <View style={styles.twins}>
+                                        <Text style={{ fontSize: 12, fontFamily: 'ISBold', color: '#fff', marginHorizontal: 5 }}>2 نفر </Text>
+                                        {/* <Text style={{ fontSize: 12, fontFamily: 'IS', color: '#555' }}>تعداد  </Text> */}
+                                        <Icon size={24} name="account-group-outline" color="#fff" />
+                                    </View>
+                                    <View style={styles.twins}>
+                                        <Text style={{ fontSize: 12, fontFamily: 'ISMedium', color: '#fff', marginHorizontal: 5 }}>1398/11/08</Text>
+                                        <Text style={{ fontSize: 12, fontFamily: 'ISMedium', color: '#fff', marginHorizontal: 5 }}> - </Text>
+                                        <Text style={{ fontSize: 12, fontFamily: 'ISMedium', color: '#fff', marginHorizontal: 5 }}>1398/11/07</Text>
+                                        <Icon size={24} name="calendar-range" color="#fff" />
+                                    </View>
+                                </View>
+
                             </View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
-                                <View style={styles.twins}>
-                                    <Text style={{ fontSize: 10, fontFamily: 'IS', color: '#555' }}>تومان در روز</Text>
-                                    <Text style={{ fontSize: 12, fontFamily: 'ISBold', color: '#555', marginHorizontal: 5 }}>400,000 </Text>
-                                    <Icon size={30} name="store-24-hour" color="#636363" />
-                                </View>
-                                <View style={styles.twins}>
-                                    <Text style={{
-                                        fontSize: 10,
-                                        fontFamily: 'ISBold',
-                                        color: '#333',
-                                        backgroundColor: '#ddd',
-                                        paddingVertical: 2,
-                                        paddingHorizontal: 10,
-                                        borderRadius: 30
-                                    }}>10 شب</Text>
-                                    <Text style={{ fontSize: 10, fontFamily: 'ISMedium', color: '#555', marginHorizontal: 5 }}>1398/11/07</Text>
-                                    <Icon size={30} name="calendar-range" color="#636363" />
-                                </View>
+
+                        </ImageBackground>
+
+                        <View style={{
+                            width: '100%',
+                            alignItems: 'center',
+                            marginVertical: 10,
+                            borderRadius: 5,
+                            backgroundColor: '#f1f1f1',
+                            padding: 10,
+                        }}>
+
+                            <View style={{
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-around',
+                                alignItems: 'center',
+                                height: 60,
+                                position: 'relative',
+                            }} >
+                                <Text style={{
+                                    color: '#A52D53',
+                                    fontFamily: 'ISFMedium',
+                                    position: 'absolute',
+                                    start: 0,
+                                    bottom: -10,
+                                }}>{this.state.minRangeSlider}</Text>
+                                <Slider
+                                    thumbTintColor="#A52D53"
+                                    style={{ width: '100%', height: 32 }}
+                                    minimumValue={this.state.minRangeSlider}
+                                    maximumValue={this.state.maxRangeSlider}
+                                    step={50000}
+                                    minimumTrackTintColor="#A52D53"
+                                    onValueChange={value => this.setState({ sliderValue: value })}
+                                    onSlidingStart={value =>
+                                        this.setState({
+                                            slideStartingValue: value,
+                                            slideStartingCount: this.state.slideStartingCount + 1,
+                                        })
+                                    }
+                                />
+                                <Text style={{
+                                    color: '#A52D53',
+                                    fontFamily: 'ISFMedium',
+                                    position: 'absolute',
+                                    end: 0,
+                                    bottom: -10
+                                }}>{this.state.maxRangeSlider}</Text>
                             </View>
+
                             <View style={{
                                 flexDirection: 'row',
-                                justifyContent: 'center',
-                                backgroundColor: '#F2C94C',
-                                padding: 5,
-                                width: '100%',
+                                justifyContent: 'space-around',
+                                marginTop: 30,
+                                backgroundColor: '#fbfbfb',
                                 borderRadius: 30,
-                                marginVertical: 20
-                            }} >
-                                <Text style={{ fontSize: 16, fontFamily: 'ISBold', color: '#555' }} >1,350,000 تومان</Text>
-                                <Text style={{ fontSize: 14, fontFamily: 'IS', color: '#555' }} >قیمت کل:  </Text>
+                                width: '70%',
+                                paddingVertical: 5
+                            }}>
+                                <Text style={{
+                                    fontSize: 15,
+                                    fontFamily: 'ISFMedium',
+                                    color: '#666'
+                                }} >{this.state.sliderValue ? this.state.sliderValue : (this.state.maxRangeSlider + this.state.minRangeSlider) / 2}</Text>
+
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                                    <Text style={{
+                                        fontSize: 10,
+                                        fontFamily: 'ISMedium',
+                                        color: '#666'
+                                    }} > (تومان)</Text>
+                                    <Text style={{
+                                        fontSize: 15,
+                                        fontFamily: 'ISMedium',
+                                        color: '#666'
+                                    }} >قیمت نهایی : </Text>
+
+                                </View>
+
                             </View>
 
                         </View>
-                        <View style={{
-                            width: '90%',
-                            marginVertical: 10,
-                            borderRadius: 30
-                        }}>
-                            <Image style={{
-                                width: '100%',
-                                height: 180,
-                                backgroundColor: '#f6f6f6',
-                                resizeMode: 'cover',
-                                borderRadius: 10
-                            }} source={require('../../Assets/Images/vilajungle.jpg')} />
 
-                        </View>
-                        <View style={{ width: '90%', justifyContent: 'space-between', flexDirection: 'row' }} >
+
+                        <View style={{
+                            width: Dimensions.get('window').width - 50,
+                            justifyContent: 'space-between',
+                            flexDirection: 'row',
+                        }} >
 
                             <GradientButton
                                 width="49%"
@@ -202,7 +321,7 @@ export default class RentPage extends Component {
                         </View>
 
 
-                    </ScrollView>
+                    </View>
                 </View>
 
 
@@ -297,44 +416,52 @@ const styles = ({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
     },
-
+    menu: {
+        backgroundColor: '#f6f6f6',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        height: 60,
+        paddingHorizontal: 20,
+        paddingTop: 10,
+    },
 
     title: {
-        fontSize: 22,
-        fontFamily: 'ISBold',
+        fontSize: 18,
+        fontFamily: 'IS',
         color: '#333',
-        borderBottomWidth: 1,
-        borderBottomColor: '#e7e7e7',
-        paddingBottom: 10,
-        marginTop: 20,
-        width: Dimensions.get('window').width - 50,
+        marginTop: 5
+    },
+    humberger: {
+        width: 60,
+        height: 60,
+        alignItems: 'center',
     },
     my_box: {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         paddingBottom: 160,
-        marginTop: 20
+        marginTop: 20,
+        width: Dimensions.get('window').width - 50,
+
     },
     box_1: {
         shadowColor: "#eee",
-        shadowOpacity: 1,
-        elevation: 5,
         borderRadius: 5,
         backgroundColor: '#fff',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '90%',
-        padding: 10
+        width: '100%',
+        resizeMode: 'cover',
+
     },
     circle: {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: '#333',
-        width: '100%',
+
+        width: '50%',
         padding: 10
     },
     user_box: {
@@ -351,7 +478,7 @@ const styles = ({
         borderColor: '#686868',
     },
     twins: {
-        width: '50%',
+        // width: '50%',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
