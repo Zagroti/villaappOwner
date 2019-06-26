@@ -29,7 +29,7 @@ export default class CheckboxIcon extends React.Component {
                     width: '50%',
                     flexDirection: 'row',
                     justifyContent: 'flex-end',
-                    marginBottom: 5,
+                    marginVertical: 10,
                     alignItems:'center'
                 }}
                 onPress={this._check}

@@ -132,6 +132,7 @@ class Routes extends React.Component {
                         title="home"
                         hideNavBar={true}
                         initial={this.state.logged}
+                        
 
                     />
 
@@ -158,39 +159,22 @@ class Routes extends React.Component {
 
                     <Scene key="EditDetails" component={EditDetails}
                         title=""
-                        titleStyle={{ color: 'transparent' }}
-                        renderBackButton={() => nothing}
-                        renderRightButton={() => backButton()}
-                        navigationBarStyle={styles.login_style_bar}
-                        sceneStyle={styles.login_scene_style}
-
+                        hideNavBar={true}
                     />
 
                     <Scene key="RentPage" component={RentPage}
                         title=""
-                        titleStyle={{ color: 'transparent' }}
-                        renderBackButton={() => nothing}
-                        renderRightButton={() => backButton()}
-                        navigationBarStyle={styles.login_style_bar}
-                        sceneStyle={styles.login_scene_style}
-
-
+                        hideNavBar={true}
                     />
 
                     <Scene key="MyFlatsPage" component={MyFlatsPage}
                         title=""
-                        titleStyle={{ color: 'transparent' }}
                         hideNavBar={true}
-                        sceneStyle={styles.login_scene_style}
                     />
 
                     <Scene key="History" component={History}
                         title=""
-                        titleStyle={{ color: 'transparent' }}
-                        renderBackButton={() => nothing}
-                        renderRightButton={() => backButton()}
-                        navigationBarStyle={styles.login_style_bar}
-                        sceneStyle={styles.login_scene_style}
+                        hideNavBar={true}
                     />
 
 

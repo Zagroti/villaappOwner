@@ -43,8 +43,8 @@ var imgs = []
 
 
 
-const arrowDown = <Icon  size={22} name="chevron-down" color="#bbb" />
-const arrowUp = <Icon  size={22} name="chevron-up" color="#bbb" />
+const arrowDown = <Icon size={22} name="chevron-down" color="#bbb" />
+const arrowUp = <Icon size={22} name="chevron-up" color="#bbb" />
 
 export default class EditDetails extends Component {
 
@@ -132,11 +132,8 @@ export default class EditDetails extends Component {
                 right: 5,
                 borderRadius: 50
             }}>
-                <Image style={{
-                    width: 15,
-                    height: 15,
-                    resizeMode: 'cover',
-                }} source={require('./../../Assets/Images/delete.png')} />
+                <Icon name="delete" size={20} color="red" />
+
             </View>
         </ImageBackground>
     }
@@ -271,184 +268,192 @@ export default class EditDetails extends Component {
 
         return (
 
-            <ScrollView >
-                <KeyboardAvoidingView style={styles.EditDetails} behavior="padding" enabled>
 
+            <View>
+                <View style={styles.menu} >
                     <Text style={styles.title} >ویلای جدید</Text>
+                    <TouchableOpacity style={styles.humberger} onPress={() => Actions.pop()}>
+                        <Icon size={36} name="arrow-right" color="#636363" />
+                    </TouchableOpacity>
+                </View>
+                <ScrollView >
+                    <KeyboardAvoidingView style={styles.EditDetails} behavior="padding" enabled>
 
-                    <View style={styles.edit_details_1} >
-                        <View style={styles.edit_details_details} >
-                            <Text style={styles.titles} >عکس ها</Text>
-                            <View style={styles.add_images_boxes} >
 
-                                <View style={styles.image_container}>
-                                    <ScrollView contentContainerStyle={{
-                                        flexDirection: 'row-reverse',
-                                        flexWrap: 'wrap',
-                                        minWidth: '100%',
-                                        justifyContent: 'flex-start'
-                                    }}>
-                                        {this.state.images ? this.state.images.map(i => <TouchableOpacity onPress={() => this._deleteImage(i.uri)} key={i.uri}>{this.renderAsset(i)}</TouchableOpacity>) : null}
-                                        <TouchableOpacity style={styles.images_box} onPress={this.pickMultiple.bind(this)} activeOpacity={.8} >
-                                            <Icon style={styles.select_image}  name="image-outline"  />
-                                            <Text style={{
-                                                fontSize: 10,
-                                                fontFamily: 'ISBold',
-                                                color: '#636363'
-                                            }} >افزودن عکس</Text>
-                                        </TouchableOpacity>
-                                    </ScrollView>
+
+                        <View style={styles.edit_details_1} >
+                            <View style={styles.edit_details_details} >
+                                <Text style={styles.titles} >عکس ها</Text>
+                                <View style={styles.add_images_boxes} >
+
+                                    <View style={styles.image_container}>
+                                        <ScrollView contentContainerStyle={{
+                                            flexDirection: 'row-reverse',
+                                            flexWrap: 'wrap',
+                                            minWidth: '100%',
+                                            justifyContent: 'flex-start'
+                                        }}>
+                                            {this.state.images ? this.state.images.map(i => <TouchableOpacity onPress={() => this._deleteImage(i.uri)} key={i.uri}>{this.renderAsset(i)}</TouchableOpacity>) : null}
+                                            <TouchableOpacity style={styles.images_box} onPress={this.pickMultiple.bind(this)} activeOpacity={.8} >
+                                                <Icon style={styles.select_image} name="image-outline" />
+                                                <Text style={{
+                                                    fontSize: 10,
+                                                    fontFamily: 'ISBold',
+                                                    color: '#636363'
+                                                }} >افزودن عکس</Text>
+                                            </TouchableOpacity>
+                                        </ScrollView>
+
+                                    </View>
 
                                 </View>
+                            </View>
 
+
+                        </View>
+
+                        {/* date */}
+                        <View style={styles.edit_details_1} >
+                            <Text style={styles.titles}> اطلاعات</Text>
+
+                            <TextInput
+                                placeholderStyle={{
+                                    fontFamily: 'ISBold',
+                                    color: '#636363'
+                                }}
+                                placeholder="عنوان"
+                                style={styles.input}
+                                ref={'MAP'}
+                            // onChangeText={() => alert('2')}
+                            />
+
+                            <Textarea
+                                containerStyle={styles.textareaContainer}
+                                style={styles.text_area}
+                                onChangeText={this.onChange}
+                                defaultValue=""
+                                placeholder={'درباره ویلا'}
+                                placeholderTextColor={'#636363'}
+                                underlineColorAndroid={'transparent'}
+                            />
+                        </View>
+
+                        {/* nights */}
+                        <View style={styles.edit_details_1} >
+                            <Text style={styles.titles}>شرایط </Text>
+                            <View style={{
+                                backgroundColor: '#fff',
+                                borderRadius: 5,
+                                padding: 20,
+                                marginTop: 10,
+                                shadowColor: "#f7f7f7",
+                                shadowOpacity: 1,
+                                elevation: 1,
+                            }} >
+                                <CheckboxText title="1. آرام باشید و مراقب خودتان باشید."
+                                    name="condition_1"
+                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
+                                />
+                                <CheckboxText title="2. عاشق خودتان باشید"
+                                    name="condition_2"
+                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
+                                />
+                                <CheckboxText title="3. اتاق را کثیف نکنید"
+                                    name="condition_3"
+                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
+                                />
+                                <CheckboxText title="4.خانوم بازی نکنید"
+                                    name="condition_4"
+                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
+                                />
+                                <CheckboxText title="5. نماز اول وقت را فراموش نکنید "
+                                    name="condition_5"
+                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
+                                />
+                                <CheckboxText title="6. دقت کنید"
+                                    name="condition_6"
+                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
+                                />
+                            </View>
+                        </View>
+
+                        <View style={styles.edit_details_1} >
+                            <Text style={styles.titles}>دسترسی ها</Text>
+                            <View style={styles.avilibiy_first}>
+                                <CheckboxIcon title="پارکینگ" name="parking" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                                <CheckboxIcon title="WiFi" name="wifi" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                                <CheckboxIcon title="لباسشویی" name="laundry" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                                <CheckboxIcon title="سیستم گرمایشی" name="heater" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                                <CheckboxIcon title="الکتریکی" name="electric" changeState={(e, name) => { this._changeCheckState(e, name) }} />
+                                <CheckboxIcon title="استخر" name="pool" changeState={(e, name) => { this._changeCheckState(e, name) }} />
                             </View>
                         </View>
 
 
-                    </View>
 
-                    {/* date */}
-                    <View style={styles.edit_details_1} >
-                        <Text style={styles.titles}> اطلاعات</Text>
-
-                        <TextInput
-                            placeholderStyle={{
-                                fontFamily: 'ISBold',
-                                color: '#636363'
+                        <View style={styles.edit_details_1} >
+                            <Text style={styles.titles}>آدرس و موقعیت </Text>
+                        </View>
+                        <View
+                            style={{
+                                height: 50,
+                                width: '90%',
+                                fontFamily: 'IS',
+                                borderWidth: 1,
+                                borderColor: '#eee',
+                                backgroundColor: '#fff',
+                                marginBottom: 20,
+                                borderRadius: 5
                             }}
-                            placeholder="عنوان"
-                            style={styles.input}
-                            ref={'MAP'}
-                        // onChangeText={() => alert('2')}
-                        />
-
-                        <Textarea
-                            containerStyle={styles.textareaContainer}
-                            style={styles.text_area}
-                            onChangeText={this.onChange}
-                            defaultValue=""
-                            placeholder={'درباره ویلا'}
-                            placeholderTextColor={'#636363'}
-                            underlineColorAndroid={'transparent'}
-                        />
-                    </View>
-
-                    {/* nights */}
-                    <View style={styles.edit_details_1} >
-                        <Text style={styles.titles}>شرایط </Text>
-                        <View style={{
-                            backgroundColor: '#fff',
-                            borderRadius: 5,
-                            padding: 20,
-                            marginTop: 10,
-                            shadowColor: "#f7f7f7",
-                            shadowOpacity: 1,
-                            elevation: 1,
-                        }} >
-                            <CheckboxText title="1. آرام باشید و مراقب خودتان باشید."
-                                name="condition_1"
-                                changeState={(e, name) => { this._changeCheckState(e, name) }}
-                            />
-                            <CheckboxText title="2. عاشق خودتان باشید"
-                                name="condition_2"
-                                changeState={(e, name) => { this._changeCheckState(e, name) }}
-                            />
-                            <CheckboxText title="3. اتاق را کثیف نکنید"
-                                name="condition_3"
-                                changeState={(e, name) => { this._changeCheckState(e, name) }}
-                            />
-                            <CheckboxText title="4.خانوم بازی نکنید"
-                                name="condition_4"
-                                changeState={(e, name) => { this._changeCheckState(e, name) }}
-                            />
-                            <CheckboxText title="5. نماز اول وقت را فراموش نکنید "
-                                name="condition_5"
-                                changeState={(e, name) => { this._changeCheckState(e, name) }}
-                            />
-                            <CheckboxText title="6. دقت کنید"
-                                name="condition_6"
-                                changeState={(e, name) => { this._changeCheckState(e, name) }}
-                            />
-                        </View>
-                    </View>
-
-                    <View style={styles.edit_details_1} >
-                        <Text style={styles.titles}>دسترسی ها</Text>
-                        <View style={styles.avilibiy_first}>
-                            <CheckboxIcon title="پارکینگ" name="parking" changeState={(e, name) => { this._changeCheckState(e, name) }} />
-                            <CheckboxIcon title="WiFi" name="wifi" changeState={(e, name) => { this._changeCheckState(e, name) }} />
-                            <CheckboxIcon title="لباسشویی" name="laundry" changeState={(e, name) => { this._changeCheckState(e, name) }} />
-                            <CheckboxIcon title="سیستم گرمایشی" name="heater" changeState={(e, name) => { this._changeCheckState(e, name) }} />
-                            <CheckboxIcon title="الکتریکی" name="electric" changeState={(e, name) => { this._changeCheckState(e, name) }} />
-                            <CheckboxIcon title="استخر" name="pool" changeState={(e, name) => { this._changeCheckState(e, name) }} />
-                        </View>
-                    </View>
-
-
-
-                    <View style={styles.edit_details_1} >
-                        <Text style={styles.titles}>آدرس و موقعیت </Text>
-                    </View>
-                    <View
-                        style={{
-                            height: 50,
-                            width: '90%',
-                            fontFamily: 'IS',
-                            borderWidth: 1,
-                            borderColor: '#eee',
-                            backgroundColor: '#fff',
-                            marginBottom: 20,
-                            borderRadius: 5
-                        }}
-                    >
-
-                        <Picker
-                            selectedValue={this.state.city}
-                            onValueChange={(itemValue) => this._changeCity(itemValue)}>
-                            <Picker.Item label="آمل" value='amol' />
-                            <Picker.Item label="بابل" value='babol' />
-                            <Picker.Item label="بابلسر" value='babolsar' />
-                        </Picker>
-                    </View>
-
-
-                    <View style={{
-                        height: this.state.mapHeight,
-                        overflow: 'hidden',
-                        borderWidth: 2,
-                        borderColor: '#fff',
-                        borderRadius: 10,
-                        shadowColor: "#f7f7f7",
-                        shadowOpacity: .3,
-                        backgroundColor: '#fff',
-                        elevation: 1,
-                        width: this.state.mapWidth
-                    }} >
-                        <Mapir
-                            accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
-                            zoomLevel={6}
-                            centerCoordinate={[51.422548, 35.732573]}
-                            showUserLocation={true}
-                            onLongPress={e => this.addMarker(e.geometry.coordinates)}
-                            style={{ flex: 1 }}
                         >
-                            {mark}
-                        </Mapir>
-                    </View>
+
+                            <Picker
+                                selectedValue={this.state.city}
+                                onValueChange={(itemValue) => this._changeCity(itemValue)}>
+                                <Picker.Item label="آمل" value='amol' />
+                                <Picker.Item label="بابل" value='babol' />
+                                <Picker.Item label="بابلسر" value='babolsar' />
+                            </Picker>
+                        </View>
 
 
-                    <TouchableOpacity
-                        style={{ marginVertical: 10, alignItems: 'center' }}
-                        onPress={this._mapHeightChanger}
-                    >
-                        <Text style={{
-                            fontSize: 13,
-                            fontFamily: 'ISBold',
-                            color: '#ccc',
-                            marginVertical: 2
-                        }} >{this.state.moreText}</Text>
-                        {this.state.arrowDown ? arrowDown : arrowUp}
-                    </TouchableOpacity>
+                        <View style={{
+                            height: this.state.mapHeight,
+                            overflow: 'hidden',
+                            borderWidth: 2,
+                            borderColor: '#fff',
+                            borderRadius: 10,
+                            shadowColor: "#f7f7f7",
+                            shadowOpacity: .3,
+                            backgroundColor: '#fff',
+                            elevation: 1,
+                            width: this.state.mapWidth
+                        }} >
+                            <Mapir
+                                accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
+                                zoomLevel={6}
+                                centerCoordinate={[51.422548, 35.732573]}
+                                showUserLocation={true}
+                                onPress={e => this.addMarker(e.geometry.coordinates)}
+                                style={{ flex: 1 }}
+                            >
+                                {mark}
+                            </Mapir>
+                        </View>
+
+
+                        <TouchableOpacity
+                            style={{ marginVertical: 10, alignItems: 'center' }}
+                            onPress={this._mapHeightChanger}
+                        >
+                            <Text style={{
+                                fontSize: 13,
+                                fontFamily: 'ISBold',
+                                color: '#ccc',
+                                marginVertical: 2
+                            }} >{this.state.moreText}</Text>
+                            {this.state.arrowDown ? arrowDown : arrowUp}
+                        </TouchableOpacity>
 
 
 
@@ -456,22 +461,24 @@ export default class EditDetails extends Component {
 
 
 
-                    <GradientButton
-                        width="90%"
-                        press={this._press}
-                        activeOpacity={.6}
-                        color_1="#36a35b"
-                        color_2="#6fcf97"
-                        height={50}
-                        borderRadius={50}
-                        textColor="#fff"
-                        size={16}
-                        title="ذخیره"
-                        top={50}
-                        bottom={200}
-                    />
-                </KeyboardAvoidingView>
-            </ScrollView>
+                        <GradientButton
+                            width="90%"
+                            press={this._press}
+                            activeOpacity={.6}
+                            color_1="#36a35b"
+                            color_2="#6fcf97"
+                            height={50}
+                            borderRadius={50}
+                            textColor="#fff"
+                            size={16}
+                            title="ذخیره"
+                            top={50}
+                            bottom={200}
+                        />
+                    </KeyboardAvoidingView>
+                </ScrollView>
+            </View>
+
 
 
 
@@ -487,15 +494,25 @@ const styles = ({
         alignItems: 'center',
         backgroundColor: '#f6f6f6',
     },
+    menu: {
+        backgroundColor: '#f6f6f6',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        height: 60,
+        paddingHorizontal: 20,
+        paddingTop: 10,
+        width: '100%'
+    },
     title: {
-        fontSize: 22,
-        fontFamily: 'ISBold',
+        fontSize: 18,
+        fontFamily: 'IS',
         color: '#333',
-        borderBottomWidth: 1,
-        borderBottomColor: '#e7e7e7',
-        paddingBottom: 10,
-        marginTop: 20,
-        width: Dimensions.get('window').width - 50,
+        marginTop: 5
+    },
+    humberger: {
+        width: 60,
+        height: 60,
+        alignItems: 'center',
     },
 
 
@@ -525,7 +542,6 @@ const styles = ({
     edit_details_1: {
         width: Dimensions.get('window').width - 50,
         flexDirection: 'column',
-        marginVertical: 20,
         paddingVertical: 20,
         borderRadius: 5,
     },
@@ -607,8 +623,8 @@ const styles = ({
         borderRadius: 10
     },
     select_image: {
-        color:'#636363',
-        fontSize:50,        
+        color: '#636363',
+        fontSize: 50,
         resizeMode: "cover",
         borderRadius: 10
     },

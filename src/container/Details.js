@@ -131,7 +131,7 @@ export default class Details extends Component {
                         <View style={styles.posibility}>
                             <Text style={styles.posibility_text}>45 متر مربع</Text>
                             <View style={styles.posibility_icon_box} >
-                                <Icon size={15} name="home-city-outline" color="#636363" />
+                                <Icon size={15} name="city-variant-outline" color="#636363" />
                             </View>
                         </View>
                     </View>
