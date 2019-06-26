@@ -27,13 +27,15 @@ export default class Home extends Component {
         this.state = {
             modalVisible: false,
             color_1: '#C72652',
-            color_2: '#000',
-            color_3: '#000',
+            color_2: '#555',
+            color_3: '#555',
+            color_4: '#555',
             red: '#C72652',
-            black: '#333',
+            black: '#555',
             tab1: true,
             tab2: false,
-            tab3: false
+            tab3: false,
+            tab4: false,
 
         };
     }
@@ -94,27 +96,44 @@ export default class Home extends Component {
                 color_1: this.state.red,
                 color_2: this.state.black,
                 color_3: this.state.black,
+                color_4: this.state.black,
                 tab1: true,
                 tab2: false,
-                tab3: false
+                tab3: false,
+                tab4: false
             })
         } else if (tab === 'tab2') {
             this.setState({
                 color_1: this.state.black,
                 color_2: this.state.red,
                 color_3: this.state.black,
+                color_4: this.state.black,
                 tab1: false,
                 tab2: true,
-                tab3: false
+                tab3: false,
+                tab4: false
             })
         } else if (tab === 'tab3') {
             this.setState({
                 color_1: this.state.black,
                 color_2: this.state.black,
                 color_3: this.state.red,
+                color_4: this.state.black,
                 tab1: false,
                 tab2: false,
-                tab3: true
+                tab3: true,
+                tab4: false
+            })
+        } else if (tab === 'tab4') {
+            this.setState({
+                color_1: this.state.black,
+                color_2: this.state.black,
+                color_3: this.state.black,
+                color_4: this.state.red,
+                tab1: false,
+                tab2: false,
+                tab3: false,
+                tab4: true
             })
         }
 
@@ -143,23 +162,23 @@ export default class Home extends Component {
                 </View>
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('myFlatPage')}>
                     <Text style={styles.drawer_text}>ویلاهای من</Text>
-                    <Icon size={30} name="home-outline" color="#636363" />
+                    <Icon size={22} name="home-outline" color="#b04267" />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('home')}>
                     <Text style={styles.drawer_text}>درخواست ها</Text>
-                    <Icon size={30} name="home-city-outline" color="#636363" />
+                    <Icon size={22} name="home-city-outline" color="#b04267" />
                 </TouchableOpacity>
 
                 {/* got to history */}
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('history')}>
                     <Text style={styles.drawer_text}>تاریخچه</Text>
-                    <Icon size={30} name="calendar-clock" color="#636363" />
+                    <Icon size={22} name="calendar-clock" color="#b04267" />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
                     <Text style={styles.drawer_text}>پروفایل</Text>
-                    <Icon size={30} name="account-outline" color="#636363" />
+                    <Icon size={22} name="account-outline" color="#b04267" />
                 </TouchableOpacity>
             </View>
         );
@@ -181,7 +200,7 @@ export default class Home extends Component {
 
                     {/* MENU */}
                     <View style={styles.menu} >
-
+                        <Text style={styles.title} >درخواست ها</Text>
                         <TouchableOpacity style={styles.humberger} onPress={this._openDrawer}>
                             <Icon size={36} name="menu" color="#636363" />
                         </TouchableOpacity>
@@ -190,20 +209,23 @@ export default class Home extends Component {
 
                     {/* request box  */}
                     <View style={styles.up} >
-                        <Text style={styles.title} >درخواست های  امروز</Text>
                         <View style={styles.tab}  >
                             <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab1')}>
-                                <Icon name="filter-outline" size={20} color={this.state.color_1} />
-                                <Text style={[styles.tab_text, { color: this.state.color_1 }]}>فعال</Text>
+                                <Icon name="gesture-tap" size={20} color={this.state.color_1} />
+                                <Text style={[styles.tab_text, { color: this.state.color_1 }]}>درخواست ها</Text>
                             </TouchableOpacity>
                             <Text style={styles.line} ></Text>
                             <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab2')}>
-                                <Icon name="filter-outline" size={20} color={this.state.color_2} />
-                                <Text style={[styles.tab_text, { color: this.state.color_2 }]}>در صف </Text>
+                                <Icon name="close-box-multiple" size={20} color={this.state.color_2} />
+                                <Text style={[styles.tab_text, { color: this.state.color_2 }]}>رد شده  </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab3')}>
-                                <Icon name="filter-outline" size={20} color={this.state.color_3} />
-                                <Text style={[styles.tab_text, { color: this.state.color_3 }]}>بسته شده</Text>
+                                <Icon name="alarm-check" size={20} color={this.state.color_3} />
+                                <Text style={[styles.tab_text, { color: this.state.color_3 }]}>تایید شده</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab4')}>
+                                <Icon name="alarm-multiple" size={20} color={this.state.color_4} />
+                                <Text style={[styles.tab_text, { color: this.state.color_4 }]}>رزرو شده</Text>
                             </TouchableOpacity>
                         </View>
                         {
@@ -235,6 +257,16 @@ export default class Home extends Component {
                             this.state.tab3 ?
                                 <ScrollView contentContainerStyle={styles.requestBox} >
                                     {/* <NoRequest /> */}
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+
+                                </ScrollView> : <Text style={{ height: 0 }}></Text>
+                        }
+                         {
+                            this.state.tab4 ?
+                                <ScrollView contentContainerStyle={styles.requestBox} >
+                                    {/* <NoRequest /> */}
+                                    <Requestitems navigate={this._showRequestsNavigate} />
+                                    <Requestitems navigate={this._showRequestsNavigate} />
                                     <Requestitems navigate={this._showRequestsNavigate} />
 
                                 </ScrollView> : <Text style={{ height: 0 }}></Text>
@@ -273,8 +305,9 @@ const styles = ({
         backgroundColor: '#f6f6f6',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        height: 50,
-        padding: 20
+        height: 60,
+        paddingHorizontal: 20,
+        paddingTop: 10,
     },
     bell: {
         width: 30,
@@ -322,21 +355,19 @@ const styles = ({
 
 
     title: {
-        fontSize: 22,
-        fontFamily: 'ISBold',
+        fontSize: 18,
+        fontFamily: 'IS',
         color: '#333',
-        borderBottomWidth: 1,
-        borderBottomColor: '#e7e7e7',
-        paddingBottom: 10,
-        marginTop: 20,
-        width: Dimensions.get('window').width - 50,
-
-
+        marginTop:5
     },
     requestBox: {
-        width: Dimensions.get('window').width,
-        alignItems: 'center',
+        width: Dimensions.get('window').width - 50,
+        // alignItems: 'center',
         paddingBottom: 200,
+        flexDirection: 'row-reverse',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        paddingTop:10
     },
 
     footer: {
@@ -367,8 +398,8 @@ const styles = ({
     },
 
     icon_parent: {
-        width: 120,
-        height: 120,
+        width: 100,
+        height: 100,
         backgroundColor: '#aaa',
         borderWidth: 10,
         borderColor: '#f5f5f5',
@@ -380,8 +411,8 @@ const styles = ({
         elevation: 1,
     },
     icon_child: {
-        width: 100,
-        height: 100,
+        width: 80,
+        height: 80,
         backgroundColor: '#fff',
         borderWidth: 10,
         borderColor: '#f8f8f8',
@@ -394,8 +425,8 @@ const styles = ({
     },
 
     icon_cover: {
-        width: 80,
-        height: 80,
+        width: 60,
+        height: 60,
         backgroundColor: '#C92652',
         borderRadius: 40,
         justifyContent: 'center',
@@ -412,24 +443,22 @@ const styles = ({
         alignItems: 'center',
     },
     person_name: {
-        fontSize: 18,
+        fontSize: 14,
         fontFamily: 'ISBold',
         marginTop: 10,
         color: '#fff'
     },
     bottomIcons: {
-        padding: 20,
+        padding: 10,
         alignItems: 'center',
         justifyContent: 'flex-end',
         flexDirection: 'row',
-        borderBottomColor: '#666',
-        borderBottomWidth: 1,
         width: '100%'
     },
     drawer_text: {
-        fontSize: 16,
-        color: '#666',
-        fontFamily: 'ISBold',
+        fontSize: 12,
+        color: '#b04267',
+        fontFamily: 'ISMedium',
         marginRight: 10,
     },
     bottomIcon: {
@@ -444,13 +473,14 @@ const styles = ({
         shadowColor: "#f7f7f7",
         shadowOpacity: 1,
         elevation: 1,
-        flexDirection: 'row',
+        flexDirection: 'row-reverse',
         justifyContent: 'space-around',
         alignItems: 'center',
         marginVertical: 10,
+        paddingHorizontal:5
     },
     tab_box: {
-        width: '33.3333%',
+        width: '25%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

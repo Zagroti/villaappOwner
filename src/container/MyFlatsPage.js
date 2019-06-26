@@ -88,23 +88,23 @@ export default class MyFlatsPage extends Component {
                 </View>
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('myFlatPage')}>
                     <Text style={styles.drawer_text}>ویلاهای من</Text>
-                    <Icon size={30} name="home-outline" color="#636363" />
+                    <Icon size={22} name="home-outline" color="#b04267" />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('home')}>
                     <Text style={styles.drawer_text}>درخواست ها</Text>
-                    <Icon size={30} name="home-city-outline" color="#636363" />
+                    <Icon size={22} name="home-city-outline" color="#b04267" />
                 </TouchableOpacity>
 
                 {/* got to history */}
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('history')}>
                     <Text style={styles.drawer_text}>تاریخچه</Text>
-                    <Icon size={30} name="calendar-clock" color="#636363" />
+                    <Icon size={22} name="calendar-clock" color="#b04267" />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
                     <Text style={styles.drawer_text}>پروفایل</Text>
-                    <Icon size={30} name="account-outline" color="#636363" />
+                    <Icon size={22} name="account-outline" color="#b04267" />
                 </TouchableOpacity>
             </View>
         );
@@ -126,7 +126,7 @@ export default class MyFlatsPage extends Component {
 
                     {/* MENU */}
                     <View style={styles.menu} >
-
+                        <Text style={styles.title} >ویلاهای من </Text>
                         <TouchableOpacity style={styles.humberger} onPress={this._openDrawer}>
                             <Icon size={36} name="menu" color="#636363" />
                         </TouchableOpacity>
@@ -135,7 +135,6 @@ export default class MyFlatsPage extends Component {
 
                     {/* request box  */}
                     <View style={styles.up} >
-                        <Text style={styles.title} >ویلاهای من </Text>
 
                         <ScrollView contentContainerStyle={styles.requestBox} >
                             {/* <NoFlat press={()=> alert('yyy')} /> */}
@@ -192,13 +191,14 @@ const styles = ({
         backgroundColor: '#f6f6f6',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        height: 50,
-        padding: 20
+        height: 60,
+        paddingHorizontal: 20,
+        paddingTop: 10,
     },
 
     humberger: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
         alignItems: 'center',
     },
     humberger_icon: {
@@ -212,37 +212,28 @@ const styles = ({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
         backgroundColor: '#f6f6f6',
-        // borderBottomRightRadius: 300,
         borderBottomLeftRadius: 0,
         overflow: 'hidden',
         zIndex: 1,
-
     },
 
 
     title: {
-        fontSize: 22,
-        fontFamily: 'ISBold',
+        fontSize: 18,
+        fontFamily: 'IS',
         color: '#333',
-        borderBottomWidth: 1,
-        borderBottomColor: '#e7e7e7',
-        paddingBottom: 10,
-        marginTop: 20,
-        width: Dimensions.get('window').width - 50,
-
-
+        marginTop:5
     },
     requestBox: {
         width: Dimensions.get('window').width,
         alignItems: 'center',
         paddingBottom: 200,
-        marginTop: 20
     },
 
 
     icon_parent: {
-        width: 120,
-        height: 120,
+        width: 100,
+        height: 100,
         backgroundColor: '#aaa',
         borderWidth: 10,
         borderColor: '#f5f5f5',
@@ -254,8 +245,8 @@ const styles = ({
         elevation: 1,
     },
     icon_child: {
-        width: 100,
-        height: 100,
+        width: 80,
+        height: 80,
         backgroundColor: '#fff',
         borderWidth: 10,
         borderColor: '#f8f8f8',
@@ -268,8 +259,8 @@ const styles = ({
     },
 
     icon_cover: {
-        width: 80,
-        height: 80,
+        width: 60,
+        height: 60,
         backgroundColor: '#C92652',
         borderRadius: 40,
         justifyContent: 'center',
@@ -286,24 +277,22 @@ const styles = ({
         alignItems: 'center',
     },
     person_name: {
-        fontSize: 18,
+        fontSize: 14,
         fontFamily: 'ISBold',
         marginTop: 10,
         color: '#fff'
     },
     bottomIcons: {
-        padding: 20,
+        padding: 10,
         alignItems: 'center',
         justifyContent: 'flex-end',
         flexDirection: 'row',
-        borderBottomColor: '#666',
-        borderBottomWidth: 1,
         width: '100%'
     },
     drawer_text: {
-        fontSize: 16,
-        color: '#666',
-        fontFamily: 'ISBold',
+        fontSize: 12,
+        color: '#b04267',
+        fontFamily: 'ISMedium',
         marginRight: 10,
     },
     bottomIcon: {
