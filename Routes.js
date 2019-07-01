@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Router, Scene, Actions } from 'react-native-router-flux';
-import { Text, View, Image, TouchableOpacity ,  ActivityIndicator } from 'react-native';
+import { Text, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -34,7 +34,7 @@ const backButton = () => (
         }}
     >
         <View >
-            <Icon  size={36} name="arrow-right" color="#636363" />
+            <Icon size={36} name="arrow-right" color="#636363" />
         </View>
     </TouchableOpacity>
 );
@@ -53,7 +53,7 @@ const backButtonDetail = () => (
             end: 10,
 
         }} onPress={() => Actions.pop()} >
-        <Icon  size={36} name="arrow-right" color="#fff" />
+        <Icon size={36} name="arrow-right" color="#fff" />
     </TouchableOpacity>
 )
 
@@ -132,7 +132,7 @@ class Routes extends React.Component {
                         title="home"
                         hideNavBar={true}
                         initial={this.state.logged}
-                        
+
 
                     />
 
@@ -149,11 +149,7 @@ class Routes extends React.Component {
 
                     <Scene key="Details" component={Details}
                         title=""
-                        titleStyle={{ color: 'red' }}
-                        renderBackButton={() => nothing}
-                        renderRightButton={() => backButtonDetail()}
-                        navigationBarStyle={styles.login_style_bar_detail}
-                        sceneStyle={styles.login_scene_style}
+                        hideNavBar={true}
 
                     />
 

@@ -7,19 +7,55 @@ import {
     ImageBackground,
     TouchableOpacity,
     ScrollView,
+    SafeAreaView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Mapir from 'mapir-react-native-sdk'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import ImageSlider from 'react-native-image-slider';
+
 
 //components 
 import GradientButton from './../components/GradientButton'
 
 
 
+const arrowDown = <Icon style={{ top: -10 }} name="chevron-down" size={36} color="#ccc" />
+const arrowUp = <Icon style={{ top: -10 }} name="chevron-up" size={36} color="#ccc" />
 
 
+let parent_slider = {
+    position: 'relative'
+}
+let image_slider_parent = {
 
+}
+let image_slider = {
+    width: '100%',
+    height: Dimensions.get('window').width,
+    resizeMode: 'cover'
+}
+
+let body = {
+    top: -50,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+}
+
+let image_footer = {
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    paddingHorizontal: 20,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    height: 120,
+    paddingBottom: 50
+}
 
 
 
@@ -30,10 +66,14 @@ export default class Details extends Component {
         super(props)
         this.state = {
             modalVisible: false,
-            avilibiyText: 'بیشتر',
-            avilibiy: false,
+            availabilityText: 'بیشتر',
+            availability: false,
             aboutvilaText: 'بیشتر',
-            aboutvila: false
+            aboutvila: false,
+            conditionsText: 'بیشتر',
+            conditions: false,
+            sliderFullScreen: false
+
         }
     }
 
@@ -49,38 +89,140 @@ export default class Details extends Component {
     }
 
 
-    _moreOptions = (item) => {
-        if (item === 'avilibiy') {
-            if (!this.state.avilibiy) {
-                this.setState({
-                    avilibiyText: 'کمتر',
-                    avilibiy: true,
-                })
-            } else {
-                this.setState({
-                    avilibiyText: 'بیشتر',
-                    avilibiy: false,
-                })
-            }
-        } else if (item === 'aboutvila') {
-            if (!this.state.aboutvila) {
-                this.setState({
-                    aboutvilaText: 'کمتر',
-                    aboutvila: true,
-                })
-            } else {
-                this.setState({
-                    aboutvilaText: 'بیشتر',
-                    aboutvila: false,
-                })
-            }
+ // more funcion 
+ _moreOptions = (item) => {
+    if (item === 'availability') {
+        if (!this.state.availability) {
+            this.setState({
+                availabilityText: 'کمتر',
+                availability: true,
+            })
+        } else {
+            this.setState({
+                availabilityText: 'بیشتر',
+                availability: false,
+            })
+        }
+    } else if (item === 'aboutvila') {
+        if (!this.state.aboutvila) {
+            this.setState({
+                aboutvilaText: 'کمتر',
+                aboutvila: true,
+            })
+        } else {
+            this.setState({
+                aboutvilaText: 'بیشتر',
+                aboutvila: false,
+            })
+        }
 
+    } else if (item === 'conditions') {
+        if (!this.state.conditions) {
+            this.setState({
+                conditionsText: 'کمتر',
+                conditions: true,
+            })
+        } else {
+            this.setState({
+                conditionsText: 'بیشتر',
+                conditions: false,
+            })
         }
 
     }
 
+}
+
+    // slide full screen
+    _sliderFullScreen = () => {
+        // full size
+        if (this.state.sliderFullScreen) {
+            this.setState({ sliderFullScreen: false })
+            parent_slider = {
+                position: 'relative',
+            }
+
+            image_slider_parent = {
+            }
+            image_slider = {
+                width: '100%',
+                height: Dimensions.get('window').width,
+                resizeMode: 'cover'
+            }
+            body = {
+
+                top: -50,
+                borderTopRightRadius: 40,
+                borderTopLeftRadius: 40,
+                backgroundColor: '#fff',
+                alignItems: 'center',
+            }
+            image_footer = {
+                width: '100%',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexDirection: 'row',
+                position: 'absolute',
+                bottom: 0,
+                paddingHorizontal: 20,
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                height: 120,
+                paddingBottom: 50
+            }
+
+        } else {
+            this.setState({ sliderFullScreen: true })
+            parent_slider = {
+                position: 'relative',
+                backgroundColor: 'red',
+                height: Dimensions.get('window').height,
+                width: Dimensions.get('window').width,
+                zIndex: 9999,
+                top: 0,
+                bottom: 0,
+                right: 0,
+                left: 0
+            }
+            image_slider_parent = {
+                backgroundColor: '#000',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%'
+            }
+            image_slider = {
+                width: '100%',
+                height: '100%',
+                resizeMode: 'contain'
+            }
+            body = {
+                width: 0,
+                height: 0,
+            }
+            image_footer = {
+                width: '100%',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexDirection: 'row',
+                position: 'absolute',
+                bottom: 0,
+                paddingHorizontal: 20,
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                height: 100,
+                paddingBottom: 40
+            }
+
+        }
+    }
+
+
 
     render() {
+        const images = [
+            'https://placeimg.com/640/640/nature',
+            'https://placeimg.com/640/640/people',
+            'https://placeimg.com/640/640/animals',
+            'https://placeimg.com/640/640/beer',
+        ];
 
 
 
@@ -89,24 +231,101 @@ export default class Details extends Component {
 
             <ScrollView style={styles.Details} >
 
-                <ImageBackground style={styles.header}
-                    source={require('./../../Assets/Images/detail.jpg')} >
+                <SafeAreaView style={parent_slider}>
+                    {!this.state.sliderFullScreen ?
+                        <View style={{
+                            backgroundColor: 'transparent',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            height: 60,
+                            padding: 20,
+                            width: '100%',
+                            position: 'absolute',
+                            top: 0,
+                            zIndex: 99999,
+                            width: '100%'
+                        }} >
+                            <Text style={styles.owner_answer}>پذیرفته شده</Text>
+                            <TouchableOpacity
+                                style={{
+                                    backgroundColor: '#33333320',
+                                    padding: 10,
+                                    width: 50,
+                                    height: 50,
+                                    borderRadius: 30,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    top: 10,
+                                    end: 10,
 
-                    {/* MENU */}
-                    <View style={styles.menu} >
-                        <Text style={styles.owner_answer}>پذیرفته شده</Text>
-                    </View>
+                                }} onPress={() => Actions.pop()} >
+                                <Icon name="arrow-right" size={28} color="#fff" />
 
-                    <View style={styles.header_price} >
-                        <Text style={styles.per_night}> هر شب</Text>
-                        <Text style={styles.price} >150,000 ت</Text>
-                    </View>
+                            </TouchableOpacity>
+                        </View> : null
+
+                    }
+                    <ImageSlider
+                        loopBothSides
+                        images={images}
+                        customSlide={({ index, item, style, width }) => (
+                            <TouchableOpacity key={index}
+                                activeOpacity={1}
+                                style={[style, image_slider_parent]}
+                                onPress={this._sliderFullScreen}>
+                                <Image source={{ uri: item }}
+                                    style={image_slider} />
+                            </TouchableOpacity>
+                        )}
+                        customButtons={(position, move) => (
+                            <View style={image_footer}>
+                                <View style={{
+                                    width: 100,
+                                    textAlign: 'center',
+                                    height: 30,
+                                    flexDirection: 'row',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    borderRadius: 20,
+                                }}>
+                                    <Text style={{ color: '#fff', fontFamily: 'ISFBold' }}>{position + 1}  /  {images.length}</Text>
+                                    <Icon name="image-area" style={{ marginLeft: 8 }} size={30} color="#fff" />
+                                </View>
+                                {
+                                    !this.state.sliderFullScreen ?
+                                        <View style={{
+                                            backgroundColor: 'rgba(255,255,255,1)',
+                                            textAlign: 'center',
+                                            paddingHorizontal: 50,
+                                            height: 30,
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            borderRadius: 20,
+                                        }}>
+                                            <Text style={{ color: '#333', fontSize: 20, fontFamily: 'ISFBold' }}>150,000 ت</Text>
+                                        </View> :
+                                        <TouchableOpacity
+                                            style={{
+                                                backgroundColor: '#33333320',
+                                                padding: 10,
+                                                width: 50,
+                                                height: 50,
+                                                borderRadius: 30,
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }} onPress={this._sliderFullScreen} >
+                                            <Icon name="arrow-right" size={28} color="#fff" />
+                                        </TouchableOpacity>
+                                }
+
+                            </View>
+                        )}
+                    />
+                </SafeAreaView>
 
 
-                </ImageBackground>
-
-
-                <View style={styles.body}>
+                <View style={body}>
 
                     {/* icons */}
                     <View style={styles.vila_posibilities}>
@@ -157,12 +376,8 @@ export default class Details extends Component {
                                 fontFamily: 'ISBold',
                                 color: '#ccc',
                                 marginVertical: 2
-                            }} >{this.state.aboutvilaText}</Text>
-                            {
-                                this.state.aboutvila ?
-                                    <Icon size={30} name="chevron-up" color="#c7c7c7" /> :
-                                    <Icon size={30} name="chevron-down" color="#c7c7c7" />
-                            }
+                            }}>{this.state.aboutvilaText}</Text>
+                            {this.state.aboutvila ? arrowUp : arrowDown}
                         </TouchableOpacity>
                     </View>
 
@@ -195,7 +410,7 @@ export default class Details extends Component {
                                 <Icon style={{ marginLeft: 5 }} size={15} name="check-circle-outline" color="#6FCF97" />
                             </View>
                             {
-                                this.state.avilibiy ?
+                                this.state.availability ?
                                     <View style={styles.avilibiy_first}>
                                         <View style={styles.avilibiy_item} >
                                             <Text style={styles.avilibiy_text} >پارکینگ</Text>
@@ -226,19 +441,15 @@ export default class Details extends Component {
                         {/* more btn */}
                         <TouchableOpacity
                             style={{ marginVertical: 10, alignItems: 'center' }}
-                            onPress={() => this._moreOptions('avilibiy')}
+                            onPress={() => this._moreOptions('availability')}
                         >
                             <Text style={{
                                 fontSize: 13,
                                 fontFamily: 'ISBold',
                                 color: '#ccc',
                                 marginVertical: 2
-                            }} >{this.state.avilibiyText}</Text>
-                            {
-                                this.state.avilibiy ?
-                                    <Icon size={30} name="chevron-up" color="#c7c7c7" /> :
-                                    <Icon size={30} name="chevron-down" color="#c7c7c7" />
-                            }
+                            }} >{this.state.availabilityText}</Text>
+                            {this.state.availability ? arrowUp : arrowDown}
                         </TouchableOpacity>
 
 
@@ -246,15 +457,33 @@ export default class Details extends Component {
 
                     <View style={styles.conditions}>
                         <Text style={styles.about_vila_title}>شرایط</Text>
+
                         <Text style={styles.conditions_text}>1. آرام باشید و مراقب خودتان باشید.</Text>
-                        <Text style={{ color: '#DC3053', fontSize: 12, fontFamily: 'ISMedium' }}>2. عاشق خودتان باشید .</Text>
+                        <Text style={styles.conditions_text}>2. عاشق خودتان باشید .</Text>
                         <Text style={styles.conditions_text}>3. اتاق را کثیف نکنید </Text>
                         <Text style={styles.conditions_text}>4. اتاق را تمیز نکنید . </Text>
-                        <Text style={styles.conditions_text}>5. خانوم بازی نکنید </Text>
-                        <Text style={styles.conditions_text}>6. داخل اتاق سیگار نکشید . </Text>
-                        <Text style={styles.conditions_text}>7. دقت کنید </Text>
-                        <Text style={styles.conditions_text}>8. نماز اول وقت را فراموش نکنید </Text>
-                        <Text style={styles.conditions_text} >9. خدا را ناظر بر اعمال خود بدانید </Text>
+
+
+                        {this.state.conditions ?
+                            <View>
+
+                                <Text style={styles.conditions_text}>5. خانوم بازی نکنید </Text>
+                                <Text style={styles.conditions_text}>6. داخل اتاق سیگار نکشید . </Text>
+                                <Text style={styles.conditions_text}>7. دقت کنید </Text>
+                                <Text style={styles.conditions_text}>8. نماز اول وقت را فراموش نکنید </Text>
+                                <Text style={styles.conditions_text} >9. خدا را ناظر بر اعمال خود بدانید </Text>
+                            </View> : null}
+                        <TouchableOpacity
+                            style={{ marginTop: 10, alignItems: 'center' }}
+                            onPress={() => this._moreOptions('conditions')}
+                        >
+                            <Text style={{
+                                fontSize: 13,
+                                fontFamily: 'ISBold',
+                                color: '#ccc',
+                            }} >{this.state.conditionsText}</Text>
+                            {this.state.conditions ? arrowUp : arrowDown}
+                        </TouchableOpacity>
 
                     </View>
 
@@ -270,7 +499,6 @@ export default class Details extends Component {
                                 id={'1'}
                                 coordinate={[51.422548, 35.732573]}
                             />
-
 
                         </Mapir>
                     </View>
@@ -296,9 +524,6 @@ export default class Details extends Component {
 
 
                 </View>
-
-
-
             </ScrollView >
 
 
@@ -313,7 +538,6 @@ const styles = ({
         backgroundColor: "#fff",
         width: Dimensions.get('window').width,
         flex: 1,
-        marginTop: -50
     },
 
     header: {
