@@ -195,6 +195,7 @@ export default class RentPage extends Component {
                                         {/* <Text style={{ fontSize: 12, fontFamily: 'IS', color: '#555' }}>تعداد  </Text> */}
                                         <Icon size={24} name="account-group-outline" color="#fff" />
                                     </View>
+                                    <View style={{width:1,height:'100%',backgroundColor:'#ccc'}} ></View>
                                     <View style={styles.twins}>
                                         <Text style={{ fontSize: 12, fontFamily: 'ISMedium', color: '#fff', marginHorizontal: 5 }}>1398/11/08</Text>
                                         <Text style={{ fontSize: 12, fontFamily: 'ISMedium', color: '#fff', marginHorizontal: 5 }}> - </Text>

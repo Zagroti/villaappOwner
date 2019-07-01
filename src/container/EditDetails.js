@@ -26,7 +26,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //components 
 import GradientButton from '../components/GradientButton'
 import CheckboxIcon from '../components/CheckboxIcon';
-import CheckboxText from '../components/CheckboxText';
 
 
 
@@ -39,6 +38,16 @@ var ImagePicker = NativeModules.ImageCropPicker;
 // images for upload
 var imgs = []
 
+
+
+// conditions!
+var conditions = [
+    ' آرام باشید و مراقب خودتان باشید.',
+    ' دست در دماغ خود نکنید ',
+    ' درب خودرو باز است ',
+    ' ثبت با سند برابر است ',
+    ' مغزهای کوچک زنگ زده '
+]
 
 
 
@@ -69,14 +78,9 @@ export default class EditDetails extends Component {
             laundry: false,
             pool: false,
             electric: false,
-            condition_1: false,
-            condition_2: false,
-            condition_3: false,
-            condition_4: false,
-            condition_5: false,
-            condition_6: false,
-            condition_7: false,
 
+            condition: '',
+            conditions: conditions
 
         }
 
@@ -110,7 +114,7 @@ export default class EditDetails extends Component {
                 image: null,
                 images: [...imgs]
             });
-            console.log('received image', imgs);
+            // console.log('received image', imgs);
 
         }).catch(e => false);
     }
@@ -164,22 +168,22 @@ export default class EditDetails extends Component {
 
 
     componentDidMount() {
-        {
-            PermissionsAndroid.requestMultiple(
-                [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-                PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
-                {
-                    title: 'Give Location Permission',
-                    message: 'App needs location permission to find your position.'
-                }
-            ).then(granted => {
-                console.log(granted);
-                resolve();
-            }).catch(err => {
-                console.warn(err);
-                reject(err);
-            });
-        }
+        // {
+        //     PermissionsAndroid.requestMultiple(
+        //         [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        //         PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
+        //         {
+        //             title: 'Give Location Permission',
+        //             message: 'App needs location permission to find your position.'
+        //         }
+        //     ).then(granted => {
+        //         console.log(granted);
+        //         resolve();
+        //     }).catch(err => {
+        //         console.warn(err);
+        //         reject(err);
+        //     });
+        // }
 
     }
 
@@ -250,6 +254,43 @@ export default class EditDetails extends Component {
 
     }
 
+
+
+    // write condition and set condition to state
+    _writeCondition = async (e) => {
+
+        await this.setState({
+            condition: e.replace(/^[a-zA-Z şüöı]+$/, '').trim()
+        })
+    }
+
+    // add condition
+    _addCondition = async () => {
+
+        if (this.state.condition !== '' || this.state.condition !== null) {
+            // push written condition to global conditions
+            await conditions.push(this.state.condition)
+
+            // set global conditions to state
+            //clear input
+            await this.setState({
+                conditions: conditions,
+                condition: ''
+            })
+        }
+    }
+
+
+    //delete coditions
+    _deleteCondition = async (index) => {
+        // delete condition from globalk conditions
+        await conditions.splice(index, 1)
+
+        // set global condition to state
+        await this.setState({
+            conditions: conditions
+        })
+    }
 
 
 
@@ -323,7 +364,6 @@ export default class EditDetails extends Component {
                                 }}
                                 placeholder="عنوان"
                                 style={styles.input}
-                                ref={'MAP'}
                             // onChangeText={() => alert('2')}
                             />
 
@@ -350,31 +390,53 @@ export default class EditDetails extends Component {
                                 shadowOpacity: 1,
                                 elevation: 1,
                             }} >
-                                <CheckboxText title="1. آرام باشید و مراقب خودتان باشید."
-                                    name="condition_1"
-                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
-                                />
-                                <CheckboxText title="2. عاشق خودتان باشید"
-                                    name="condition_2"
-                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
-                                />
-                                <CheckboxText title="3. اتاق را کثیف نکنید"
-                                    name="condition_3"
-                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
-                                />
-                                <CheckboxText title="4.خانوم بازی نکنید"
-                                    name="condition_4"
-                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
-                                />
-                                <CheckboxText title="5. نماز اول وقت را فراموش نکنید "
-                                    name="condition_5"
-                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
-                                />
-                                <CheckboxText title="6. دقت کنید"
-                                    name="condition_6"
-                                    changeState={(e, name) => { this._changeCheckState(e, name) }}
-                                />
+                                {/* c o n d i t i o n s  */}
+                                {
+                                    this.state.conditions.length !== 0 ?
+                                        this.state.conditions.map((condition, index) => {
+                                            return <View style={styles.conditions_parent} key={Math.random()} >
+                                                <TouchableOpacity style={styles.delete_condition} key={index} onPress={() => this._deleteCondition(index)}>
+                                                    <Icon color="#636363" size={24} name="close" />
+                                                </TouchableOpacity>
+                                                <Text style={styles.condition_text} >
+                                                    {(index + 1) + '. ' + condition}
+                                                </Text>
+                                            </View>
+                                        }) :
+                                        <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                            <Icon size={32} color="#ccc" name="file-document-outline" />
+                                            <Text style={{
+                                                fontFamily: 'ISMedium',
+                                                fontSize: 14,
+                                                color: '#ccc'
+                                            }}>هنوز چیزی درج نکرده اید </Text>
+                                        </View>
+                                }
                             </View>
+                            <TextInput
+                                placeholderStyle={{
+                                    fontFamily: 'ISBold',
+                                    color: '#ccc'
+                                }}
+                                value={this.state.condition}
+                                placeholder="میتوانید شرایط خود را درج کنید "
+                                style={styles.input}
+                                onChangeText={(e) => this._writeCondition(e)}
+                            />
+                            <GradientButton
+                                width="100%"
+                                press={this._addCondition}
+                                activeOpacity={.6}
+                                color_1="#ddd"
+                                color_2="#ccc"
+                                height={50}
+                                borderRadius={5}
+                                textColor="#fff"
+                                size={14}
+                                title="افزودن "
+                                top={10}
+                                bottom={0}
+                            />
                         </View>
 
                         <View style={styles.edit_details_1} >
@@ -533,12 +595,6 @@ const styles = ({
         padding: 10,
         marginTop: 50,
     },
-
-    home_icon_marker: {
-        width: 100,
-        resizeMode: "contain",
-        top: -40,
-    },
     edit_details_1: {
         width: Dimensions.get('window').width - 50,
         flexDirection: 'column',
@@ -685,6 +741,25 @@ const styles = ({
         color: 'white',
         fontSize: 20,
         textAlign: 'center'
+    },
+    delete_condition: {
+        width: 30,
+        justifyContent: 'center',
+        height: 30,
+        alignItems: 'center'
+    },
+    conditions_parent: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 5
+
+    },
+    condition_text: {
+        fontSize: 12,
+        fontFamily: 'ISMedium',
+        color: '#333',
+        textAlign: 'right',
     }
 
 
