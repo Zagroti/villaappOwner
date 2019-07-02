@@ -386,9 +386,6 @@ export default class EditDetails extends Component {
                                 borderRadius: 5,
                                 padding: 20,
                                 marginTop: 10,
-                                shadowColor: "#f7f7f7",
-                                shadowOpacity: 1,
-                                elevation: 1,
                             }} >
                                 {/* c o n d i t i o n s  */}
                                 {
@@ -485,10 +482,7 @@ export default class EditDetails extends Component {
                             borderWidth: 2,
                             borderColor: '#fff',
                             borderRadius: 10,
-                            shadowColor: "#f7f7f7",
-                            shadowOpacity: .3,
                             backgroundColor: '#fff',
-                            elevation: 1,
                             width: this.state.mapWidth
                         }} >
                             <Mapir
@@ -588,9 +582,6 @@ const styles = ({
         width: '90%',
         flexDirection: 'row',
         alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
         height: 120,
         padding: 10,
         marginTop: 50,
@@ -630,9 +621,6 @@ const styles = ({
         marginTop: 20,
         padding: 20,
         borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
     },
 
     avilibiy_item: {
@@ -688,9 +676,6 @@ const styles = ({
     input: {
         textAlign: 'right',
         borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
         width: '100%',
         height: 50,
         backgroundColor: '#fff',
@@ -705,9 +690,6 @@ const styles = ({
         height: 180,
         backgroundColor: '#fff',
         textAlign: 'right',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: .3,
-        elevation: 1,
         borderRadius: 5,
         marginTop: 10,
         fontFamily: 'ISBold',

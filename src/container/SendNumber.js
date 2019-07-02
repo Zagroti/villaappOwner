@@ -323,9 +323,6 @@ const styles = ({
         flexDirection: 'row',
         width: Dimensions.get('window').width - 100,
         borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
         backgroundColor: '#fff'
     },
 

@@ -155,9 +155,6 @@ export default class MyFlatsPage extends Component {
                         justifyContent: 'center',
                         alignItems: 'center',
 
-                        shadowColor: "#000",
-                        shadowOpacity: 1,
-                        elevation: 5,
                     }}
                         onPress={() => {
                             Actions.EditDetails()
@@ -240,9 +237,6 @@ const styles = ({
         borderRadius: 60,
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
     },
     icon_child: {
         width: 80,
@@ -253,9 +247,6 @@ const styles = ({
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
     },
 
     icon_cover: {

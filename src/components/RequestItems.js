@@ -107,9 +107,6 @@ const styles = ({
         alignItems: 'center',
         width: 60,
         height: 60,
-        shadowColor: "#eee",
-        shadowOpacity: 1,
-        elevation: 5,
         borderRadius: 30
     },
     number: {

@@ -262,9 +262,6 @@ const styles = ({
         marginTop: 80,
         marginBottom: 30,
         borderRadius: 10,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 2,
     },
 
     ActivationCodeText: {

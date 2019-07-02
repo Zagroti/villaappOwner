@@ -161,9 +161,6 @@ const styles = ({
         borderRadius: 45,
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
     },
     icon_child: {
         width: 70,
@@ -174,9 +171,6 @@ const styles = ({
         borderRadius: 35,
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
     },
 
     icon_cover: {
@@ -215,9 +209,6 @@ const styles = ({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor:'#fff',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
         marginBottom: 10,
         paddingHorizontal: 10,
         borderRadius: 5,

@@ -335,10 +335,6 @@ const styles = ({
         height: 60,
         alignItems: 'center',
     },
-    humberger_icon: {
-        width: 30,
-        height: 30,
-    },
     up: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
@@ -346,8 +342,6 @@ const styles = ({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
         backgroundColor: '#f6f6f6',
-        // borderBottomRightRadius: 300,
-        borderBottomLeftRadius: 0,
         overflow: 'hidden',
         zIndex: 1,
 
@@ -406,9 +400,6 @@ const styles = ({
         borderRadius: 60,
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
     },
     icon_child: {
         width: 80,
@@ -419,9 +410,6 @@ const styles = ({
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
     },
 
     icon_cover: {
@@ -470,9 +458,6 @@ const styles = ({
         height: 50,
         backgroundColor: '#fff',
         borderRadius: 5,
-        shadowColor: "#f7f7f7",
-        shadowOpacity: 1,
-        elevation: 1,
         flexDirection: 'row-reverse',
         justifyContent: 'space-around',
         alignItems: 'center',

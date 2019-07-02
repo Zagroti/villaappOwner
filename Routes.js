@@ -180,14 +180,10 @@ export default Routes;
 const styles = ({
     login_style_bar: {
         backgroundColor: '#f6f6f6',
-        shadowColor: "#f7f7f7",
-        elevation: 0,
         height: 50,
     },
     login_style_bar_detail: {
         backgroundColor: 'transparent',
-        shadowColor: "#f7f7f7",
-        elevation: 0,
         height: 50,
     },
     bell: {
