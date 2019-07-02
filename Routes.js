@@ -12,8 +12,9 @@ import Profile from './src/container/Profile';
 import Details from './src/container/Details';
 import EditDetails from './src/container/EditDetails';
 import RentPage from './src/container/RentPage';
-import MyFlatsPage from './src/container/MyFlatsPage'
-import History from './src/container/History'
+import MyFlatsPage from './src/container/MyFlatsPage';
+import History from './src/container/History';
+import Splash from './src/components/SplashScreen'
 
 
 
@@ -95,15 +96,7 @@ class Routes extends React.Component {
 
     render() {
         if (this.state.loading) {
-            return <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                padding: 10
-            }}>
-                <ActivityIndicator size="large" color="#A52D53" />
-            </View>;
+            return <Splash/>
         }
 
         return (
