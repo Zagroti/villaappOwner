@@ -98,7 +98,7 @@ export default class RentPage extends Component {
 
                 <View style={styles.menu} >
                     <Text style={styles.title} >اجاره آپارتمان رویال</Text>
-                    <TouchableOpacity style={styles.humberger} onPress={() => Actions.pop()}>
+                    <TouchableOpacity style={styles.menu_icon} onPress={() => Actions.pop()}>
                         <Icon size={36} name="arrow-right" color="#636363" />
                     </TouchableOpacity>
                 </View>
@@ -421,21 +421,24 @@ const styles = ({
         backgroundColor: '#f6f6f6',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        height: 60,
-        paddingHorizontal: 20,
-        paddingTop: 10,
+        height: 50,
+        width: '100%',
+        paddingVertical: 5,
+        alignItems: 'center',
     },
 
     title: {
-        fontSize: 18,
-        fontFamily: 'IS',
+        fontSize: 14,
+        fontFamily: 'ISBold',
         color: '#333',
-        marginTop: 5
+        textAlign: 'center',
     },
-    humberger: {
-        width: 60,
-        height: 60,
+    menu_icon: {
+        width: 50,
+        height: 50,
         alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative'
     },
     my_box: {
         flexDirection: 'column',

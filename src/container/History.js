@@ -39,7 +39,7 @@ export default class History extends Component {
 
                 <View style={styles.menu} >
                     <Text style={styles.title} >تاریخچه</Text>
-                    <TouchableOpacity style={styles.humberger} onPress={() => Actions.pop()}>
+                    <TouchableOpacity style={styles.menu_icon} onPress={() => Actions.pop()}>
                         <Icon size={36} name="arrow-right" color="#636363" />
                     </TouchableOpacity>
                 </View>
@@ -74,15 +74,24 @@ const styles = ({
         backgroundColor: '#f6f6f6',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        height: 60,
-        paddingHorizontal: 20,
-        paddingTop: 10,
-        width:'100%'
-    },
-    humberger: {
-        width: 60,
-        height: 60,
+        height: 50,
+        width: '100%',
+        paddingVertical: 5,
         alignItems: 'center',
+    },
+
+    title: {
+        fontSize: 14,
+        fontFamily: 'ISBold',
+        color: '#333',
+        textAlign: 'center',
+    },
+    menu_icon: {
+        width: 50,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative'
     },
 
     history_box: {
@@ -97,12 +106,7 @@ const styles = ({
         overflow: 'hidden',
         zIndex: 1,
     },
-    title: {
-        fontSize: 18,
-        fontFamily: 'IS',
-        color: '#333',
-        marginTop: 5
-    },
+
     body: {
         width: Dimensions.get('window').width - 50,
         height: 50,

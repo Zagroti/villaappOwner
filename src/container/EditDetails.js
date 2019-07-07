@@ -313,7 +313,7 @@ export default class EditDetails extends Component {
             <View>
                 <View style={styles.menu} >
                     <Text style={styles.title} >ویلای جدید</Text>
-                    <TouchableOpacity style={styles.humberger} onPress={() => Actions.pop()}>
+                    <TouchableOpacity style={styles.menu_icon} onPress={() => Actions.pop()}>
                         <Icon size={36} name="arrow-right" color="#636363" />
                     </TouchableOpacity>
                 </View>
@@ -554,21 +554,24 @@ const styles = ({
         backgroundColor: '#f6f6f6',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        height: 60,
-        paddingHorizontal: 20,
-        paddingTop: 10,
-        width: '100%'
-    },
-    title: {
-        fontSize: 18,
-        fontFamily: 'IS',
-        color: '#333',
-        marginTop: 5
-    },
-    humberger: {
-        width: 60,
-        height: 60,
+        height: 50,
+        width: '100%',
+        paddingVertical: 5,
         alignItems: 'center',
+    },
+
+    title: {
+        fontSize: 14,
+        fontFamily: 'ISBold',
+        color: '#333',
+        textAlign: 'center',
+    },
+    menu_icon: {
+        width: 50,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative'
     },
 
 
@@ -599,7 +602,7 @@ const styles = ({
     },
     titles: {
         width: '100%',
-        fontSize: 16,
+        fontSize: 15,
         fontFamily: 'ISBold',
         color: '#636363',
         borderBottomWidth: 1,

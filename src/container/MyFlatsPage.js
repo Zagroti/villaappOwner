@@ -127,7 +127,7 @@ export default class MyFlatsPage extends Component {
                     {/* MENU */}
                     <View style={styles.menu} >
                         <Text style={styles.title} >ویلاهای من </Text>
-                        <TouchableOpacity style={styles.humberger} onPress={this._openDrawer}>
+                        <TouchableOpacity style={styles.menu_icon} onPress={this._openDrawer}>
                             <Icon size={36} name="menu" color="#636363" />
                         </TouchableOpacity>
                     </View>
@@ -188,19 +188,24 @@ const styles = ({
         backgroundColor: '#f6f6f6',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        height: 60,
-        paddingHorizontal: 20,
-        paddingTop: 10,
-    },
-
-    humberger: {
-        width: 60,
-        height: 60,
+        height: 50,
+        width: '100%',
+        paddingVertical: 5,
         alignItems: 'center',
     },
-    humberger_icon: {
-        width: 30,
-        height: 30,
+
+    title: {
+        fontSize: 14,
+        fontFamily: 'ISBold',
+        color: '#333',
+        textAlign: 'center',
+    },
+    menu_icon: {
+        width: 50,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative'
     },
     up: {
         flexDirection: 'column',
@@ -214,13 +219,6 @@ const styles = ({
         zIndex: 1,
     },
 
-
-    title: {
-        fontSize: 18,
-        fontFamily: 'IS',
-        color: '#333',
-        marginTop:5
-    },
     requestBox: {
         width: Dimensions.get('window').width,
         alignItems: 'center',

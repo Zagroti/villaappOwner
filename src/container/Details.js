@@ -289,7 +289,7 @@ export default class Details extends Component {
                                     alignItems: 'center',
                                     borderRadius: 20,
                                 }}>
-                                    <Text style={{ color: '#fff', fontFamily: 'ISFBold' }}>{position + 1}  /  {images.length}</Text>
+                                    <Text style={{color: '#fff', fontFamily: 'ISFBold', fontSize: 12}}>{position + 1}  /  {images.length}</Text>
                                     <Icon name="image-area" style={{ marginLeft: 8 }} size={30} color="#fff" />
                                 </View>
                                 {
@@ -303,7 +303,7 @@ export default class Details extends Component {
                                             alignItems: 'center',
                                             borderRadius: 20,
                                         }}>
-                                            <Text style={{ color: '#333', fontSize: 20, fontFamily: 'ISFBold' }}>150,000 ت</Text>
+                                            <Text style={{ color: '#333', fontSize: 16, fontFamily: 'ISFBold' }}>150,000 ت</Text>
                                         </View> :
                                         <TouchableOpacity
                                             style={{
@@ -609,15 +609,17 @@ const styles = ({
         borderRadius: 30,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         width: '90%',
         marginTop: 20,
         padding: 15
 
     },
     posibility: {
+        width:'25%',
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent:'center'
     },
     posibility_text: {
         fontSize: 10,
@@ -648,7 +650,7 @@ const styles = ({
 
     },
     about_vila_title: {
-        fontSize: 18,
+        fontSize: 15,
         fontFamily: 'ISFBold',
         color: '#333',
         marginBottom: 10

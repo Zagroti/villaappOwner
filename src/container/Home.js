@@ -201,8 +201,8 @@ export default class Home extends Component {
                     {/* MENU */}
                     <View style={styles.menu} >
                         <Text style={styles.title} >درخواست ها</Text>
-                        <TouchableOpacity style={styles.humberger} onPress={this._openDrawer}>
-                            <Icon size={36} name="menu" color="#636363" />
+                        <TouchableOpacity style={styles.menu_icon} onPress={this._openDrawer}>
+                            <Icon size={32} name="menu" color="#636363" />
                         </TouchableOpacity>
                     </View>
 
@@ -305,37 +305,26 @@ const styles = ({
         backgroundColor: '#f6f6f6',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        height: 60,
-        paddingHorizontal: 20,
-        paddingTop: 10,
+        height: 50,
+        width: '100%',
+        paddingVertical: 5,
+        alignItems: 'center',
     },
-    bell: {
-        width: 30,
-        height: 30,
+
+    title: {
+        fontSize: 14,
+        fontFamily: 'ISBold',
+        color: '#333',
+        textAlign: 'center',
+    },
+    menu_icon: {
+        width: 50,
+        height: 50,
+        alignItems: 'center',
         justifyContent: 'center',
-        alignItems: 'center',
-    },
-    notification: {
-        width: 14,
-        height: 14,
-        borderRadius: 7,
-        backgroundColor: '#B22850',
-        start: 10,
-        top: -10,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    notification_text: {
-        color: '#fff',
-        fontSize: 9,
-        fontFamily: 'ISFMedium',
-    },
-    humberger: {
-        width: 60,
-        height: 60,
-        alignItems: 'center',
-    },
-    up: {
+        position: 'relative'
+    }, 
+     up: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -347,13 +336,6 @@ const styles = ({
 
     },
 
-
-    title: {
-        fontSize: 18,
-        fontFamily: 'IS',
-        color: '#333',
-        marginTop:5
-    },
     requestBox: {
         width: Dimensions.get('window').width - 50,
         // alignItems: 'center',

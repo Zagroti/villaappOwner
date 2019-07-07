@@ -20,11 +20,6 @@ import Splash from './src/components/SplashScreen'
 
 
 
-const nothing = () => (
-    null
-);
-
-
 //back button
 const backButton = () => (
     <TouchableOpacity
@@ -35,29 +30,14 @@ const backButton = () => (
         }}
     >
         <View >
-            <Icon size={36} name="arrow-right" color="#636363" />
+            <Icon size={36} name="arrow-right" color="#A52D53" />
         </View>
     </TouchableOpacity>
 );
 
-const backButtonDetail = () => (
-    <TouchableOpacity
-        style={{
-            backgroundColor: '#33333320',
-            padding: 10,
-            width: 50,
-            height: 50,
-            borderRadius: 30,
-            justifyContent: 'center',
-            alignItems: 'center',
-            top: 10,
-            end: 10,
-
-        }} onPress={() => Actions.pop()} >
-        <Icon size={36} name="arrow-right" color="#fff" />
-    </TouchableOpacity>
-)
-
+const nothing = () => (
+    null
+);
 
 
 class Routes extends React.Component {
@@ -106,18 +86,18 @@ class Routes extends React.Component {
 
                     <Scene key="SendNumber"
                         component={SendNumber}
-                        title="Send Number"
+                        title=""
                         hideNavBar={true}
                         initial={!this.state.logged}
 
                     />
                     <Scene key="EnterCode" component={EnterCode}
-                        title=""
-                        titleStyle={{ color: 'transparent' }}
-                        navigationBarStyle={styles.login_style_bar}
-                        sceneStyle={styles.login_scene_style}
-                        renderBackButton={() => nothing}
-                        renderRightButton={() => backButton()}
+                      title=""
+                      titleStyle={{ color: 'transparent' }}
+                      renderRightButton={() => backButton()}
+                      renderBackButton={() => nothing}
+                      navigationBarStyle={styles.login_style_bar}
+                      sceneStyle={styles.login_scene_style}
                     />
 
                     <Scene key="Home"
@@ -180,11 +160,15 @@ export default Routes;
 const styles = ({
     login_style_bar: {
         backgroundColor: '#f6f6f6',
+        shadowColor: "#f7f7f7",
+        elevation: 0,
         height: 50,
     },
     login_style_bar_detail: {
         backgroundColor: 'transparent',
-        height: 50,
+        shadowColor: "#f7f7f7",
+        elevation: 0,
+        height: 0,
     },
     bell: {
         width: 30,
@@ -211,7 +195,7 @@ const styles = ({
     notification_box: {
         width: 40,
         height: 40,
-        right: 20,
+        left: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -236,7 +220,6 @@ const styles = ({
         fontSize: 9,
         fontFamily: 'ISFMedium',
     },
-
 })
 
 

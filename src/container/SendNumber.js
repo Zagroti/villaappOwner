@@ -90,8 +90,8 @@ class SendNumber extends Component {
 
         } else if (this.state.number.length === 11) {
 
-             let enternumber = this.state.number.split('')
-            await enternumber.splice(0,1)
+            let enternumber = this.state.number.split('')
+            await enternumber.splice(0, 1)
 
             let sentNumber = this.state.code + enternumber.join('')
             await this.setState({
@@ -323,6 +323,9 @@ const styles = ({
         flexDirection: 'row',
         width: Dimensions.get('window').width - 100,
         borderRadius: 5,
+        shadowColor: "#f7f7f7",
+        shadowOpacity: 1,
+        elevation: 1,
         backgroundColor: '#fff'
     },
 
@@ -330,36 +333,27 @@ const styles = ({
         height: 45,
         paddingLeft: 10,
         fontSize: 12,
-        fontWeight: '900'
+        fontWeight: '900',
+
     },
     input_box_2: {
         height: 45,
         width: '70%',
         paddingLeft: 10,
         fontSize: 18,
-        fontWeight: '900',
         letterSpacing: 5,
-        ...Platform.select({
-
-            android: {
-                fontFamily: 'ISFBold',
-            }
-        })
+        fontWeight: '900',
     },
     number_inputs: {
         marginTop: 50,
-        // flexGrow:3
     },
     number_inputs_title: {
         color: '#999',
-        fontSize: 16,
+        fontSize: 12,
         marginBottom: 10,
         fontFamily: 'ISBold',
 
     },
-
-
-
 })
 
 
