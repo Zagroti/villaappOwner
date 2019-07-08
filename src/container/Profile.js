@@ -279,7 +279,7 @@ const styles = ({
         marginBottom: 10,
         paddingHorizontal: 10,
         borderRadius: 5,
-        height: 45,
+        height: 40,
         width: Dimensions.get('window').width - 100,
 
     },
