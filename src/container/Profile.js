@@ -45,9 +45,7 @@ export default class Profile extends Component {
 
 
 
-    pickMultiple = async () => {
-        console.log(9)
-
+    pickSingleImage =  () => {
         ImagePicker.openPicker({
             width: 300,
             height: 300,
@@ -57,10 +55,7 @@ export default class Profile extends Component {
             this.setState({
                 image: imgs
             });
-            console.log(this.state.images)
-
         })
-        console.log("image : " + this.state.image)
     }
 
 
@@ -119,8 +114,8 @@ export default class Profile extends Component {
                                     this._deleteImage(i.uri)} key={i.uri}>{this.renderAsset(i)}
                                 </TouchableOpacity>)
                                 :
-                                <TouchableOpacity  onPress={this.pickMultiple.bind(this)} activeOpacity={.8} >
-                                    <Icon style={styles.icon} size={25} name="account-outline" color="#fff" />
+                                <TouchableOpacity onPress={this.pickSingleImage} activeOpacity={.8} >
+                                    <Icon style={styles.icon} size={40} name="account-outline" color="#fff" />
                                 </TouchableOpacity>}
                             {
                                 !this.state.image ?
@@ -136,12 +131,11 @@ export default class Profile extends Component {
                                             width: '100%',
                                             height: 20
                                         }}
-                                        onPress={this.pickMultiple.bind(this)}>
+                                        onPress={this.pickSingleImage}>
                                         <Icon name="image-plus" size={16} color="#fff" />
                                     </TouchableOpacity>
                                     : null
                             }
-
                         </View>
                     </View>
 
@@ -259,12 +253,7 @@ const styles = ({
     icon_box: {
         overflow: 'hidden'
     },
-    icon: {
-        backgroundColor: '#C92652',
-        color: '#fff',
-        fontSize: 40,
-        borderRadius: 20,
-    },
+
     account_box: {
         flexDirection: 'column',
         width: Dimensions.get('window').width - 100,
