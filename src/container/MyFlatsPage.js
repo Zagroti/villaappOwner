@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 //components 
@@ -33,7 +34,20 @@ export default class MyFlatsPage extends Component {
     }
 
 
-
+ // log out
+ _exit = () => {
+    console.log(111)
+    this._removeData()
+    Actions.replace('SendNumber')
+}
+_removeData = async () => {
+    try {
+        await AsyncStorage.removeItem('login')
+        console.log(AsyncStorage.getItem('login'))
+    } catch (e) {
+        
+    }
+}
 
 
     //menu actions
@@ -105,6 +119,10 @@ export default class MyFlatsPage extends Component {
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
                     <Text style={styles.drawer_text}>پروفایل</Text>
                     <Icon size={22} name="account-outline" color="#b04267" />
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={this._exit}>
+                    <Text style={styles.drawer_text}>خروج</Text>
+                    <Icon size={22} name="exit-to-app" color="#b04267" />
                 </TouchableOpacity>
             </View>
         );

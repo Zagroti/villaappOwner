@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 
@@ -61,6 +62,22 @@ export default class Home extends Component {
     handleBackButton() {
         // ToastAndroid.show('Back button is pressed', ToastAndroid.SHORT);
         return true;
+    }
+
+
+     // log out
+     _exit = () => {
+        console.log(111)
+        this._removeData()
+        Actions.replace('SendNumber')
+    }
+    _removeData = async () => {
+        try {
+            await AsyncStorage.removeItem('login')
+            console.log(AsyncStorage.getItem('login'))
+        } catch (e) {
+            
+        }
     }
 
 
@@ -180,6 +197,10 @@ export default class Home extends Component {
                     <Text style={styles.drawer_text}>پروفایل</Text>
                     <Icon size={22} name="account-outline" color="#b04267" />
                 </TouchableOpacity>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={this._exit}>
+                    <Text style={styles.drawer_text}>خروج</Text>
+                    <Icon size={22} name="exit-to-app" color="#b04267" />
+                </TouchableOpacity>
             </View>
         );
 
@@ -191,9 +212,9 @@ export default class Home extends Component {
                 ref={'DRAWER_REF'}
                 drawerPosition={DrawerLayoutAndroid.positions.Right}
                 renderNavigationView={() => navigationView}
-                onDrawerSlide={(e) => { console.log('1') }}
-                onDrawerStateChanged={(e) => { console.log('2') }}
-                onDrawerClose={(e) => { console.log('close') }}
+                onDrawerSlide={(e) => { }}
+                onDrawerStateChanged={(e) => {  }}
+                onDrawerClose={(e) => {  }}
                 onDrawerOpen={(e) => { this._openDrawer.bind(this) }}
             >
                 <View style={styles.home_cover} >
