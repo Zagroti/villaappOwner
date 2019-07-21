@@ -372,7 +372,7 @@ export default class EditDetails extends Component {
         return (
 
 
-            <View style={{paddingBottom:100}} >
+            <View style={{ paddingBottom: 100 }} >
                 <View style={styles.menu} >
                     <Text style={styles.title} >ویلای جدید</Text>
                     <TouchableOpacity style={styles.menu_icon} onPress={() => Actions.pop()}>
@@ -420,10 +420,8 @@ export default class EditDetails extends Component {
                             <Text style={styles.titles}> اطلاعات</Text>
 
                             <TextInput
-                                placeholderStyle={{
-                                    fontFamily: 'ISBold',
-                                    color: '#636363'
-                                }}
+                                placeholderStyle={{ fontFamily: 'ISBold' }}
+                                placeholderTextColor="#999"
                                 placeholder="عنوان"
                                 style={styles.input}
                                 onChangeText={(e) => this._changeInput(e, 'title')}
@@ -436,7 +434,7 @@ export default class EditDetails extends Component {
                                 onChangeText={(e) => this._changeInput(e, 'abouteVilla')}
                                 defaultValue=""
                                 placeholder={'درباره ویلا'}
-                                placeholderTextColor={'#636363'}
+                                placeholderTextColor={'#999'}
                                 underlineColorAndroid={'transparent'}
                                 value={this.state.abouteVilla}
                             />
@@ -476,10 +474,8 @@ export default class EditDetails extends Component {
                             </View>
 
                             <TextInput
-                                placeholderStyle={{
-                                    fontFamily: 'ISBold',
-                                    color: '#ccc'
-                                }}
+                                placeholderStyle={{ fontFamily: 'ISBold' }}
+                                placeholderTextColor="#999"
                                 placeholder="میتوانید شرایط خود را درج کنید "
                                 style={styles.input}
                                 onChangeText={(e) => this._writeCondition(e)}
@@ -521,7 +517,7 @@ export default class EditDetails extends Component {
                                     _returnValue={this._setProps}
                                     val={this.state.singleBed} />
                                 <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
-                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >تختخواب یکنفره</Text>
+                                    <Text style={styles.counters_title} >تختخواب یکنفره</Text>
                                     <Icon style={{ marginLeft: 10 }} size={22} name="bed-empty" color="#636363" />
                                 </View>
                             </View>
@@ -533,7 +529,7 @@ export default class EditDetails extends Component {
                                     _returnValue={this._setProps}
                                     val={this.state.doubleBed} />
                                 <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
-                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >تختخواب دونفره</Text>
+                                    <Text style={styles.counters_title} >تختخواب دونفره</Text>
                                     <Icon style={{ marginLeft: 10 }} size={22} name="bed-empty" color="#636363" />
                                 </View>
                             </View>
@@ -545,7 +541,7 @@ export default class EditDetails extends Component {
                                     _returnValue={this._setProps}
                                     val={this.state.capacity} />
                                 <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
-                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >ظرفیت </Text>
+                                    <Text style={styles.counters_title} >ظرفیت </Text>
                                     <Icon style={{ marginLeft: 10 }} size={22} name="account-group" color="#636363" />
                                 </View>
                             </View>
@@ -557,7 +553,7 @@ export default class EditDetails extends Component {
                                     _returnValue={this._setProps}
                                     val={this.state.rooms} />
                                 <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
-                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >تعداد اتاق </Text>
+                                    <Text style={styles.counters_title} >تعداد اتاق </Text>
                                     <Icon style={{ marginLeft: 10 }} size={22} name="door" color="#636363" />
                                 </View>
                             </View>
@@ -567,27 +563,25 @@ export default class EditDetails extends Component {
                                 <TextInput
                                     keyboardType='numeric'
                                     maxLength={3}
-                                    placeholderStyle={{
-                                        fontFamily: 'ISBold',
-                                        color: '#636363'
-                                    }}
+                                    placeholderStyle={{ fontFamily: 'ISBold' }}
+                                    placeholderTextColor="#999"
                                     placeholder="متر مربع"
                                     style={{
                                         textAlign: 'center',
                                         borderRadius: 5,
                                         width: '50%',
-                                        height: 40,
+                                        height: '100%',
                                         backgroundColor: '#fff',
                                         color: '#636363',
-                                        paddingRight: 10,
                                         fontFamily: 'ISFBold',
+                                        fontSize: 18
                                     }}
                                     onChangeText={(e) => this._changeInput(e, 'area')}
                                     value={this.state.area}
                                 />
                                 <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
-                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >متراژ</Text>
-                                    <Icon style={{ marginLeft: 10 }} size={22} name="door" color="#636363" />
+                                    <Text style={styles.counters_title} >متراژ</Text>
+                                    <Icon style={{ marginLeft: 10 }} size={22} name="altimeter" color="#636363" />
                                 </View>
                             </View>
 
@@ -606,7 +600,7 @@ export default class EditDetails extends Component {
                                             this.setState({ provinceModal: true })
                                         }}>
                                             <Text
-                                                style={{ fontSize: 12, color: '#555', padding: 10, fontFamily: 'ISBold', width: '100%' }}
+                                                style={{ fontSize: 12, color: '#636363', padding: 10, fontFamily: 'ISBold', width: '100%' }}
                                             >
                                                 {
                                                     this.state.province !== '' ? this.state.province : "استان را انتخاب کنید"
@@ -658,7 +652,7 @@ export default class EditDetails extends Component {
                                                     this.setState({ cityModal: true })
                                                 }}>
                                                     <Text
-                                                        style={{ fontSize: 12, color: '#555', padding: 10, fontFamily: 'ISBold', width: '100%' }}
+                                                        style={{ fontSize: 12, color: '#636363', padding: 10, fontFamily: 'ISBold', width: '100%' }}
                                                     >
                                                         {
                                                             this.state.city !== '' ? this.state.city : "شهر را انتخاب کنید"
@@ -704,40 +698,37 @@ export default class EditDetails extends Component {
 
 
                             <TextInput
-                                placeholderStyle={{
-                                    fontFamily: 'ISBold',
-                                    color: '#ccc'
-                                }}
+                                placeholderStyle={{ fontFamily: 'ISBold' }}
+                                placeholderTextColor="#999"
                                 placeholder="آدرس خود را وارد کنید  "
                                 style={styles.input}
                                 value={this.state.address}
                                 onChangeText={(e) => this._changeInput(e, 'address')}
                             />
-                            
-
-                            
                         </View>
+
+
                         <View style={{
-                                height: this.state.mapHeight,
-                                overflow: 'hidden',
-                                borderWidth: 2,
-                                borderColor: '#fff',
-                                borderRadius: 10,
-                                backgroundColor: '#fff',
-                                width: this.state.mapWidth,
-                                marginTop: 10
-                            }} >
-                                <Mapir
-                                    accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
-                                    zoomLevel={6}
-                                    centerCoordinate={[51.422548, 35.732573]}
-                                    showUserLocation={true}
-                                    onPress={e => this.addMarker(e.geometry.coordinates)}
-                                    style={{ flex: 1 }}
-                                >
-                                    {mark}
-                                </Mapir>
-                            </View>
+                            height: this.state.mapHeight,
+                            overflow: 'hidden',
+                            borderWidth: 2,
+                            borderColor: '#fff',
+                            borderRadius: 10,
+                            backgroundColor: '#fff',
+                            width: this.state.mapWidth,
+                            marginTop: 10
+                        }} >
+                            <Mapir
+                                accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
+                                zoomLevel={6}
+                                centerCoordinate={[51.422548, 35.732573]}
+                                showUserLocation={true}
+                                onPress={e => this.addMarker(e.geometry.coordinates)}
+                                style={{ flex: 1 }}
+                            >
+                                {mark}
+                            </Mapir>
+                        </View>
 
 
                         <TouchableOpacity
@@ -929,6 +920,7 @@ const styles = ({
         paddingRight: 10,
         marginTop: 10,
         fontFamily: 'ISFBold',
+        fontSize: 12
     },
 
     textareaContainer: {
@@ -949,6 +941,7 @@ const styles = ({
         height: '100%',
         borderRadius: 5,
         fontFamily: 'ISFBold',
+        fontSize: 12
 
     }
     ,
@@ -1002,6 +995,11 @@ const styles = ({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    counters_title: {
+        fontFamily: 'ISBold',
+        fontSize: 12,
+        color: '#333'
     },
     modal_boxes: {
         backgroundColor: '#fff',
