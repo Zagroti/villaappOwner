@@ -487,13 +487,13 @@ export default class EditDetails extends Component {
                                 width="100%"
                                 press={this._addCondition}
                                 activeOpacity={.6}
-                                color_1="#ddd"
-                                color_2="#ccc"
+                                color_1="#bbb"
+                                color_2="#d8d8d8"
                                 height={50}
                                 borderRadius={5}
                                 textColor="#fff"
                                 size={14}
-                                title="افزودن "
+                                title="افزودن"
                                 top={10}
                                 bottom={0}
                             />
