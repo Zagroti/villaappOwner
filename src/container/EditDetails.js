@@ -1027,7 +1027,7 @@ const styles = ({
     picker_item: {
         fontFamily: 'ISBold',
         paddingVertical: 10,
-        fontSize: 14,
+        fontSize: 12,
         textAlign: 'center',
         color: '#333'
     },
