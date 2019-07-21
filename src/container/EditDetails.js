@@ -8,11 +8,10 @@ import {
     ScrollView,
     KeyboardAvoidingView,
     PermissionsAndroid,
-    Picker,
     TouchableOpacity,
-    Alert,
     NativeModules,
-    ImageBackground
+    ImageBackground,
+    Modal
 } from 'react-native';
 
 
@@ -26,7 +25,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //components 
 import GradientButton from '../components/GradientButton'
 import CheckboxIcon from '../components/CheckboxIcon';
-
+import Counter from '../components/Counter'
 
 
 // import ImagePicker from 'react-native-image-picker';
@@ -65,7 +64,7 @@ export default class EditDetails extends Component {
                 { latitude: 51.422548, longitude: 35.732573 },
             ],
             mapHeight: 200,
-            mapWidth: '90%',
+            mapWidth: '100%',
             moreText: 'بزرگتر',
             arrowDown: true,
 
@@ -80,24 +79,72 @@ export default class EditDetails extends Component {
             electric: false,
 
             condition: '',
-            conditions: conditions
+            conditions: conditions,
+
+            address: '',
+
+            singleBed: 0,
+            doubleBed: 0,
+            capacity: 0,
+            rooms: 0,
+
+            provinceModal: false,
+            province: '',
+            provinceNumber: 100,
+            provinceWidth: '100%',
+            cityModal: false,
+            city: '',
+            cityWidth: 0,
+
+            provinces: ['مازندران', 'تهران', 'گیلان'],
+            cities: [
+                [
+                    { 0: 'آمل' },
+                    { 1: 'بابل' },
+                    { 2: 'ساری' }
+                ],
+                [
+                    { 0: 'دماوند' },
+                    { 1: 'پردیس' },
+                    { 2: 'بومهن' }
+                ],
+                [
+                    { 0: 'فومن' },
+                    { 1: 'رشت' },
+                    { 2: 'انزلی' }
+                ],
+            ],
 
         }
 
 
     }
 
+    componentDidMount() {
+        // {
+        //     PermissionsAndroid.requestMultiple(
+        //         [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        //         PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
+        //         {
+        //             title: 'Give Location Permission',
+        //             message: 'App needs location permission to find your position.'
+        //         }
+        //     ).then(granted => {
+        //         console.log(granted);
+        //         resolve();
+        //     }).catch(err => {
+        //         console.warn(err);
+        //         reject(err);
+        //     });
+        // }
 
-
-    //close modal
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
     }
 
 
 
 
 
+    // multi select image
     pickMultiple() {
 
         ImagePicker.openPicker({
@@ -162,30 +209,9 @@ export default class EditDetails extends Component {
     // checkbox state
     _changeCheckState = async (e, name) => {
         await this.setState({ [name]: e })
-        // console.log(this.state)
     }
 
 
-
-    componentDidMount() {
-        // {
-        //     PermissionsAndroid.requestMultiple(
-        //         [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        //         PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
-        //         {
-        //             title: 'Give Location Permission',
-        //             message: 'App needs location permission to find your position.'
-        //         }
-        //     ).then(granted => {
-        //         console.log(granted);
-        //         resolve();
-        //     }).catch(err => {
-        //         console.warn(err);
-        //         reject(err);
-        //     });
-        // }
-
-    }
 
 
     // select location 
@@ -209,7 +235,7 @@ export default class EditDetails extends Component {
         } else {
             this.setState({
                 mapHeight: 200,
-                mapWidth: '90%',
+                mapWidth: '100%',
                 moreText: 'بزرگتر',
                 arrowDown: true
             })
@@ -258,16 +284,16 @@ export default class EditDetails extends Component {
 
     // write condition and set condition to state
     _writeCondition = async (e) => {
-
         await this.setState({
-            condition: e.replace(/^[a-zA-Z şüöı]+$/, '').trim()
+            condition: e.replace(/^[a-zA-Z şüöı]+$/, '')
         })
     }
+
 
     // add condition
     _addCondition = async () => {
 
-        if (this.state.condition !== '' || this.state.condition !== null) {
+        if (this.state.condition !== '') {
             // push written condition to global conditions
             await conditions.push(this.state.condition)
 
@@ -279,6 +305,7 @@ export default class EditDetails extends Component {
             })
         }
     }
+
 
 
     //delete coditions
@@ -294,6 +321,41 @@ export default class EditDetails extends Component {
 
 
 
+    // address - area - title - about vila
+    _changeInput = (e, name) => {
+        this.setState({
+            [name]: e.replace(/^[a-zA-Z şüöı]+$/, '')
+        })
+    }
+
+    //select capacity of rooms beds ...
+    _setProps = async (name, val) => {
+        await this.setState({
+            [name]: val
+        })
+    }
+
+
+
+    //select province and city
+    _selectProvince = async (method, methodModal, name, i) => {
+        await this.setState({
+            [method]: name,
+            [methodModal]: false,
+            provinceNumber: i,
+            city: '',
+            provinceWidth: '48%',
+            cityWidth: '48%'
+        })
+    }
+
+    //select province and city
+    _selectCity = async (method, methodModal, name, i) => {
+        await this.setState({
+            [method]: name,
+            [methodModal]: false,
+        })
+    }
 
     render() {
 
@@ -310,7 +372,7 @@ export default class EditDetails extends Component {
         return (
 
 
-            <View>
+            <View >
                 <View style={styles.menu} >
                     <Text style={styles.title} >ویلای جدید</Text>
                     <TouchableOpacity style={styles.menu_icon} onPress={() => Actions.pop()}>
@@ -364,13 +426,13 @@ export default class EditDetails extends Component {
                                 }}
                                 placeholder="عنوان"
                                 style={styles.input}
-                            // onChangeText={() => alert('2')}
+                                onChangeText={(e) => this._changeInput(e, 'title')}
                             />
 
                             <Textarea
                                 containerStyle={styles.textareaContainer}
                                 style={styles.text_area}
-                                onChangeText={this.onChange}
+                                onChangeText={(e) => this._changeInput(e, 'abouteVilla')}
                                 defaultValue=""
                                 placeholder={'درباره ویلا'}
                                 placeholderTextColor={'#636363'}
@@ -410,6 +472,7 @@ export default class EditDetails extends Component {
                                         </View>
                                 }
                             </View>
+
                             <TextInput
                                 placeholderStyle={{
                                     fontFamily: 'ISBold',
@@ -448,53 +511,227 @@ export default class EditDetails extends Component {
                             </View>
                         </View>
 
+                        <View style={{ marginBottom: 20 }}>
+                            {/* single bed */}
+                            <View style={styles.capacity}>
+                                <Counter
+                                    name="singleBed"
+                                    _returnValue={this._setProps}
+                                    val={this.state.singleBed} />
+                                <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
+                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >تختخواب یکنفره</Text>
+                                    <Icon style={{ marginLeft: 10 }} size={22} name="bed-empty" color="#636363" />
+                                </View>
+                            </View>
+
+                            {/* double bed */}
+                            <View style={styles.capacity}>
+                                <Counter
+                                    name="doubleBed"
+                                    _returnValue={this._setProps}
+                                    val={this.state.doubleBed} />
+                                <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
+                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >تختخواب دونفره</Text>
+                                    <Icon style={{ marginLeft: 10 }} size={22} name="bed-empty" color="#636363" />
+                                </View>
+                            </View>
+
+                            {/*  people capacity  */}
+                            <View style={styles.capacity}>
+                                <Counter
+                                    name="capacity"
+                                    _returnValue={this._setProps}
+                                    val={this.state.capacity} />
+                                <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
+                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >ظرفیت </Text>
+                                    <Icon style={{ marginLeft: 10 }} size={22} name="account-group" color="#636363" />
+                                </View>
+                            </View>
+
+                            {/* rooms  */}
+                            <View style={styles.capacity}>
+                                <Counter
+                                    name="rooms"
+                                    _returnValue={this._setProps}
+                                    val={this.state.rooms} />
+                                <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
+                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >تعداد اتاق </Text>
+                                    <Icon style={{ marginLeft: 10 }} size={22} name="door" color="#636363" />
+                                </View>
+                            </View>
+
+                            {/* area meters! */}
+                            <View style={styles.capacity}>
+                                <TextInput
+                                    keyboardType='numeric'
+                                    maxLength={3}
+                                    placeholderStyle={{
+                                        fontFamily: 'ISBold',
+                                        color: '#636363'
+                                    }}
+                                    placeholder="متر مربع"
+                                    style={{
+                                        textAlign: 'center',
+                                        borderRadius: 5,
+                                        width: '50%',
+                                        height: 40,
+                                        backgroundColor: '#fff',
+                                        color: '#636363',
+                                        paddingRight: 10,
+                                        fontFamily: 'ISFBold',
+                                    }}
+                                    onChangeText={(e) => this._changeInput(e, 'area')}
+                                />
+                                <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
+                                    <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >متراژ</Text>
+                                    <Icon style={{ marginLeft: 10 }} size={22} name="door" color="#636363" />
+                                </View>
+                            </View>
+
+                        </View>
 
 
+                        {/* A D D R E S S  */}
                         <View style={styles.edit_details_1} >
                             <Text style={styles.titles}>آدرس و موقعیت </Text>
-                        </View>
-                        <View
-                            style={{
-                                height: 50,
-                                width: '90%',
-                                fontFamily: 'IS',
-                                borderWidth: 1,
-                                borderColor: '#eee',
+
+                            {/* places */}
+                            <View style={{ flexDirection: 'row-reverse', width: '100%', justifyContent: 'space-between', marginTop: 10 }}>
+                                <View style={[styles.modal_boxes, { width: this.state.provinceWidth }]} >
+                                    <View style={{ width: '100%', height: 50, borderRadius: 5, justifyContent: 'center' }}>
+                                        <TouchableOpacity onPress={() => {
+                                            this.setState({ provinceModal: true })
+                                        }}>
+                                            <Text
+                                                style={{ fontSize: 12, color: '#555', padding: 10, fontFamily: 'ISBold', width: '100%' }}
+                                            >
+                                                {
+                                                    this.state.province !== '' ? this.state.province : "استان را انتخاب کنید"
+                                                }
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </View>
+
+                                    {/* province modal  */}
+                                    <Modal
+                                        animationType="fade"
+                                        transparent={true}
+                                        visible={this.state.provinceModal}
+                                        onRequestClose={() => {
+                                            this.setState({ provinceModal: false })
+                                        }}>
+                                        <TouchableOpacity style={styles.picker_modal} activeOpacity={1} onPress={() => this.setState({ provinceModal: false })} >
+                                            <View style={styles.picker_box}>
+                                                <ScrollView
+                                                    contentContainerStyle={{
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                    }}
+                                                    style={{ width: '100%' }}>
+                                                    {
+                                                        this.state.provinces.map((province, i) => {
+                                                            return < TouchableOpacity
+                                                                key={i}
+                                                                style={styles.picker_button}
+                                                                activeOpacity={.3}
+                                                                onPress={() => this._selectProvince('province', 'provinceModal', province, i)}>
+                                                                <Text style={styles.picker_item} >{province}</Text>
+                                                            </TouchableOpacity>
+                                                        })
+                                                    }
+                                                </ScrollView>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </Modal>
+                                </View>
+
+
+                                {/* select city */}
+                                {
+                                    this.state.province !== '' ?
+                                        <View style={[styles.modal_boxes, { width: this.state.cityWidth }]} >
+                                            <View style={{ width: '100%', height: 50, borderRadius: 5, justifyContent: 'center' }}>
+                                                <TouchableOpacity onPress={() => {
+                                                    this.setState({ cityModal: true })
+                                                }}>
+                                                    <Text
+                                                        style={{ fontSize: 12, color: '#555', padding: 10, fontFamily: 'ISBold', width: '100%' }}
+                                                    >
+                                                        {
+                                                            this.state.city !== '' ? this.state.city : "شهر را انتخاب کنید"
+                                                        }
+                                                    </Text>
+                                                </TouchableOpacity>
+                                            </View>
+
+                                            {/* city modal */}
+                                            <Modal
+                                                animationType="fade"
+                                                transparent={true}
+                                                visible={this.state.cityModal}
+                                                onRequestClose={() => {
+                                                    this.setState({ cityModal: false })
+                                                }}>
+                                                <TouchableOpacity style={styles.picker_modal} activeOpacity={1} onPress={() => this.setState({ cityModal: false })} >
+                                                    <View style={styles.picker_box}>
+                                                        <ScrollView
+                                                            contentContainerStyle={{
+                                                                justifyContent: 'center',
+                                                                alignItems: 'center',
+                                                            }}
+                                                            style={{ width: '100%' }}>
+                                                            {
+                                                                this.state.cities[this.state.provinceNumber].map((city, i) => {
+                                                                    return < TouchableOpacity
+                                                                        key={i}
+                                                                        style={styles.picker_button}
+                                                                        activeOpacity={.3}
+                                                                        onPress={() => this._selectCity('city', 'cityModal', city[i])}>
+                                                                        <Text style={styles.picker_item} >{city[i]}</Text>
+                                                                    </TouchableOpacity>
+                                                                })
+                                                            }
+                                                        </ScrollView>
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </Modal>
+                                        </View> : null
+                                }
+                            </View>
+
+
+                            <TextInput
+                                placeholderStyle={{
+                                    fontFamily: 'ISBold',
+                                    color: '#ccc'
+                                }}
+                                placeholder="آدرس خود را وارد کنید  "
+                                style={styles.input}
+                                onChangeText={(e) => this._changeInput(e, 'address')}
+                            />
+                            
+
+                            <View style={{
+                                height: this.state.mapHeight,
+                                overflow: 'hidden',
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                                borderRadius: 10,
                                 backgroundColor: '#fff',
-                                marginBottom: 20,
-                                borderRadius: 5
-                            }}
-                        >
-
-                            <Picker
-                                selectedValue={this.state.city}
-                                onValueChange={(itemValue) => this._changeCity(itemValue)}>
-                                <Picker.Item label="آمل" value='amol' />
-                                <Picker.Item label="بابل" value='babol' />
-                                <Picker.Item label="بابلسر" value='babolsar' />
-                            </Picker>
-                        </View>
-
-
-                        <View style={{
-                            height: this.state.mapHeight,
-                            overflow: 'hidden',
-                            borderWidth: 2,
-                            borderColor: '#fff',
-                            borderRadius: 10,
-                            backgroundColor: '#fff',
-                            width: this.state.mapWidth
-                        }} >
-                            <Mapir
-                                accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
-                                zoomLevel={6}
-                                centerCoordinate={[51.422548, 35.732573]}
-                                showUserLocation={true}
-                                onPress={e => this.addMarker(e.geometry.coordinates)}
-                                style={{ flex: 1 }}
-                            >
-                                {mark}
-                            </Mapir>
+                                width: this.state.mapWidth,
+                                marginTop: 10
+                            }} >
+                                <Mapir
+                                    accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
+                                    zoomLevel={6}
+                                    centerCoordinate={[51.422548, 35.732573]}
+                                    showUserLocation={true}
+                                    onPress={e => this.addMarker(e.geometry.coordinates)}
+                                    style={{ flex: 1 }}
+                                >
+                                    {mark}
+                                </Mapir>
+                            </View>
                         </View>
 
 
@@ -519,7 +756,7 @@ export default class EditDetails extends Component {
 
                         <GradientButton
                             width="90%"
-                            press={this._press}
+                            press={() => console.log(this.state)}
                             activeOpacity={.6}
                             color_1="#36a35b"
                             color_2="#6fcf97"
@@ -533,7 +770,7 @@ export default class EditDetails extends Component {
                         />
                     </KeyboardAvoidingView>
                 </ScrollView>
-            </View>
+            </View >
 
 
 
@@ -548,7 +785,7 @@ const styles = ({
     EditDetails: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f6f6f6',
+        backgroundColor: '#f3f3f3',
     },
     menu: {
         backgroundColor: '#f6f6f6',
@@ -666,13 +903,13 @@ const styles = ({
     images: {
         width: '100%',
         height: '100%',
-        resizeMode: "cover",
+        resizeMode: 'cover',
         borderRadius: 10
     },
     select_image: {
         color: '#636363',
         fontSize: 50,
-        resizeMode: "cover",
+        // resizeMode: 'cover',
         borderRadius: 10
     },
 
@@ -686,7 +923,7 @@ const styles = ({
         marginTop: 5,
         paddingRight: 10,
         marginTop: 10,
-        fontFamily: 'ISBold',
+        fontFamily: 'ISFBold',
     },
 
     textareaContainer: {
@@ -706,7 +943,7 @@ const styles = ({
         textAlignVertical: 'top',
         height: '100%',
         borderRadius: 5,
-        fontFamily: 'ISBold',
+        fontFamily: 'ISFBold',
 
     }
     ,
@@ -745,7 +982,59 @@ const styles = ({
         fontFamily: 'ISMedium',
         color: '#333',
         textAlign: 'right',
-    }
+    },
+    capacity: {
+        textAlign: 'right',
+        borderRadius: 5,
+        width: Dimensions.get('window').width - 50,
+        height: 50,
+        backgroundColor: '#fff',
+        color: '#636363',
+        marginTop: 5,
+        paddingHorizontal: 10,
+        marginTop: 10,
+        fontFamily: 'ISBold',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    modal_boxes: {
+        backgroundColor: '#fff',
+        borderRadius: 5
+    },
+    picker_modal: {
+        position: 'absolute',
+        right: 0,
+        left: 0,
+        top: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0,0,0,.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    picker_box: {
+        width: '90%',
+        paddingHorizontal: 5,
+        borderRadius: 5,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 50
+    },
+    picker_item: {
+        fontFamily: 'ISBold',
+        paddingVertical: 10,
+        fontSize: 14,
+        textAlign: 'center',
+        color: '#333'
+    },
+    picker_button: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#f1f1f1',
+        width: '100%',
+        backgroundColor: '#fff',
+        padding: 5
+    },
 
 
 
