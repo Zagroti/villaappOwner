@@ -64,7 +64,7 @@ export default class EditDetails extends Component {
                 { latitude: 51.422548, longitude: 35.732573 },
             ],
             mapHeight: 200,
-            mapWidth: '100%',
+            mapWidth: '90%',
             moreText: 'بزرگتر',
             arrowDown: true,
 
@@ -372,7 +372,7 @@ export default class EditDetails extends Component {
         return (
 
 
-            <View >
+            <View style={{paddingBottom:100}} >
                 <View style={styles.menu} >
                     <Text style={styles.title} >ویلای جدید</Text>
                     <TouchableOpacity style={styles.menu_icon} onPress={() => Actions.pop()}>
@@ -711,7 +711,9 @@ export default class EditDetails extends Component {
                             />
                             
 
-                            <View style={{
+                            
+                        </View>
+                        <View style={{
                                 height: this.state.mapHeight,
                                 overflow: 'hidden',
                                 borderWidth: 2,
@@ -732,7 +734,6 @@ export default class EditDetails extends Component {
                                     {mark}
                                 </Mapir>
                             </View>
-                        </View>
 
 
                         <TouchableOpacity
