@@ -427,6 +427,7 @@ export default class EditDetails extends Component {
                                 placeholder="عنوان"
                                 style={styles.input}
                                 onChangeText={(e) => this._changeInput(e, 'title')}
+                                value={this.state.title}
                             />
 
                             <Textarea
@@ -437,6 +438,7 @@ export default class EditDetails extends Component {
                                 placeholder={'درباره ویلا'}
                                 placeholderTextColor={'#636363'}
                                 underlineColorAndroid={'transparent'}
+                                value={this.state.abouteVilla}
                             />
                         </View>
 
@@ -478,10 +480,10 @@ export default class EditDetails extends Component {
                                     fontFamily: 'ISBold',
                                     color: '#ccc'
                                 }}
-                                value={this.state.condition}
                                 placeholder="میتوانید شرایط خود را درج کنید "
                                 style={styles.input}
                                 onChangeText={(e) => this._writeCondition(e)}
+                                value={this.state.condition}
                             />
                             <GradientButton
                                 width="100%"
@@ -581,6 +583,7 @@ export default class EditDetails extends Component {
                                         fontFamily: 'ISFBold',
                                     }}
                                     onChangeText={(e) => this._changeInput(e, 'area')}
+                                    value={this.state.area}
                                 />
                                 <View style={{ justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center' }} >
                                     <Text style={{ fontFamily: 'ISBold', fontSize: 12, color: '#333' }} >متراژ</Text>
@@ -707,6 +710,7 @@ export default class EditDetails extends Component {
                                 }}
                                 placeholder="آدرس خود را وارد کنید  "
                                 style={styles.input}
+                                value={this.state.address}
                                 onChangeText={(e) => this._changeInput(e, 'address')}
                             />
                             
