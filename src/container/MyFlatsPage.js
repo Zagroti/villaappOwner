@@ -79,7 +79,7 @@ export default class MyFlatsPage extends Component {
                 <View style={{
                     alignItems: 'center',
                     paddingVertical: 20,
-                    backgroundColor: '#b04267',
+                    backgroundColor: '#A52D53',
                     width: '100%'
                 }} >
                     <View style={styles.icon_parent} >
@@ -94,27 +94,27 @@ export default class MyFlatsPage extends Component {
                 </View>
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('MyFlatsPage')}>
                     <Text style={styles.drawer_text}>ویلاهای من</Text>
-                    <Icon size={22} name="home-outline" color="#b04267" />
+                    <Icon size={22} name="home-outline" color="#A52D53" />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('Home')}>
                     <Text style={styles.drawer_text}>درخواست ها</Text>
-                    <Icon size={22} name="home-city-outline" color="#b04267" />
+                    <Icon size={22} name="home-city-outline" color="#A52D53" />
                 </TouchableOpacity>
 
                 {/* got to history */}
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('History')}>
                     <Text style={styles.drawer_text}>تاریخچه</Text>
-                    <Icon size={22} name="calendar-clock" color="#b04267" />
+                    <Icon size={22} name="calendar-clock" color="#A52D53" />
                 </TouchableOpacity>
 
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('Profile')}>
                     <Text style={styles.drawer_text}>پروفایل</Text>
-                    <Icon size={22} name="account-outline" color="#b04267" />
+                    <Icon size={22} name="account-outline" color="#A52D53" />
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={this._exit}>
                     <Text style={styles.drawer_text}>خروج</Text>
-                    <Icon size={22} name="exit-to-app" color="#b04267" />
+                    <Icon size={22} name="exit-to-app" color="#A52D53" />
                 </TouchableOpacity>
             </View>
         );
@@ -159,22 +159,19 @@ export default class MyFlatsPage extends Component {
                         bottom: 140,
                         zIndex: 10,
                         right: 20,
-                        width: 70,
-                        height: 70,
+                        width: 80,
+                        height: 80,
                         borderRadius: 40,
-                        backgroundColor: '#f3f3f3',
+                        backgroundColor: '#A52D53',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        borderWidth: 3,
-                        borderColor: '#A52D53',
-                        elevation: 10
                     }}
                         onPress={() => {
                             Actions.EditDetails()
                         }}
                     >
-                        <Icon size={42} name="plus" color="#A52D53" />
+                        <Icon size={50} name="plus" color="#fff" />
                     </TouchableOpacity>
 
 
@@ -272,7 +269,7 @@ const styles = ({
     },
     drawer_text: {
         fontSize: 12,
-        color: '#b04267',
+        color: '#A52D53',
         fontFamily: 'ISMedium',
         marginRight: 10,
     },

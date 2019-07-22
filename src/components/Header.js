@@ -15,7 +15,7 @@ const Header = (props) => (
     <View style={styles.menu} >
         <Text style={styles.title} >{props.title}</Text>
         <TouchableOpacity style={styles.menu_icon} onPress={props.press}>
-            <Icon size={36} name={props.icon} color={props.color} />
+            <Icon size={32} name={props.icon} color={props.color} />
         </TouchableOpacity>
     </View>
 )

@@ -14,7 +14,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
-
 //components 
 import NoRequest from '../components/NoRequest';
 import Requestitems from '../components/RequestItems';
@@ -28,17 +27,9 @@ export default class Home extends Component {
         super(props)
         this.state = {
             modalVisible: false,
-            color_1: '#C72652',
-            color_2: '#555',
-            color_3: '#555',
-            color_4: '#555',
-            red: '#C72652',
-            black: '#555',
-            tab1: true,
-            tab2: false,
-            tab3: false,
-            tab4: false,
-
+            activeColor: '#A52D53',
+            inactiveColor: '#555',
+            tab:[true,false,false,false]
         };
     }
 
@@ -100,52 +91,7 @@ export default class Home extends Component {
 
     // change tabs for request type
     _changeTab = (tab) => {
-        if (tab === 'tab1') {
-            this.setState({
-                color_1: this.state.red,
-                color_2: this.state.black,
-                color_3: this.state.black,
-                color_4: this.state.black,
-                tab1: true,
-                tab2: false,
-                tab3: false,
-                tab4: false
-            })
-        } else if (tab === 'tab2') {
-            this.setState({
-                color_1: this.state.black,
-                color_2: this.state.red,
-                color_3: this.state.black,
-                color_4: this.state.black,
-                tab1: false,
-                tab2: true,
-                tab3: false,
-                tab4: false
-            })
-        } else if (tab === 'tab3') {
-            this.setState({
-                color_1: this.state.black,
-                color_2: this.state.black,
-                color_3: this.state.red,
-                color_4: this.state.black,
-                tab1: false,
-                tab2: false,
-                tab3: true,
-                tab4: false
-            })
-        } else if (tab === 'tab4') {
-            this.setState({
-                color_1: this.state.black,
-                color_2: this.state.black,
-                color_3: this.state.black,
-                color_4: this.state.red,
-                tab1: false,
-                tab2: false,
-                tab3: false,
-                tab4: true
-            })
-        }
-
+        this.setState({tab:tab})
     }
 
     render() {
@@ -167,8 +113,8 @@ export default class Home extends Component {
                     <View style={styles.person_desc} >
                         <Text style={styles.person_name} >جمیله باغی تبار</Text>
                     </View>
-
                 </View>
+
                 <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('MyFlatsPage')}>
                     <Text style={styles.drawer_text}>ویلاهای من</Text>
                     <Icon size={22} name="home-outline" color="#b04267" />
@@ -220,27 +166,31 @@ export default class Home extends Component {
 
                     {/* request box  */}
                     <View style={styles.up} >
-                        <View style={styles.tab}  >
-                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab1')}>
-                                <Icon name="gesture-tap" size={20} color={this.state.color_1} />
-                                <Text style={[styles.tab_text, { color: this.state.color_1 }]}>درخواست ها</Text>
+                        <View style={styles.tab}>
+
+                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab(tab=[true,false,false,false])}>
+                                <Icon name="gesture-tap" size={20} color={this.state.tab[0] ? this.state.activeColor : this.state.inactiveColor} />
+                                <Text style={[styles.tab_text, { color: this.state.tab[0] ? this.state.activeColor : this.state.inactiveColor }]}>درخواست ها</Text>
                             </TouchableOpacity>
-                            <Text style={styles.line} ></Text>
-                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab2')}>
-                                <Icon name="close-box-multiple" size={20} color={this.state.color_2} />
-                                <Text style={[styles.tab_text, { color: this.state.color_2 }]}>رد شده  </Text>
+
+                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab(tab=[false,true,false,false])}>
+                                <Icon name="close-box-multiple" size={20} color={this.state.tab[1] ? this.state.activeColor : this.state.inactiveColor} />
+                                <Text style={[styles.tab_text, { color:this.state.tab[1] ? this.state.activeColor : this.state.inactiveColor }]}>رد شده  </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab3')}>
-                                <Icon name="alarm-check" size={20} color={this.state.color_3} />
-                                <Text style={[styles.tab_text, { color: this.state.color_3 }]}>تایید شده</Text>
+
+                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab(tab=[false,false,true,false])}>
+                                <Icon name="alarm-check" size={20} color={this.state.tab[2] ? this.state.activeColor : this.state.inactiveColor} />
+                                <Text style={[styles.tab_text, { color: this.state.tab[2] ? this.state.activeColor : this.state.inactiveColor }]}>تایید شده</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab('tab4')}>
-                                <Icon name="alarm-multiple" size={20} color={this.state.color_4} />
-                                <Text style={[styles.tab_text, { color: this.state.color_4 }]}>رزرو شده</Text>
+
+                            <TouchableOpacity style={styles.tab_box} onPress={() => this._changeTab(tab=[false,false,false,true])}>
+                                <Icon name="alarm-multiple" size={20} color={this.state.tab[3] ? this.state.activeColor : this.state.inactiveColor} />
+                                <Text style={[styles.tab_text, { color: this.state.tab[3] ? this.state.activeColor : this.state.inactiveColor }]}>رزرو شده</Text>
                             </TouchableOpacity>
+                        
                         </View>
                         {
-                            this.state.tab1 ?
+                            this.state.tab[0] ?
                                 <ScrollView contentContainerStyle={styles.requestBox} >
                                     {/* <NoRequest /> */}
                                     <Requestitems navigate={this._showRequestsNavigate} />
@@ -254,7 +204,7 @@ export default class Home extends Component {
                         }
 
                         {
-                            this.state.tab2 ?
+                            this.state.tab[1] ?
                                 <ScrollView contentContainerStyle={styles.requestBox} >
                                     {/* <NoRequest /> */}
                                     <Requestitems navigate={this._showRequestsNavigate} />
@@ -265,7 +215,7 @@ export default class Home extends Component {
 
 
                         {
-                            this.state.tab3 ?
+                            this.state.tab[2] ?
                                 <ScrollView contentContainerStyle={styles.requestBox} >
                                     {/* <NoRequest /> */}
                                     <Requestitems navigate={this._showRequestsNavigate} />
@@ -273,7 +223,7 @@ export default class Home extends Component {
                                 </ScrollView> : <Text style={{ height: 0 }}></Text>
                         }
                         {
-                            this.state.tab4 ?
+                            this.state.tab[3] ?
                                 <ScrollView contentContainerStyle={styles.requestBox} >
                                     {/* <NoRequest /> */}
                                     <Requestitems navigate={this._showRequestsNavigate} />
