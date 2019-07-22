@@ -160,14 +160,14 @@ export default class MyFlatsPage extends Component {
                         bottom: 140,
                         zIndex: 10,
                         right: 20,
-                        width: 80,
-                        height: 80,
+                        width: 70,
+                        height: 70,
                         borderRadius: 40,
                         backgroundColor: '#f3f3f3',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        borderWidth: 4,
+                        borderWidth: 3,
                         borderColor: '#A52D53',
                         elevation:10
                     }}
@@ -175,7 +175,7 @@ export default class MyFlatsPage extends Component {
                             Actions.EditDetails()
                         }}
                     >
-                        <Icon size={60} name="plus" color="#A52D53" />
+                        <Icon size={42} name="plus" color="#A52D53" />
                     </TouchableOpacity>
 
 
