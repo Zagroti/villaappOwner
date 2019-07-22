@@ -156,20 +156,26 @@ export default class MyFlatsPage extends Component {
                         </ScrollView>
                     </View>
                     <TouchableOpacity activeOpacity={.9} style={{
-                        position: 'absolute', bottom: 140, zIndex: 10, right: 20, width: 80,
+                        position: 'absolute',
+                        bottom: 140,
+                        zIndex: 10,
+                        right: 20,
+                        width: 80,
                         height: 80,
                         borderRadius: 40,
-                        backgroundColor: '#B62750',
+                        backgroundColor: '#f3f3f3',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
-
+                        borderWidth: 4,
+                        borderColor: '#A52D53',
+                        elevation:10
                     }}
                         onPress={() => {
                             Actions.EditDetails()
                         }}
                     >
-                        <Icon size={60} name="plus" color="#fff" />
+                        <Icon size={60} name="plus" color="#A52D53" />
                     </TouchableOpacity>
 
 
@@ -186,7 +192,7 @@ export default class MyFlatsPage extends Component {
 const styles = ({
 
     MyFlatsPage: {
-        backgroundColor: "#C92652",
+        backgroundColor: "#fff",
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').width,
         flex: 1,
@@ -194,7 +200,7 @@ const styles = ({
     },
 
     menu: {
-        backgroundColor: '#f6f6f6',
+        backgroundColor: '#f3f3f3',
         flexDirection: 'row',
         justifyContent: 'flex-end',
         height: 50,
@@ -222,7 +228,7 @@ const styles = ({
         alignItems: 'center',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
-        backgroundColor: '#f6f6f6',
+        backgroundColor: '#f3f3f3',
         borderBottomLeftRadius: 0,
         overflow: 'hidden',
         zIndex: 1,

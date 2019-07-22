@@ -27,7 +27,9 @@ export default class ResultItems extends Component {
                     height: 100,
                     marginTop: 10,
                     zIndex: 10,
-                    backgroundColor: this.state.touchColor
+                    backgroundColor: this.state.touchColor,
+                    overflow: 'hidden',
+
                 }}
                 activeOpacity={.9}
                 onPress={this.props.navigate}
@@ -41,7 +43,7 @@ export default class ResultItems extends Component {
                         borderTopLeftRadius: 10,
                         borderBottomLeftRadius: 30,
                         flex: 3,
-                        height: 90
+                        height: 90,
                     }} >
 
                     <View style={styles.up}>
