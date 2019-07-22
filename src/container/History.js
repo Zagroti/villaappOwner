@@ -3,17 +3,13 @@ import {
     Text,
     View,
     Dimensions,
-    TextInput,
-    Image,
-    KeyboardAvoidingView,
-    TouchableOpacity
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //components
 import GradientButton from '../components/GradientButton';
+import Header from '../components/Header';
 
 
 
@@ -37,12 +33,12 @@ export default class History extends Component {
 
             <View style={styles.History}>
 
-                <View style={styles.menu} >
-                    <Text style={styles.title} >تاریخچه</Text>
-                    <TouchableOpacity style={styles.menu_icon} onPress={() => Actions.pop()}>
-                        <Icon size={36} name="arrow-right" color="#636363" />
-                    </TouchableOpacity>
-                </View>
+                <Header title="تاریخچه"
+                    icon="arrow-right"
+                    color="#636363"
+                    press={() => Actions.pop()}
+                />
+
                 <View style={styles.history_box}>
 
                     <Text>چیزی برای نمایش وجود ندارد</Text>
@@ -70,29 +66,7 @@ const styles = ({
         // justifyContent: 'center',
         alignItems: 'center',
     },
-    menu: {
-        backgroundColor: '#f6f6f6',
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        height: 50,
-        width: '100%',
-        paddingVertical: 5,
-        alignItems: 'center',
-    },
 
-    title: {
-        fontSize: 14,
-        fontFamily: 'ISBold',
-        color: '#333',
-        textAlign: 'center',
-    },
-    menu_icon: {
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative'
-    },
 
     history_box: {
         flexDirection: 'column',

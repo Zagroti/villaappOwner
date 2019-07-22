@@ -26,6 +26,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import GradientButton from '../components/GradientButton'
 import CheckboxIcon from '../components/CheckboxIcon';
 import Counter from '../components/Counter'
+import Header from '../components/Header';
 
 
 // import ImagePicker from 'react-native-image-picker';
@@ -328,6 +329,7 @@ export default class EditDetails extends Component {
         })
     }
 
+
     //select capacity of rooms beds ...
     _setProps = async (name, val) => {
         await this.setState({
@@ -373,12 +375,13 @@ export default class EditDetails extends Component {
 
 
             <View style={{ paddingBottom: 100 }} >
-                <View style={styles.menu} >
-                    <Text style={styles.title} >ویلای جدید</Text>
-                    <TouchableOpacity style={styles.menu_icon} onPress={() => Actions.pop()}>
-                        <Icon size={36} name="arrow-right" color="#636363" />
-                    </TouchableOpacity>
-                </View>
+                <Header title="ویلای جدید"
+                    icon="arrow-right"
+                    color="#636363"
+                    press={() => Actions.pop()}
+                />
+
+
                 <ScrollView >
                     <KeyboardAvoidingView style={styles.EditDetails} behavior="padding" enabled>
 
@@ -783,32 +786,6 @@ const styles = ({
         alignItems: 'center',
         backgroundColor: '#f3f3f3',
     },
-    menu: {
-        backgroundColor: '#f6f6f6',
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        height: 50,
-        width: '100%',
-        paddingVertical: 5,
-        alignItems: 'center',
-    },
-
-    title: {
-        fontSize: 14,
-        fontFamily: 'ISBold',
-        color: '#333',
-        textAlign: 'center',
-    },
-    menu_icon: {
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative'
-    },
-
-
-
     edit_details_description: {
         backgroundColor: '#eee',
         borderBottomRightRadius: 20,

@@ -18,6 +18,7 @@ import Slider from '@react-native-community/slider';
 
 //components 
 import GradientButton from '../components/GradientButton'
+import Header from '../components/Header';
 
 
 
@@ -75,14 +76,14 @@ export default class RentPage extends Component {
     }
 
     //close modal
-    setModalVisible(visible) {
+    _setModalVisible(visible) {
         this.setState({ modalVisible: visible });
     }
 
 
     _acceptRequest = () => {
         Actions.Profile();
-        this.setModalVisible(false);
+        this._setModalVisible(false);
     }
 
 
@@ -96,12 +97,11 @@ export default class RentPage extends Component {
 
             <View style={styles.rent_page} >
 
-                <View style={styles.menu} >
-                    <Text style={styles.title} >اجاره آپارتمان رویال</Text>
-                    <TouchableOpacity style={styles.menu_icon} onPress={() => Actions.pop()}>
-                        <Icon size={36} name="arrow-right" color="#636363" />
-                    </TouchableOpacity>
-                </View>
+                <Header title="اجاره آپارتمان رویال"
+                    icon="arrow-right"
+                    color="#636363"
+                    press={() => Actions.pop()}
+                />
 
                 {/* request box  */}
                 <View style={{
@@ -158,14 +158,16 @@ export default class RentPage extends Component {
                                             borderBottomColor: '#333',
                                             alignItems: 'center',
                                             justifyContent: 'center',
-                                            width:'100%',
+                                            width: '100%',
                                         }} >
                                             <Text style={{ fontSize: 10, fontFamily: 'IS', color: '#666' }} >(تومان)</Text>
                                             <Text style={{ fontSize: 13, fontFamily: 'IS', color: '#555' }} >قیمت پیشنهادی  </Text>
                                         </View>
-                                           
-                                        <View style={{ flexDirection: 'row',alignItems: 'center', width:'100%',
-                                            justifyContent: 'center', }} >
+
+                                        <View style={{
+                                            flexDirection: 'row', alignItems: 'center', width: '100%',
+                                            justifyContent: 'center',
+                                        }} >
                                             <Text style={{ fontSize: 13, fontFamily: 'ISMedium', color: '#555' }} >150,000 </Text>
                                             <Text style={{ fontSize: 13, fontFamily: 'ISMedium', color: '#555' }} > - </Text>
                                             <Text style={{ fontSize: 13, fontFamily: 'ISMedium', color: '#555' }} >1,350,000 </Text>
@@ -195,7 +197,7 @@ export default class RentPage extends Component {
                                         {/* <Text style={{ fontSize: 12, fontFamily: 'IS', color: '#555' }}>تعداد  </Text> */}
                                         <Icon size={24} name="account-group-outline" color="#fff" />
                                     </View>
-                                    <View style={{width:1,height:'100%',backgroundColor:'#ccc'}} ></View>
+                                    <View style={{ width: 1, height: '100%', backgroundColor: '#ccc' }} ></View>
                                     <View style={styles.twins}>
                                         <Text style={{ fontSize: 12, fontFamily: 'ISMedium', color: '#fff', marginHorizontal: 5 }}>1398/11/08</Text>
                                         <Text style={{ fontSize: 12, fontFamily: 'ISMedium', color: '#fff', marginHorizontal: 5 }}> - </Text>
@@ -298,7 +300,7 @@ export default class RentPage extends Component {
                         }} >
 
                             <GradientButton
-                                width="49%"
+                                width="34%"
                                 press={() => Actions.pop()}
                                 color_1="#dfdfdf"
                                 color_2="#dfdfdf"
@@ -309,8 +311,8 @@ export default class RentPage extends Component {
                                 title="انصراف"
                             />
                             <GradientButton
-                                width="49%"
-                                press={() => { this.setModalVisible(true) }}
+                                width="60%"
+                                press={() => { this._setModalVisible(true) }}
                                 color_2="#6fcf97"
                                 color_1="#36a35b"
                                 height={50}
@@ -344,7 +346,9 @@ export default class RentPage extends Component {
 
 
                         {/* Modal Body */}
-                        <View style={styles.Modal}>
+                        <TouchableOpacity style={styles.Modal} 
+                            onPress={() => this._setModalVisible(false) }
+                        >
                             <View style={{
                                 backgroundColor: '#fff',
                                 width: '90%',
@@ -370,8 +374,8 @@ export default class RentPage extends Component {
                                 <View style={{ width: '90%', justifyContent: 'space-between', flexDirection: 'row' }} >
 
                                     <GradientButton
-                                        width="49%"
-                                        press={() => { this.setModalVisible(false); }}
+                                        width="34%"
+                                        press={() => { this._setModalVisible(false); }}
                                         color_2="#C50143"
                                         color_1="#C50143"
                                         height={40}
@@ -381,7 +385,7 @@ export default class RentPage extends Component {
                                         title="خیر"
                                     />
                                     <GradientButton
-                                        width="49%"
+                                        width="60%"
                                         press={this._acceptRequest}
                                         color_1="#63CB8E"
                                         color_2="#63CB8E"
@@ -395,7 +399,7 @@ export default class RentPage extends Component {
 
                             </View>
 
-                        </View>
+                        </TouchableOpacity>
                     </InputScrollView>
 
 
@@ -417,29 +421,7 @@ const styles = ({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
     },
-    menu: {
-        backgroundColor: '#f6f6f6',
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        height: 50,
-        width: '100%',
-        paddingVertical: 5,
-        alignItems: 'center',
-    },
 
-    title: {
-        fontSize: 14,
-        fontFamily: 'ISBold',
-        color: '#333',
-        textAlign: 'center',
-    },
-    menu_icon: {
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative'
-    },
     my_box: {
         flexDirection: 'column',
         alignItems: 'center',

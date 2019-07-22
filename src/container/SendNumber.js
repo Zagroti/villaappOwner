@@ -7,7 +7,6 @@ import {
     View,
     Dimensions,
     TextInput,
-    Platform,
     KeyboardAvoidingView,
     Animated
 } from 'react-native';

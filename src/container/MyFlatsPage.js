@@ -16,7 +16,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 //components 
 import ResultItems from '../components/ResultItems';
 import NoFlat from '../components/NoFlat';
-
+import Header from '../components/Header'
 
 
 export default class MyFlatsPage extends Component {
@@ -72,6 +72,7 @@ export default class MyFlatsPage extends Component {
 
     render() {
 
+        //drawer menu
         const navigationView = (
             <View style={{ flex: 1, backgroundColor: '#fff', alignItems: 'center' }}>
                 {/* <Text style={{ margin: 10, fontSize: 15, textAlign: 'left' }}>I'm in the Drawer!</Text> */}
@@ -133,13 +134,11 @@ export default class MyFlatsPage extends Component {
             >
                 <View style={styles.MyFlatsPage} >
 
-                    {/* MENU */}
-                    <View style={styles.menu} >
-                        <Text style={styles.title} >ویلاهای من </Text>
-                        <TouchableOpacity style={styles.menu_icon} onPress={this._openDrawer}>
-                            <Icon size={36} name="menu" color="#636363" />
-                        </TouchableOpacity>
-                    </View>
+                    <Header title="ویلاهای من"
+                        icon="menu"
+                        color="#636363"
+                        press={() => this._openDrawer()}
+                    />
 
 
                     {/* request box  */}
@@ -169,7 +168,7 @@ export default class MyFlatsPage extends Component {
                         alignItems: 'center',
                         borderWidth: 3,
                         borderColor: '#A52D53',
-                        elevation:10
+                        elevation: 10
                     }}
                         onPress={() => {
                             Actions.EditDetails()
@@ -199,29 +198,7 @@ const styles = ({
 
     },
 
-    menu: {
-        backgroundColor: '#f3f3f3',
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        height: 50,
-        width: '100%',
-        paddingVertical: 5,
-        alignItems: 'center',
-    },
 
-    title: {
-        fontSize: 14,
-        fontFamily: 'ISBold',
-        color: '#333',
-        textAlign: 'center',
-    },
-    menu_icon: {
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative'
-    },
     up: {
         flexDirection: 'column',
         justifyContent: 'flex-start',

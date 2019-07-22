@@ -18,6 +18,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 //components 
 import NoRequest from '../components/NoRequest';
 import Requestitems from '../components/RequestItems';
+import Header from '../components/Header';
 
 
 
@@ -210,13 +211,11 @@ export default class Home extends Component {
             >
                 <View style={styles.home_cover} >
 
-                    {/* MENU */}
-                    <View style={styles.menu} >
-                        <Text style={styles.title} >درخواست ها</Text>
-                        <TouchableOpacity style={styles.menu_icon} onPress={this._openDrawer}>
-                            <Icon size={32} name="menu" color="#636363" />
-                        </TouchableOpacity>
-                    </View>
+                    <Header title="درخواست ها"
+                        icon="menu"
+                        color="#636363"
+                        press={() => this._openDrawer()}
+                    />
 
 
                     {/* request box  */}
