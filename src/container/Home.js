@@ -65,8 +65,8 @@ export default class Home extends Component {
     }
 
 
-     // log out
-     _exit = () => {
+    // log out
+    _exit = () => {
         console.log(111)
         this._removeData()
         Actions.replace('SendNumber')
@@ -76,31 +76,22 @@ export default class Home extends Component {
             await AsyncStorage.removeItem('login')
             console.log(AsyncStorage.getItem('login'))
         } catch (e) {
-            
+
         }
     }
 
 
-    //footer actions
+    //drawer actions
     _navigate = (path) => {
-        if (path === 'profile') {
-            Actions.Profile()
-        }
-        if (path === 'myFlatPage') {
-            Actions.MyFlatsPage()
-        }
-        if (path === 'home') {
-            Actions.Home()
-        }
-        if (path === 'history') {
-            Actions.History()
-        }
+        //go to route
+        Actions[path]()
 
-
+        //close drawer
         this.refs['DRAWER_REF'].closeDrawer();
 
     }
 
+    // gor to rent page 
     _showRequestsNavigate = () => {
         Actions.RentPage()
     }
@@ -177,23 +168,23 @@ export default class Home extends Component {
                     </View>
 
                 </View>
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('myFlatPage')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('MyFlatsPage')}>
                     <Text style={styles.drawer_text}>ویلاهای من</Text>
                     <Icon size={22} name="home-outline" color="#b04267" />
                 </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('home')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('Home')}>
                     <Text style={styles.drawer_text}>درخواست ها</Text>
                     <Icon size={22} name="home-city-outline" color="#b04267" />
                 </TouchableOpacity>
 
                 {/* got to history */}
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('history')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('History')}>
                     <Text style={styles.drawer_text}>تاریخچه</Text>
                     <Icon size={22} name="calendar-clock" color="#b04267" />
                 </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('Profile')}>
                     <Text style={styles.drawer_text}>پروفایل</Text>
                     <Icon size={22} name="account-outline" color="#b04267" />
                 </TouchableOpacity>
@@ -213,8 +204,8 @@ export default class Home extends Component {
                 drawerPosition={DrawerLayoutAndroid.positions.Right}
                 renderNavigationView={() => navigationView}
                 onDrawerSlide={(e) => { }}
-                onDrawerStateChanged={(e) => {  }}
-                onDrawerClose={(e) => {  }}
+                onDrawerStateChanged={(e) => { }}
+                onDrawerClose={(e) => { }}
                 onDrawerOpen={(e) => { this._openDrawer.bind(this) }}
             >
                 <View style={styles.home_cover} >
@@ -282,7 +273,7 @@ export default class Home extends Component {
 
                                 </ScrollView> : <Text style={{ height: 0 }}></Text>
                         }
-                         {
+                        {
                             this.state.tab4 ?
                                 <ScrollView contentContainerStyle={styles.requestBox} >
                                     {/* <NoRequest /> */}
@@ -344,8 +335,8 @@ const styles = ({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative'
-    }, 
-     up: {
+    },
+    up: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -364,7 +355,7 @@ const styles = ({
         flexDirection: 'row-reverse',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        paddingTop:10
+        paddingTop: 10
     },
 
     footer: {
@@ -465,7 +456,7 @@ const styles = ({
         justifyContent: 'space-around',
         alignItems: 'center',
         marginVertical: 10,
-        paddingHorizontal:5
+        paddingHorizontal: 5
     },
     tab_box: {
         width: '25%',

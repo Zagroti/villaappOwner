@@ -34,44 +34,35 @@ export default class MyFlatsPage extends Component {
     }
 
 
- // log out
- _exit = () => {
-    console.log(111)
-    this._removeData()
-    Actions.replace('SendNumber')
-}
-_removeData = async () => {
-    try {
-        await AsyncStorage.removeItem('login')
-        console.log(AsyncStorage.getItem('login'))
-    } catch (e) {
-        
+    // log out
+    _exit = () => {
+        console.log(111)
+        this._removeData()
+        Actions.replace('SendNumber')
     }
-}
+    _removeData = async () => {
+        try {
+            await AsyncStorage.removeItem('login')
+            console.log(AsyncStorage.getItem('login'))
+        } catch (e) {
+
+        }
+    }
 
 
-    //menu actions
+    //drawer actions
     _navigate = (path) => {
-        if (path === 'profile') {
-            Actions.Profile()
-        }
-        if (path === 'myFlat') {
-            Actions.MyFlatsPage()
-        }
-        if (path === 'home') {
-            Actions.Home()
-        }
-        if (path === 'history') {
-            Actions.History()
-        }
+        //go to route
+        Actions[path]()
 
+        //close drawer
         this.refs['DRAWER_REF'].closeDrawer();
 
     }
 
 
 
-
+    // go to detail page
     _showDetail = () => {
         Actions.Details()
     }
@@ -100,23 +91,23 @@ _removeData = async () => {
                     </View>
 
                 </View>
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('myFlatPage')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('MyFlatsPage')}>
                     <Text style={styles.drawer_text}>ویلاهای من</Text>
                     <Icon size={22} name="home-outline" color="#b04267" />
                 </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('home')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('Home')}>
                     <Text style={styles.drawer_text}>درخواست ها</Text>
                     <Icon size={22} name="home-city-outline" color="#b04267" />
                 </TouchableOpacity>
 
                 {/* got to history */}
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('history')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('History')}>
                     <Text style={styles.drawer_text}>تاریخچه</Text>
                     <Icon size={22} name="calendar-clock" color="#b04267" />
                 </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('profile')}>
+                <TouchableOpacity activeOpacity={.6} style={styles.bottomIcons} onPress={(e) => this._navigate('Profile')}>
                     <Text style={styles.drawer_text}>پروفایل</Text>
                     <Icon size={22} name="account-outline" color="#b04267" />
                 </TouchableOpacity>
