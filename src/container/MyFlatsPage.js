@@ -174,7 +174,7 @@ export default class MyFlatsPage extends Component {
                         <LinearGradient
                             start={{ x: 1, y: 1 }}
                             end={{ x: 1, y: 0 }}
-                            colors={[ '#cb587b','#A52D53']}
+                            colors={[ '#c73664','#A52D53']}
                             style={{
                                 width: 70,
                                 height: 70,
@@ -182,7 +182,7 @@ export default class MyFlatsPage extends Component {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}>
-                            <Icon size={44} name="plus" color="#fff" />
+                            <Icon size={36} name="plus" color="#fff" />
                         </LinearGradient>
                     </TouchableOpacity>
 
