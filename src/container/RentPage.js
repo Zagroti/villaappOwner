@@ -300,7 +300,7 @@ export default class RentPage extends Component {
                         }} >
 
                             <GradientButton
-                                width="34%"
+                                width={(Dimensions.get('window').width - 60)*2/5 }
                                 press={() => Actions.pop()}
                                 color_1="#dfdfdf"
                                 color_2="#dfdfdf"
@@ -310,8 +310,10 @@ export default class RentPage extends Component {
                                 size={16}
                                 title="انصراف"
                             />
+                            <View style={{width:10}} ></View>
+
                             <GradientButton
-                                width="60%"
+                                width={(Dimensions.get('window').width - 60)*3/5 }
                                 press={() => { this._setModalVisible(true) }}
                                 color_2="#6fcf97"
                                 color_1="#36a35b"
@@ -346,9 +348,7 @@ export default class RentPage extends Component {
 
 
                         {/* Modal Body */}
-                        <TouchableOpacity style={styles.Modal} 
-                            onPress={() => this._setModalVisible(false) }
-                        >
+                        <View style={styles.Modal} >
                             <View style={{
                                 backgroundColor: '#fff',
                                 width: '90%',
@@ -399,7 +399,7 @@ export default class RentPage extends Component {
 
                             </View>
 
-                        </TouchableOpacity>
+                        </View>
                     </InputScrollView>
 
 
