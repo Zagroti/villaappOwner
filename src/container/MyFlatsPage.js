@@ -11,6 +11,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-community/async-storage';
+import LinearGradient from 'react-native-linear-gradient';
 
 
 //components 
@@ -154,24 +155,35 @@ export default class MyFlatsPage extends Component {
                             <ResultItems navigate={this._showDetail} />
                         </ScrollView>
                     </View>
-                    <TouchableOpacity activeOpacity={.9} style={{
-                        position: 'absolute',
-                        bottom: 140,
-                        zIndex: 10,
-                        right: 20,
-                        width: 80,
-                        height: 80,
-                        borderRadius: 40,
-                        backgroundColor: '#A52D53',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                        onPress={() => {
-                            Actions.EditDetails()
-                        }}
-                    >
-                        <Icon size={50} name="plus" color="#fff" />
+
+                    <TouchableOpacity activeOpacity={.9}
+                        onPress={() => Actions.EditDetails()}
+                        style={{
+                            position: 'absolute',
+                            bottom: 140,
+                            zIndex: 10,
+                            right: 20,
+                            width: 70,
+                            height: 70,
+                            borderRadius: 18,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor:'#333',
+                            elevation:10
+                        }}>
+                        <LinearGradient
+                            start={{ x: 1, y: 1 }}
+                            end={{ x: 1, y: 0 }}
+                            colors={[ '#cb587b','#A52D53']}
+                            style={{
+                                width: 70,
+                                height: 70,
+                                borderRadius: 18,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                            <Icon size={44} name="plus" color="#fff" />
+                        </LinearGradient>
                     </TouchableOpacity>
 
 

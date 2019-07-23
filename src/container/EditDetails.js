@@ -831,7 +831,7 @@ const styles = ({
         flexWrap: 'wrap',
         flexDirection: 'row',
         backgroundColor: '#fff',
-        marginTop: 20,
+        marginTop: 10,
         padding: 20,
         borderRadius: 5,
     },
