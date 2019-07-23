@@ -385,6 +385,41 @@ export default class EditDetails extends Component {
                 <ScrollView >
                     <KeyboardAvoidingView style={styles.EditDetails} behavior="padding" enabled>
 
+                        <View style={{
+                            height: this.state.mapHeight,
+                            overflow: 'hidden',
+                            borderWidth: 2,
+                            borderColor: '#fff',
+                            borderRadius: 10,
+                            backgroundColor: '#fff',
+                            width: this.state.mapWidth,
+                            marginTop: 10
+                        }} >
+                            <Mapir
+                                accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
+                                zoomLevel={6}
+                                centerCoordinate={[51.422548, 35.732573]}
+                                showUserLocation={true}
+                                onPress={e => this.addMarker(e.geometry.coordinates)}
+                                style={{ flex: 1 }}
+                                userTrackingMode={20}
+                            >
+                                {mark}
+                            </Mapir>
+                        </View>
+                        <TouchableOpacity
+                            style={{ marginVertical: 10, alignItems: 'center' }}
+                            onPress={this._mapHeightChanger}
+                        >
+                            <Text style={{
+                                fontSize: 13,
+                                fontFamily: 'ISBold',
+                                color: '#ccc',
+                                marginVertical: 2
+                            }} >{this.state.moreText}</Text>
+                            {this.state.arrowDown ? arrowDown : arrowUp}
+                        </TouchableOpacity>
+
 
 
                         <View style={styles.edit_details_1} >
@@ -711,41 +746,10 @@ export default class EditDetails extends Component {
                         </View>
 
 
-                        <View style={{
-                            height: this.state.mapHeight,
-                            overflow: 'hidden',
-                            borderWidth: 2,
-                            borderColor: '#fff',
-                            borderRadius: 10,
-                            backgroundColor: '#fff',
-                            width: this.state.mapWidth,
-                            marginTop: 10
-                        }} >
-                            <Mapir
-                                accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
-                                zoomLevel={6}
-                                centerCoordinate={[51.422548, 35.732573]}
-                                showUserLocation={true}
-                                onPress={e => this.addMarker(e.geometry.coordinates)}
-                                style={{ flex: 1 }}
-                            >
-                                {mark}
-                            </Mapir>
-                        </View>
 
 
-                        <TouchableOpacity
-                            style={{ marginVertical: 10, alignItems: 'center' }}
-                            onPress={this._mapHeightChanger}
-                        >
-                            <Text style={{
-                                fontSize: 13,
-                                fontFamily: 'ISBold',
-                                color: '#ccc',
-                                marginVertical: 2
-                            }} >{this.state.moreText}</Text>
-                            {this.state.arrowDown ? arrowDown : arrowUp}
-                        </TouchableOpacity>
+
+                        
 
 
 
