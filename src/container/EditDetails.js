@@ -16,7 +16,6 @@ import {
 } from 'react-native';
 
 
-import Mapir from 'mapir-react-native-sdk'
 import { Actions } from 'react-native-router-flux';
 import Textarea from 'react-native-textarea';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

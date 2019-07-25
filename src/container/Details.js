@@ -10,9 +10,9 @@ import {
     SafeAreaView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Mapir from 'mapir-react-native-sdk'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ImageSlider from 'react-native-image-slider';
+import MapView, { Marker } from 'react-native-maps';
 
 
 //components 
@@ -72,7 +72,10 @@ export default class Details extends Component {
             aboutvila: false,
             conditionsText: 'بیشتر',
             conditions: false,
-            sliderFullScreen: false
+            sliderFullScreen: false,
+            markers: [
+                { latitude: 35.68925, longitude: 51.3890,  latitudeDelta: 0,longitudeDelta: 0, },
+            ],
 
         }
     }
@@ -224,6 +227,15 @@ export default class Details extends Component {
             'https://placeimg.com/640/640/beer',
         ];
 
+
+        // map marker
+        const marker = (
+            this.state.markers.map(marker => (
+                <Marker coordinate={marker} key={marker.latitude}>
+                    <Icon name="map-marker" size={45} color="#a52d53" />
+                </Marker>
+            ))
+        )
 
 
 
@@ -491,17 +503,16 @@ export default class Details extends Component {
 
 
                         <View style={{ width: '100%', height: 250, marginTop: 20 }}>
-                            <Mapir
-                                accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
-                                zoomLevel={13}
-                                centerCoordinate={[51.422548, 35.732573]}
-                                style={{ flex: 1 }}>
-                                <Mapir.Marker
-                                    id={'1'}
-                                    coordinate={[51.422548, 35.732573]}
-                                />
-
-                            </Mapir>
+                            <MapView
+                                style={{ flex: 1 }}
+                                mapType="hybrid"
+                                zoomLevel={7}
+                                scrollEnabled={false}
+                                initialRegion={this.state.markers[0]}
+                                maxZoomLevel={16}
+                            >
+                                {marker}
+                            </MapView>
                         </View>
 
                         <View style={styles.save_button}
