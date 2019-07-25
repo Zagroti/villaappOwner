@@ -84,7 +84,7 @@ class Routes extends React.Component {
             < Router >
                 <Scene key="root" >
 
-                    {/* <Scene key="SendNumber"
+                    <Scene key="SendNumber"
                         component={SendNumber}
                         title=""
                         hideNavBar={true}
@@ -124,7 +124,7 @@ class Routes extends React.Component {
                         title=""
                         hideNavBar={true}
 
-                    /> */}
+                    />
 
                     <Scene key="EditDetails" component={EditDetails}
                         title=""
