@@ -11,7 +11,8 @@ import {
     TouchableOpacity,
     NativeModules,
     ImageBackground,
-    Modal
+    Modal,
+    Animated,
 } from 'react-native';
 
 
@@ -19,8 +20,7 @@ import Mapir from 'mapir-react-native-sdk'
 import { Actions } from 'react-native-router-flux';
 import Textarea from 'react-native-textarea';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-
+import MapView, { Marker } from 'react-native-maps';
 
 //components 
 import GradientButton from '../components/GradientButton'
@@ -55,6 +55,9 @@ var conditions = [
 const arrowDown = <Icon size={22} name="chevron-down" color="#bbb" />
 const arrowUp = <Icon size={22} name="chevron-up" color="#bbb" />
 
+
+
+
 export default class EditDetails extends Component {
 
     constructor(props) {
@@ -62,10 +65,11 @@ export default class EditDetails extends Component {
         this.state = {
             modalVisible: false,
             markers: [
-                { latitude: 51.422548, longitude: 35.732573 },
+                { latitude: 35.68925, longitude: 51.3890 },
             ],
+
             mapHeight: 200,
-            mapWidth: '90%',
+            mapWidth: Dimensions.get('window').width - 50,
             moreText: 'بزرگتر',
             arrowDown: true,
 
@@ -100,28 +104,41 @@ export default class EditDetails extends Component {
             provinces: ['مازندران', 'تهران', 'گیلان'],
             cities: [
                 [
-                    { 0: 'آمل' },
-                    { 1: 'بابل' },
-                    { 2: 'ساری' }
+                    { city: 'آمل', coordinate: [{ latitude: 36.4676, longitude: 52.3507 }] },
+                    { city: 'بابل', coordinate: [{ latitude: 36.5387, longitude: 52.6765 }] },
+                    { city: 'ساری', coordinate: [{ latitude: 35.68925, longitude: 51.3890 }] },
                 ],
                 [
-                    { 0: 'دماوند' },
-                    { 1: 'پردیس' },
-                    { 2: 'بومهن' }
+                    { city: 'دماوند', latitude: 35.68925, longitude: 51.3890 },
+                    { city: 'پردیس', latitude: 35.68925, longitude: 51.3890 },
+                    { city: 'بومهن', latitude: 35.68925, longitude: 51.3890 }
                 ],
                 [
-                    { 0: 'فومن' },
-                    { 1: 'رشت' },
-                    { 2: 'انزلی' }
+                    { city: 'فومن', latitude: 35.68925, longitude: 51.3890 },
+                    { city: 'رشت', latitude: 35.68925, longitude: 51.3890 },
+                    { city: 'انزلی', latitude: 35.68925, longitude: 51.3890 }
                 ],
             ],
+            mapIsChanging: false,
+            markerScale: 1,
+            markerTop: 0,
+            markerHeight: 10,
+            markerWidth: 10,
+
+
+            initialPositionInstead: {
+                latitude: 35.68925,
+                longitude: 51.3890,
+                latitudeDelta: 0,
+                longitudeDelta: 0,
+            }
 
         }
 
 
     }
 
-    componentDidMount() {
+    componentWillMount() {
         // {
         //     PermissionsAndroid.requestMultiple(
         //         [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -131,13 +148,39 @@ export default class EditDetails extends Component {
         //             message: 'App needs location permission to find your position.'
         //         }
         //     ).then(granted => {
-        //         console.log(granted);
+        //         // console.log(granted);
         //         resolve();
         //     }).catch(err => {
-        //         console.warn(err);
+        //         // console.warn(err);
         //         reject(err);
         //     });
         // }
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                // const initialPosition = JSON.stringify(position);
+                await this.setState({
+                    initialPosition: {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        latitudeDelta: 0,
+                        longitudeDelta: 0
+                    },
+                    finalPosition: {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                    }
+                });
+            },
+            (error) => alert(error.message),
+            { enableHighAccuracy: true, timeout: 20000 }
+        );
+        this.watchID = navigator.geolocation.watchPosition((position) => {
+            const lastPosition = JSON.stringify(position);
+            this.setState({ lastPosition });
+        });
+
+        console.log(this.state.finalPosition)
 
     }
 
@@ -223,20 +266,27 @@ export default class EditDetails extends Component {
 
     }
 
+    changeHand = (coordinates) => {
+        console.log('hand')
+        this.setState({
+            markers: [{ latitude: coordinates[0], longitude: coordinates[1] }]
+        });
+    }
+
 
     // change map size and arrow 
     _mapHeightChanger = () => {
         if (this.state.arrowDown) {
             this.setState({
-                mapHeight: 400,
-                mapWidth: Dimensions.get('window').width - 10,
+                mapHeight: 300,
+                mapWidth: Dimensions.get('window').width,
                 moreText: 'کوچکتر',
                 arrowDown: false
             })
         } else {
             this.setState({
                 mapHeight: 200,
-                mapWidth: '100%',
+                mapWidth: Dimensions.get('window').width - 50,
                 moreText: 'بزرگتر',
                 arrowDown: true
             })
@@ -245,41 +295,6 @@ export default class EditDetails extends Component {
     }
 
 
-    // picker select city 
-    _changeCity = async (item) => {
-        switch (item) {
-            case 'amol':
-                await this.setState({
-                    markers: [
-                        { latitude: 51.22, longitude: 35.33 },
-                    ],
-                    city: item
-                })
-                break;
-
-            case 'babol':
-                await this.setState({
-                    markers: [
-                        { latitude: 52.422548, longitude: 35.732573 },
-                    ],
-                    city: item
-                })
-                break;
-            case 'babolsar':
-                await this.setState({
-                    markers: [
-                        { latitude: 52.01, longitude: 35.732573 },
-                    ],
-                    city: item
-                })
-                break;
-            default:
-                break;
-        }
-
-
-
-    }
 
 
 
@@ -352,23 +367,87 @@ export default class EditDetails extends Component {
     }
 
     //select province and city
-    _selectCity = async (method, methodModal, name, i) => {
+    _selectCity = async (method, methodModal, object) => {
+
         await this.setState({
-            [method]: name,
+            [method]: object['city'],
             [methodModal]: false,
+            markers: [{ latitude: object.coordinate[0]['latitude'], longitude: object.coordinate[0]['longitude'] }],
+
         })
+        this.refs['MAP'].animateToRegion({
+            latitude: object.coordinate[0]['latitude'],
+            longitude: object.coordinate[0]['longitude'],
+            latitudeDelta: 0,
+            longitudeDelta: 0,
+        }, 1000)
+
+
+
+
+
     }
+
+
+
+    _onMapDrag = () => {
+        console.log('drag')
+
+        if (!this.state.mapIsChanging) {
+            this.setState({
+                mapIsChanging: true,
+                markerScale: .9,
+                markerTop: -10,
+                markerHeight: 25,
+                markerWidth: 25
+            })
+        }
+    }
+
+
+    _mapChangeComplete = async (e) => {
+        console.log('com')
+
+        if (this.state.mapIsChanging) {
+            await this.setState({
+                mapIsChanging: false,
+                markerScale: 1,
+                markerTop: 0,
+                markerHeight: 10,
+                markerWidth: 10,
+
+                markers: [{ latitude: e.latitude, longitude: e.longitude }],
+                finalPosition: {
+                    latitude: e.latitude,
+                    longitude: e.longitude
+                }
+
+            })
+        }
+        console.log(this.state.finalPosition)
+    }
+
+
+
+
+
 
     render() {
 
-        // map marker
-        const mark = this.state.markers.map(markers =>
-            (<Mapir.Marker
-                id={'2'}
-                key={markers.latitude}
-                coordinate={[markers.latitude, markers.longitude]}
 
-            />))
+        let { markerScale, markerTop, markerWidth, markerHeight } = this.state
+
+
+        // map marker
+        const marker = (
+            this.state.markers.map(marker => (
+                <Marker coordinate={marker} key={marker.latitude}>
+                    <Icon name="map-marker" size={45} color="yellow" />
+                </Marker>
+            ))
+        )
+
+
 
 
         return (
@@ -382,8 +461,12 @@ export default class EditDetails extends Component {
                 />
 
 
-                <ScrollView >
+                <ScrollView contentContainerStyle={{ position: 'relative', zIndex: 99 }} >
                     <KeyboardAvoidingView style={styles.EditDetails} behavior="padding" enabled>
+
+
+
+
 
 
 
@@ -681,13 +764,13 @@ export default class EditDetails extends Component {
                                                             }}
                                                             style={{ width: '100%' }}>
                                                             {
-                                                                this.state.cities[this.state.provinceNumber].map((city, i) => {
+                                                                this.state.cities[this.state.provinceNumber].map((object, i) => {
                                                                     return < TouchableOpacity
                                                                         key={i}
                                                                         style={styles.picker_button}
                                                                         activeOpacity={.3}
-                                                                        onPress={() => this._selectCity('city', 'cityModal', city[i])}>
-                                                                        <Text style={styles.picker_item} >{city[i]}</Text>
+                                                                        onPress={() => this._selectCity('city', 'cityModal', object)}>
+                                                                        <Text style={styles.picker_item} >{object['city']}</Text>
                                                                     </TouchableOpacity>
                                                                 })
                                                             }
@@ -711,33 +794,81 @@ export default class EditDetails extends Component {
                         </View>
 
 
+
+
+
                         <View style={{
                             height: this.state.mapHeight,
                             overflow: 'hidden',
-                            borderWidth: 2,
-                            borderColor: '#fff',
-                            borderRadius: 10,
                             backgroundColor: '#fff',
                             width: this.state.mapWidth,
-                            marginTop: 10
-                        }} >
-                            <Mapir
-                                accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
-                                zoomLevel={6}
-                                centerCoordinate={[51.422548, 35.732573]}
-                                showUserLocation={true}
-                                onPress={e => this.addMarker(e.geometry.coordinates)}
+                            zIndex: 10,
+                            marginTop: -10,
+                            borderRadius: 5
+                        }}
+                        >
+
+
+                            <MapView
+                                ref={'MAP'}
                                 style={{ flex: 1 }}
+                                mapType="hybrid"
+                                zoomEnabled={true}
+                                zoomTapEnabled={true}
+                                zoomControlEnabled={true}
+                                minZoomLevel={8}
+                                maxZoomLevel={20}
+                                initialRegion={this.state.initialPosition ? this.state.initialPosition : this.state.initialPositionInstead}
+                                showsUserLocation={true}
+                                showsMyLocationButton={true}
+                                followsUserLocation={true}
+                                showsCompass={true}
+                                showsPointsOfInterest={true}
+                                pitchEnabled={false}
+                                onRegionChangeComplete={(e) => this._mapChangeComplete(e)}
+                                onPanDrag={this._onMapDrag}
                             >
-                                {mark}
-                            </Mapir>
+                                {/* {marker} */}
+                            </MapView>
+
+                            {/* marker on center */}
+                            <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }} >
+                                <View style={{ width: 100, height: 100, justifyContent: 'center', alignItems: 'center', marginTop: -40 }} >
+                                    <Icon style={{
+                                        transform: [{ scale: markerScale }],
+                                        top: markerTop,
+                                        zIndex: 9,
+                                    }}
+                                        name="map-marker"
+                                        size={45}
+                                        color="#a52d53" />
+                                    <View
+                                        style={{
+                                            width: markerWidth,
+                                            height: markerHeight,
+                                            backgroundColor: '#50102459',
+                                            borderRadius: 30,
+                                            top: -10,
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <Text style={{
+                                            width: 3,
+                                            height: 3,
+                                            borderRadius: 10,
+                                            backgroundColor: '#a52d53'
+                                        }} ></Text>
+                                    </View>
+                                </View>
+                            </View>
                         </View>
 
 
                         <TouchableOpacity
                             style={{ marginVertical: 10, alignItems: 'center' }}
                             onPress={this._mapHeightChanger}
-                        >
+                            onFocus={() => console.log(0)}>
                             <Text style={{
                                 fontSize: 13,
                                 fontFamily: 'ISBold',
