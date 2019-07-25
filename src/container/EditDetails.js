@@ -12,9 +12,7 @@ import {
     NativeModules,
     ImageBackground,
     Modal,
-    navigator,
-    geolocation,
-    Animated
+    Animated,
 } from 'react-native';
 
 
@@ -23,7 +21,6 @@ import { Actions } from 'react-native-router-flux';
 import Textarea from 'react-native-textarea';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MapView, { Marker } from 'react-native-maps';
-import Geolocation from 'react-native-geolocation-service';
 
 //components 
 import GradientButton from '../components/GradientButton'
@@ -128,20 +125,20 @@ export default class EditDetails extends Component {
             markerHeight: 10,
             markerWidth: 10,
 
-            initialRegion: {
+
+            initialPositionInstead: {
                 latitude: 35.68925,
                 longitude: 51.3890,
                 latitudeDelta: 0,
                 longitudeDelta: 0,
             }
 
-
         }
 
 
     }
 
-    componentDidMount() {
+    componentWillMount() {
         // {
         //     PermissionsAndroid.requestMultiple(
         //         [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -158,19 +155,33 @@ export default class EditDetails extends Component {
         //         reject(err);
         //     });
         // }
-        // Instead of navigator.geolocation, just use Geolocation.
-        if (hasLocationPermission) {
-            Geolocation.getCurrentPosition(
-                (position) => {
-                    console.log(position);
-                },
-                (error) => {
-                    // See error code charts below.
-                    console.log(error.code, error.message);
-                },
-                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-            );
-        }
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                // const initialPosition = JSON.stringify(position);
+                await this.setState({
+                    initialPosition: {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        latitudeDelta: 0,
+                        longitudeDelta: 0
+                    },
+                    finalPosition: {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                    }
+                });
+            },
+            (error) => alert(error.message),
+            { enableHighAccuracy: true, timeout: 20000 }
+        );
+        this.watchID = navigator.geolocation.watchPosition((position) => {
+            const lastPosition = JSON.stringify(position);
+            this.setState({ lastPosition });
+        });
+
+        console.log(this.state.finalPosition)
+
     }
 
 
@@ -357,18 +368,12 @@ export default class EditDetails extends Component {
 
     //select province and city
     _selectCity = async (method, methodModal, object) => {
-        console.log(object)
+
         await this.setState({
             [method]: object['city'],
             [methodModal]: false,
             markers: [{ latitude: object.coordinate[0]['latitude'], longitude: object.coordinate[0]['longitude'] }],
 
-            // initialRegion : {
-            //     latitude: object.coordinate[0]['latitude'],
-            //     longitude:object.coordinate[0]['longitude'],
-            //     latitudeDelta: 0,
-            //     longitudeDelta: 0,
-            // }
         })
         this.refs['MAP'].animateToRegion({
             latitude: object.coordinate[0]['latitude'],
@@ -376,7 +381,11 @@ export default class EditDetails extends Component {
             latitudeDelta: 0,
             longitudeDelta: 0,
         }, 1000)
-        console.log(this.state.markers)
+
+
+
+
+
     }
 
 
@@ -396,11 +405,11 @@ export default class EditDetails extends Component {
     }
 
 
-    _mapChangeComplete = (e) => {
+    _mapChangeComplete = async (e) => {
         console.log('com')
 
         if (this.state.mapIsChanging) {
-            this.setState({
+            await this.setState({
                 mapIsChanging: false,
                 markerScale: 1,
                 markerTop: 0,
@@ -408,15 +417,14 @@ export default class EditDetails extends Component {
                 markerWidth: 10,
 
                 markers: [{ latitude: e.latitude, longitude: e.longitude }],
-                // initialRegion : {
-                //     latitude: e.latitude,
-                //     longitude: e.longitude,
-                //     latitudeDelta: e.latitudeDelta,
-                //     longitudeDelta: e.longitudeDelta,
-                // }
+                finalPosition: {
+                    latitude: e.latitude,
+                    longitude: e.longitude
+                }
 
             })
         }
+        console.log(this.state.finalPosition)
     }
 
 
@@ -431,13 +439,15 @@ export default class EditDetails extends Component {
 
 
         // map marker
-        const mark = this.state.markers.map(markers =>
-            (<Mapir.Marker
-                id={'2'}
-                key={markers.latitude}
-                coordinate={[markers.latitude, markers.longitude]}
+        const marker = (
+            this.state.markers.map(marker => (
+                <Marker coordinate={marker} key={marker.latitude}>
+                    <Icon name="map-marker" size={45} color="yellow" />
+                </Marker>
+            ))
+        )
 
-            />))
+
 
 
         return (
@@ -792,38 +802,12 @@ export default class EditDetails extends Component {
                             overflow: 'hidden',
                             backgroundColor: '#fff',
                             width: this.state.mapWidth,
-                            // position: 'absolute',
-                            // top: 50,
-                            // left: 50,
-                            // right: -100,
-                            // bottom: -100,
                             zIndex: 10,
-                            marginTop: -10
+                            marginTop: -10,
+                            borderRadius: 5
                         }}
                         >
-                            {/* <Mapir
-                                accessToken={'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5ZjlmMWZhNDA4YzM0ODI2ZjcxZGI5YTdlM2U2ZmVjNDEzMzNmMDU0MjVhM2MzOTM0NmMwNTlkMzBiMzcyYjA5YzU1OGZjOGU4NTJmNWJhIn0.eyJhdWQiOiJteWF3ZXNvbWVhcHAiLCJqdGkiOiIzOWY5ZjFmYTQwOGMzNDgyNmY3MWRiOWE3ZTNlNmZlYzQxMzMzZjA1NDI1YTNjMzkzNDZjMDU5ZDMwYjM3MmIwOWM1NThmYzhlODUyZjViYSIsImlhdCI6MTU1OTQ1NTIzMiwibmJmIjoxNTU5NDU1MjMyLCJleHAiOjE1NTk0NTg4MzIsInN1YiI6IiIsInNjb3BlcyI6WyJiYXNpYyIsImVtYWlsIl19.JNowwSPWaoVoJ1Omirk9OTtkDySsNL91nP00GcCARdM-YHoTQYw3NZy3SaVlAsbafO9oPPvlVfhNIxPIHESACZATutE3tb7RBEmQGEXX-8G7GOSu8IzyyLBmHaQe75LtisgdKi-zPTGsx8zFv0Acn6HrDDxFrKFNtmI85L3jos_GVxvYYhHWKAez8mbJRHcH1b15DrwgWAhCjO2p_HqpuGLdRF1l03J6HsOnJLMid2997g7iAVTOa8mt2oaEPvmwA_f6pwFZSURqw-RJzdN_R8IEmtqWQq5ZNTEppVaV82yuwfnSmrb0_Sak2hfBIiLwQeCMsnfhU_CvUbE_1rukmQ'}
-                                zoomLevel={6}
-                                centerCoordinate={[51.422548, 35.732573]}
-                                showUserLocation={true}
-                                onPress={e => this.addMarker(e.geometry.coordinates)}
-                                style={{ flex: 1 }}
-                                onRegionDidChange={(e) => {
-                                    console.log(' hand ::::::::::')
-                                    this.setState({
-                                        mapIsChanging: true,
-                                        markers: [{ latitude: e.geometry.coordinates[0], longitude: e.geometry.coordinates[1] }]
-                                    });
-                                }}
-                            >
-                               {mark}
 
-                            </Mapir>
-                            <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }} >
-                                <View style={{ width: 100, height: 100, justifyContent: 'center', alignItems: 'center' }} >
-                                    <Icon name="map-marker" size={30} color="#A52D53" /> 
-                                </View>
-                            </View> */}
 
                             <MapView
                                 ref={'MAP'}
@@ -834,8 +818,7 @@ export default class EditDetails extends Component {
                                 zoomControlEnabled={true}
                                 minZoomLevel={8}
                                 maxZoomLevel={20}
-                                // initialRegion={this.state.initialRegion}
-                                // region={this.state.initialRegion}
+                                initialRegion={this.state.initialPosition ? this.state.initialPosition : this.state.initialPositionInstead}
                                 showsUserLocation={true}
                                 showsMyLocationButton={true}
                                 followsUserLocation={true}
@@ -845,19 +828,10 @@ export default class EditDetails extends Component {
                                 onRegionChangeComplete={(e) => this._mapChangeComplete(e)}
                                 onPanDrag={this._onMapDrag}
                             >
-                                {this.state.markers.map(marker => (
-                                    <Marker
-                                        coordinate={marker}
-                                        // title={marker.title}
-                                        // description={marker.description}
-                                        key={marker.latitude}
-                                    >
-
-                                        <Icon name="map-marker" size={45} color="yellow" />
-                                    </Marker>
-                                ))
-                                }
+                                {/* {marker} */}
                             </MapView>
+
+                            {/* marker on center */}
                             <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }} >
                                 <View style={{ width: 100, height: 100, justifyContent: 'center', alignItems: 'center', marginTop: -40 }} >
                                     <Icon style={{
